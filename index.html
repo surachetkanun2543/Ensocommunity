@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Enso • Pilots — Role & Directory</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Commissioner:wght@700&display=swap" rel="stylesheet"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Enso • Pilots Roster — Formal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Commissioner:wght@700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  /* Enso gradients (หรู ทางการ) */
-  --enso1:#7C3AED;   /* royal purple */
-  --enso2:#06B6D4;   /* cyan */
-  --ensoAura:#F472B6;/* pink aura */
-
-  --bg:#070A13;
-  --panel:rgba(14,16,26,.72);
-  --ink:#E8F3FF;
-  --muted:#9AA4B2;
+  --enso1:#8B5CF6; --enso2:#22D3EE;
+  --bg:#090B14; --panel:rgba(14,16,26,.72);
+  --ink:#E6F3FF; --muted:#9AA4B2;
   --border:rgba(255,255,255,.10);
   --accent:linear-gradient(90deg,var(--enso1),var(--enso2));
-  --accent-angled:linear-gradient(135deg,var(--enso1),var(--enso2));
-  --ring:0 0 0 1px rgba(255,255,255,.06) inset, 0 10px 30px rgba(6,182,212,.12), 0 6px 18px rgba(124,58,237,.14);
-  --glow:0 18px 42px rgba(124,58,237,.28), 0 10px 28px rgba(6,182,212,.22);
-
+  --ring:0 0 0 1px rgba(255,255,255,.06) inset, 0 10px 30px rgba(34,211,238,.10), 0 6px 18px rgba(139,92,246,.12);
+  --glow:0 14px 36px rgba(139,92,246,.25), 0 8px 22px rgba(34,211,238,.18);
   /* Warriors fallback */
   --blue:#1D428A; --gold:#FFC72C;
   --bg-light:#fff; --ink-dark:#0B0D17; --muted-dark:#5b667a; --border-light:#e4e7ee; --accent-bg-light:#f6f8fc;
@@ -33,65 +25,62 @@ html,body{height:100%}
 body{
   margin:0;
   background:
-    radial-gradient(1600px 800px at 10% -5%, color-mix(in oklab, var(--enso1) 30%, transparent) , transparent 50%),
-    radial-gradient(1200px 600px at 110% 0%, color-mix(in oklab, var(--enso2) 28%, transparent), transparent 55%),
-    radial-gradient(1400px 700px at 40% 120%, color-mix(in oklab, var(--ensoAura) 22%, transparent), transparent 60%),
+    radial-gradient(1200px 600px at 20% -10%, rgba(139,92,246,.18), transparent 40%),
+    radial-gradient(900px 500px at 100% 10%, rgba(34,211,238,.16), transparent 45%),
     var(--bg);
   color:var(--ink);
   font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
 /* Topbar */
-.topbar{ background:var(--accent); color:#0B0D17; border-bottom:1px solid rgba(255,255,255,.06) }
-.container{ max-width:1100px; margin:0 auto; padding:12px 16px }
+.topbar{
+  background:var(--accent); color:#0B0D17; border-bottom:1px solid rgba(255,255,255,.06);
+}
+.container{ max-width:1200px; margin:0 auto; padding:12px 16px }
 .topbar .wrap{ display:flex; align-items:center; gap:12px }
 .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px }
-.brand .dot{ width:10px; height:10px; border-radius:50%; background:#22D3EE; box-shadow:0 0 0 3px rgba(6,182,212,.25) }
+.brand .dot{ width:10px; height:10px; border-radius:50%; background:#22D3EE; box-shadow:0 0 0 3px rgba(34,211,238,.25) }
 .brand span{ font-family:'Commissioner',sans-serif; font-size:18px }
+.switch{ margin-left:auto; display:flex; gap:6px; padding:6px; border:1px solid var(--border); border-radius:999px; background:rgba(14,16,26,.5); backdrop-filter:blur(8px) }
+.switch button{ cursor:pointer; border:none; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px; background:transparent; color:var(--ink) }
+.switch .active{ background:var(--accent); color:#0B0D17; box-shadow:var(--glow) }
 
-/* Hero (Role focus) */
+/* Hero */
 .hero{
+  position:relative;
   background:
-    radial-gradient(900px 320px at 18% 0%, color-mix(in oklab, var(--enso1) 30%, transparent), transparent 60%),
-    radial-gradient(900px 320px at 82% 0%, color-mix(in oklab, var(--enso2) 26%, transparent), transparent 60%),
-    linear-gradient(120deg, #0B0F1E, #0A0E19);
+    radial-gradient(800px 300px at 20% 0%, rgba(139,92,246,.25), transparent 60%),
+    radial-gradient(800px 300px at 80% 0%, rgba(34,211,238,.20), transparent 60%),
+    linear-gradient(120deg, #0C1020, #0B0F1A);
   border-bottom:1px solid var(--border);
 }
-.hero .wrap{ display:grid; grid-template-columns: 1.05fr .95fr; gap:28px; align-items:center }
+.hero .wrap{ display:grid; grid-template-columns: 1.3fr .7fr; gap:24px; align-items:end }
 .kicker{ display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px; color:#0B0D17; background:var(--accent); box-shadow:var(--glow) }
-.hero h1{ margin:10px 0 10px; font-size:clamp(32px,5vw,52px); letter-spacing:.2px }
+.hero h1{ margin:10px 0 6px; font-size:clamp(32px,5vw,54px); letter-spacing:.3px }
 .hero p{ color:var(--muted); margin:0 }
 .hero .logo-box{
-  justify-self:end;
+  justify-self:end; align-self:center;
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
   border:1px solid var(--border); border-radius:16px; padding:16px; backdrop-filter:blur(8px);
   box-shadow:var(--glow)
 }
-.hero .logo-box img{ width:min(240px, 30vw); height:auto; display:block }
+.hero .logo-box img{ width:min(280px, 35vw); height:auto; display:block }
 
-/* Role bullets */
-.roles{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:16px }
-.role-card{
-  border:1px solid var(--border); border-radius:14px; background:rgba(14,16,26,.6); backdrop-filter:blur(8px);
-  padding:12px 14px;
-}
-.role-card h3{ margin:0 0 6px; font-size:14px }
-.role-card p{ margin:0; color:var(--muted); font-size:13px }
-
-/* Importance / responsibilities */
-.section{ padding:18px 16px }
-.panel{
+/* Feature grid */
+.features{ padding:26px 16px 6px }
+.fgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px }
+.card{
   border:1px solid var(--border); border-radius:16px; background:rgba(14,16,26,.6);
-  backdrop-filter:blur(8px); padding:18px; box-shadow:0 0 0 0 rgba(0,0,0,0)
+  backdrop-filter:blur(8px); padding:16px; transition:.2s ease; box-shadow:0 0 0 0 rgba(0,0,0,0)
 }
-.panel h2{ margin:0 0 10px; font-size:18px; letter-spacing:.2px }
-.cols{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px }
-.item{ border:1px solid var(--border); border-radius:12px; padding:12px; background:rgba(255,255,255,.04) }
-.item h4{ margin:0 0 6px; font-size:14px }
-.item p, .item li{ color:var(--muted); font-size:13px; margin:0 }
-.item ul{ padding-left:18px; margin:6px 0 0 }
+.card:hover{ transform:translateY(-4px); box-shadow:var(--glow) }
+.card .title{ display:flex; align-items:center; gap:10px; font-weight:700 }
+.badge{ background:var(--accent); color:#0B0D17; font-weight:800; font-family:'Commissioner',sans-serif; min-width:34px; height:34px; display:grid; place-items:center; border-radius:10px; box-shadow:var(--glow) }
+.card p{ color:var(--muted); font-size:14px; margin:8px 0 0 }
+.card a{ color:#CDEBFF; text-decoration:none; border-bottom:1px dashed rgba(205,235,255,.35) }
+.card a:hover{ border-bottom-style:solid }
 
-/* Subnav (letters) */
+/* Subnav (Roster filters) */
 .subnav{ position:sticky; top:0; z-index:8; background:rgba(9,11,20,.7); border-top:1px solid var(--border); border-bottom:1px solid var(--border); backdrop-filter: blur(10px) }
 .subnav .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
 .tab{ padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.05); font-weight:600; font-size:13px; cursor:pointer; color:var(--ink); transition:.2s ease }
@@ -100,47 +89,25 @@ body{
 .search{ margin-left:auto; display:flex; align-items:center; gap:8px; border:1px solid var(--border); padding:8px 10px; border-radius:10px; background:rgba(14,16,26,.5); backdrop-filter: blur(8px) }
 .search input{ border:none; outline:none; font-size:14px; width:200px; background:transparent; color:var(--ink) }
 
-/* Directory grid (F1-card background) */
-.container-main{ max-width:1100px; margin:0 auto; padding:16px }
-.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px }
-
+/* Roster grid */
+.container-main{ max-width:1200px; margin:0 auto; padding:16px }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px }
 .member{
-  position: relative; overflow: hidden; border: 1px solid var(--border);
-  border-radius: 16px; background: #0f121a; backdrop-filter: blur(8px);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  border:1px solid var(--border); border-radius:16px; background:rgba(14,16,26,.6);
+  transition:.2s ease; overflow:hidden; backdrop-filter: blur(8px)
 }
-.member .head{
-  position: relative;
-  background:
-    repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0px, rgba(255,255,255,.06) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px),
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
-  padding:14px; display:flex; align-items:center; gap:12px;
-}
-.member::before{
-  content:""; position:absolute; inset:-20% -25% 45% -25%; transform:skewY(-12deg);
-  background: var(--accent-angled); filter:saturate(110%); box-shadow: 0 20px 60px rgba(6,182,212,.18), 0 10px 30px rgba(124,58,237,.22);
-  pointer-events:none; transition: transform .45s ease, opacity .45s ease; opacity:.9;
-}
-.member::after{
-  content:""; position:absolute; inset:0; background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.10) 55%, transparent 100%);
-  transform: translateX(-120%) rotate(0.001deg); transition: transform .9s cubic-bezier(.22,.61,.36,1); pointer-events:none; mix-blend-mode: screen; opacity:.7;
-}
-.member:hover{ transform: translateY(-6px); border-color: transparent; box-shadow: var(--glow) }
-.member:hover::before{ transform:skewY(-12deg) translateX(2%); opacity:1 }
-.member:hover::after{ transform: translateX(120%) rotate(0.001deg) }
-.member .head::after{
-  content:""; position:absolute; left:14px; top:12px; height:4px; width:72px; border-radius:999px; background: var(--accent); box-shadow: 0 6px 18px rgba(124,58,237,.35);
-}
-
+.member:hover{ transform:translateY(-6px); box-shadow:var(--glow) }
+.member .head{ padding:14px; display:flex; align-items:center; gap:12px; background:linear-gradient(180deg, rgba(139,92,246,.14), rgba(255,255,255,0)) }
+.member .num{ composes: badge; }
 .num{ background:var(--accent); color:#0B0D17; font-weight:800; font-family:'Commissioner',sans-serif; min-width:38px; height:38px; display:grid; place-items:center; border-radius:10px; box-shadow:var(--glow) }
-.avatar{ width:72px; height:72px; border-radius:50%; border:3px solid rgba(124,58,237,.75); outline:2px solid rgba(6,182,212,.35); object-fit:cover; background:#0B0F1A }
+.avatar{ width:72px; height:72px; border-radius:50%; border:3px solid rgba(139,92,246,.75); outline:2px solid rgba(34,211,238,.35); object-fit:cover; background:#0B0F1A }
 .info h3{ margin:2px 0 4px; font-size:18px }
 .info .role{ color:var(--muted); font-size:12px }
-.member .body{ padding:0 14px 14px; display:flex; gap:8px; background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00)) }
+.member .body{ padding:0 14px 14px; display:flex; gap:8px }
 .btn{
   flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
   border:1px solid var(--border); padding:10px 10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  cursor:pointer; text-decoration:none; color:#fff; font-weight:600; font-size:13px; transition:.2s ease
+  cursor:pointer; text-decoration:none; color:var(--ink); font-weight:600; font-size:13px; transition:.2s ease
 }
 .btn:hover{ border-color:transparent; box-shadow: var(--ring) }
 
@@ -152,16 +119,24 @@ body{
 .close{ background:none; border:none; color:#0B0D17; font-size:22px; cursor:pointer }
 
 /* Footer */
-.footer{ border-top:1px solid var(--border); color:var(--muted); font-size:13px; margin-top:22px }
-.footer .row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center }
+.footer{ border-top:1px solid var(--border); color:var(--muted); font-size:12px; margin-top:18px }
+.footer .container{ max-width:1200px; margin:0 auto; padding:18px 16px }
 
-/* Warriors fallback toggle (ยังเหลือไว้ แต่ซ่อนปุ่ม) */
+/* Warriors fallback when toggled */
 body.theme-warriors{ background:var(--bg-light); color:var(--ink-dark) }
 body.theme-warriors .topbar{ background:var(--blue); color:#fff }
+body.theme-warriors .switch{ background:#fff; border:1px solid var(--border-light) }
+body.theme-warriors .switch .active{ background:#FFC72C; color:#0B0D17; box-shadow:none }
+body.theme-warriors .hero{ background:linear-gradient(120deg, var(--blue), #173469) }
+body.theme-warriors .hero .logo-box{ background:#fff }
+body.theme-warriors .subnav{ background:#fff; border-color:var(--blue) }
+body.theme-warriors .tab{ background:var(--accent-bg-light); border-color:var(--border-light); color:#0B0D17 }
+body.theme-warriors .tab.active{ background:#FFC72C }
 body.theme-warriors .member{ background:#fff; border-color:var(--border-light) }
+body.theme-warriors .member:hover{ box-shadow:0 10px 26px rgba(29,66,138,.18) }
+body.theme-warriors .avatar{ border:3px solid var(--gold); outline:none; background:#fff }
 body.theme-warriors .modal{ background:#fff; border-color:var(--border-light) }
-@media (max-width:900px){ .hero .wrap{ grid-template-columns:1fr } }
-.hide{ display:none !important }
+body.theme-warriors .modal-head{ background:var(--blue); color:#fff }
 </style>
 </head>
 <body class="theme-enso">
@@ -170,105 +145,94 @@ body.theme-warriors .modal{ background:#fff; border-color:var(--border-light) }
 <header class="topbar">
   <div class="container wrap">
     <div class="brand"><span class="dot"></span><span>ENSO • PILOTS</span></div>
-    <!-- ซ่อนสวิตช์ธีมเพื่อความเป็นทางการ -->
-    <div class="hide"><button>Blue–Gold</button><button>Enso</button></div>
+    <div class="switch">
+      <button id="btn-warriors">Blue–Gold</button>
+      <button id="btn-enso" class="active">Enso Purple–Cyan</button>
+    </div>
   </div>
 </header>
 
-<!-- HERO: Focus on Pilot Role -->
+<!-- HERO with Enso logo + formal copy -->
 <section class="hero">
   <div class="container wrap">
     <div>
-      <span class="kicker">Pilots Program</span>
-      <h1>บทบาทนักบิน (Enso Pilots)</h1>
-      <p>นักบินคือ “ผู้ดูแลคุณภาพ” ของประสบการณ์ใช้งาน Enso—ออกแบบกลยุทธ์, ตรวจสอบความปลอดภัย, ทดลองจำลองก่อนใช้งานจริง และส่งต่อความรู้ให้ชุมชน เพื่อให้การดำเนินการบนเชน “ชัดเจน ปลอดภัย ทำซ้ำได้”.</p>
-
-      <div class="roles" aria-label="Pilot role highlights">
-        <div class="role-card">
-          <h3>Strategy Design</h3>
-          <p>ร่าง &amp; ปรับแต่งเส้นทางการทำธุรกรรม (Shortcuts) ที่สั้น กระชับ และวัดผลได้</p>
-        </div>
-        <div class="role-card">
-          <h3>Risk &amp; Security</h3>
-          <p>ตั้งค่า permission, limit, simulation และเกณฑ์หยุดฉุกเฉิน (guardrails)</p>
-        </div>
-        <div class="role-card">
-          <h3>Research &amp; Integrations</h3>
-          <p>สำรวจโปรโตคอล/บริดจ์ใหม่ ตรวจสอบความเข้ากันได้ และข้อจำกัด</p>
-        </div>
-        <div class="role-card">
-          <h3>QA &amp; Monitoring</h3>
-          <p>ทดสอบ end-to-end, เฝ้าระวังการเปลี่ยนแปลง route/ราคา และความเสถียร</p>
-        </div>
-        <div class="role-card">
-          <h3>Community Enablement</h3>
-          <p>จัดทำคู่มือ, ตัวอย่าง, เวิร์กช็อป เพื่อให้ผู้ใช้ทำตามได้อย่างมั่นใจ</p>
-        </div>
-      </div>
+      <span class="kicker">Enso</span>
+      <h1>Automate DeFi with Shortcuts</h1>
+      <p>Design once. Execute anywhere. Enso streamlines complex on-chain actions into auditable, reusable Shortcuts—built for scale, reliability, and clarity.</p>
     </div>
-
     <div class="logo-box">
       <img src="Enso-Logo-Transparent.png" alt="Enso Logo">
     </div>
   </div>
 </section>
 
-<!-- Importance & Responsibilities -->
-<section class="section">
-  <div class="container">
-    <div class="panel">
-      <h2>ทำไมนักบินจึงสำคัญ</h2>
-      <div class="cols">
-        <div class="item">
-          <h4>ลดความซับซ้อน → เพิ่มความเชื่อมั่น</h4>
-          <p>เส้นทาง on-chain ที่ถูกออกแบบและทดสอบแล้ว ช่วยให้ผู้ใช้ทุกระดับทำงานยาก ๆ ได้ในคลิกเดียว โดยไม่ต้องเดา.</p>
-        </div>
-        <div class="item">
-          <h4>ความปลอดภัยระดับสถาบัน</h4>
-          <p>นักบินทำหน้าที่เป็นด่านสุดท้าย ตรวจสอบความเสี่ยง สถานะโปรโตคอล และตั้ง guardrails ให้ปลอดภัยเสมอ.</p>
-        </div>
-        <div class="item">
-          <h4>มาตรฐาน &amp; การทำซ้ำ</h4>
-          <p>Shortcuts ที่นิยามชัดเจน ทำซ้ำได้ ตรวจสอบย้อนหลังได้ ช่วยให้ทีมปฏิบัติการทำงานสอดคล้องกันทั้งองค์กร.</p>
-        </div>
-        <div class="item">
-          <h4>เวิร์กโฟลว์ที่แนะนำ</h4>
-          <ul>
-            <li>กำหนดวัตถุประสงค์ + KPI</li>
-            <li>ออกแบบเส้นทาง / ตั้ง parameter</li>
-            <li>Simulation &amp; QA ข้ามเชน</li>
-            <li>กำกับการใช้งานจริง + Monitoring</li>
-            <li>สรุปผลลัพธ์ / เรียนรู้ / อัปเดตรุ่น</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+<!-- Key sections (formal, concise, Enso-style) -->
+<section class="features container">
+  <div class="fgrid">
+    <article class="card">
+      <div class="title"><div class="badge">S</div>Shortcuts</div>
+      <p>Create programmable flows for swaps, staking, lending, and portfolio moves. Parameterize, schedule, and reuse with version control.</p>
+      <p><a href="#">Explore Shortcuts</a></p>
+    </article>
+    <article class="card">
+      <div class="title"><div class="badge">H</div>Happypath</div>
+      <p>One-click execution that selects optimal routes across chains and venues while surfacing slippage and price impact transparently.</p>
+      <p><a href="#">See Happypath</a></p>
+    </article>
+    <article class="card">
+      <div class="title"><div class="badge">I</div>Integrations</div>
+      <p>Connect leading DEXs, bridges, and yield protocols through a unified interface. Compose safely—no glue code.</p>
+      <p><a href="#">View Integrations</a></p>
+    </article>
+    <article class="card">
+      <div class="title"><div class="badge">A</div>Security &amp; Audits</div>
+      <p>Defense-in-depth with strong permissions, simulations, and continuous monitoring. Designed for institutional grade operations.</p>
+      <p><a href="#">Security Overview</a></p>
+    </article>
+    <article class="card">
+      <div class="title"><div class="badge">D</div>Docs</div>
+      <p>Clear guides and API references to ship faster with best practices from day one.</p>
+      <p><a href="#">Read the Docs</a></p>
+    </article>
+    <article class="card">
+      <div class="title"><div class="badge">C</div>Community</div>
+      <p>Builders, Pilots, and partners coordinating across ecosystems. Join the discussion and shape the roadmap.</p>
+      <p><a href="#">Join Community</a></p>
+    </article>
   </div>
 </section>
 
-<!-- Directory Subnav (letters + search) -->
+<!-- Subnav for roster -->
 <nav class="subnav">
   <div class="container row">
-    <strong style="font-size:13px;opacity:.9">Pilot Directory</strong>
     <button class="tab active" data-filter="all">All</button>
     <button class="tab" data-filter="0-9">0–9</button>
-    <button class="tab" data-filter="A">A</button><button class="tab" data-filter="B">B</button>
-    <button class="tab" data-filter="C">C</button><button class="tab" data-filter="D">D</button>
-    <button class="tab" data-filter="E">E</button><button class="tab" data-filter="F">F</button>
-    <button class="tab" data-filter="G">G</button><button class="tab" data-filter="H">H</button>
-    <button class="tab" data-filter="J">J</button><button class="tab" data-filter="K">K</button>
-    <button class="tab" data-filter="L">L</button><button class="tab" data-filter="M">M</button>
-    <button class="tab" data-filter="N">N</button><button class="tab" data-filter="R">R</button>
-    <button class="tab" data-filter="S">S</button><button class="tab" data-filter="T">T</button>
-    <button class="tab" data-filter="V">V</button><button class="tab" data-filter="W">W</button>
-    <div class="search" style="margin-left:auto">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#06B6D4" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="q" placeholder="Search name…"/>
+    <button class="tab" data-filter="A">A</button>
+    <button class="tab" data-filter="B">B</button>
+    <button class="tab" data-filter="C">C</button>
+    <button class="tab" data-filter="D">D</button>
+    <button class="tab" data-filter="E">E</button>
+    <button class="tab" data-filter="F">F</button>
+    <button class="tab" data-filter="G">G</button>
+    <button class="tab" data-filter="H">H</button>
+    <button class="tab" data-filter="J">J</button>
+    <button class="tab" data-filter="K">K</button>
+    <button class="tab" data-filter="L">L</button>
+    <button class="tab" data-filter="M">M</button>
+    <button class="tab" data-filter="N">N</button>
+    <button class="tab" data-filter="R">R</button>
+    <button class="tab" data-filter="S">S</button>
+    <button class="tab" data-filter="T">T</button>
+    <button class="tab" data-filter="V">V</button>
+    <button class="tab" data-filter="W">W</button>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#22D3EE" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="q" placeholder="Search by name…" />
     </div>
   </div>
 </nav>
 
-<!-- Directory grid -->
+<!-- Roster -->
 <main class="container-main">
   <div class="grid" id="grid"></div>
 </main>
@@ -276,7 +240,7 @@ body.theme-warriors .modal{ background:#fff; border-color:var(--border-light) }
 <!-- Modal -->
 <div class="modal-backdrop" id="modal">
   <div class="modal">
-    <div class="modal-head">
+    <div class="modal-head" id="m-head">
       <div style="display:flex;align-items:center;gap:10px">
         <div id="m-number" class="num" style="min-width:34px;height:34px">#1</div>
         <div>
@@ -287,8 +251,8 @@ body.theme-warriors .modal{ background:#fff; border-color:var(--border-light) }
       <button class="close" id="m-close">×</button>
     </div>
     <div class="modal-body">
-      <img id="m-avatar" style="width:120px;height:120px;border-radius:50%;border:4px solid rgba(124,58,237,.8);outline:2px solid rgba(6,182,212,.35);object-fit:cover;box-shadow:0 10px 26px rgba(124,58,237,.25)"/>
-      <p style="color:var(--muted);font-size:14px;margin-top:12px">Add Discord/X links to contact each Pilot directly.</p>
+      <img id="m-avatar" style="width:120px;height:120px;border-radius:50%;border:4px solid rgba(139,92,246,.8);outline:2px solid rgba(34,211,238,.35);object-fit:cover;box-shadow:0 10px 26px rgba(139,92,246,.25)" />
+      <p style="color:var(--muted);font-size:14px;margin-top:12px">This is an Enso Pilot. Add Discord/X links to cards for direct contact.</p>
       <div style="display:flex;gap:10px;margin-top:6px">
         <a id="m-discord" class="btn" target="_blank" rel="noreferrer noopener">Discord</a>
         <a id="m-twitter" class="btn" target="_blank" rel="noreferrer noopener">X (Twitter)</a>
@@ -297,16 +261,12 @@ body.theme-warriors .modal{ background:#fff; border-color:var(--border-light) }
   </div>
 </div>
 
-<!-- Footer -->
 <footer class="footer">
-  <div class="container row">
-    <div>© <span id="year"></span> Enso — Pilots Program. Clarity • Safety • Repeatability.</div>
-    <div>Contact: pilots@enso.build</div>
-  </div>
+  <div class="container">Enso • Pilots Roster — formal theme, Enso logo &amp; sections styled for clarity and trust.</div>
 </footer>
 
 <script>
-// ===== Data (รายชื่อเดิม) =====
+// ===== Data (35 names) =====
 const DATA = [
   "0xKh1n","Abdul","Alt_Coiner","Andrik","bc1pBITHERU…","Cozmee","ezrmol","Falcon",
   "Ghfri","GIAN","hanzo(φ,G)","haruya_","HASHAN",
@@ -318,7 +278,7 @@ const DATA = [
 // Placeholder avatar (dark)
 const placeholderEnso =
 "data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'>
-  <defs><linearGradient id='ring' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#7C3AED'/><stop offset='100%' stop-color='#06B6D4'/></linearGradient></defs>
+  <defs><linearGradient id='ring' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#8B5CF6'/><stop offset='100%' stop-color='#22D3EE'/></linearGradient></defs>
   <circle cx='72' cy='72' r='70' fill='url(#ring)'/><circle cx='72' cy='72' r='60' fill='#0B0F1A'/>
   <circle cx='72' cy='60' r='20' fill='#1A2032'/><path d='M36 110c8-20 28-28 36-28s28 8 36 28' fill='#1A2032'/>
 </svg>`);
@@ -332,7 +292,21 @@ const mNumber = document.getElementById('m-number');
 const mName = document.getElementById('m-name');
 const mAvatar = document.getElementById('m-avatar');
 
-// Render directory
+// Theme toggle
+const btnWarriors = document.getElementById('btn-warriors');
+const btnEnso = document.getElementById('btn-enso');
+
+function applyTheme(t){
+  const ens = t==='enso';
+  document.body.classList.toggle('theme-warriors', !ens);
+  btnWarriors.classList.toggle('active', !ens);
+  btnEnso.classList.toggle('active', ens);
+}
+btnWarriors.addEventListener('click', ()=>applyTheme('warriors'));
+btnEnso.addEventListener('click', ()=>applyTheme('enso'));
+applyTheme('enso');
+
+// Render roster
 function card(p){
   const el = document.createElement('article');
   el.className = 'member';
@@ -342,7 +316,7 @@ function card(p){
       <img class="avatar" src="${p.avatar || placeholderEnso}" alt="${p.name}">
       <div class="info">
         <h3>${p.name}</h3>
-        <div class="role">🚀 ${p.role}</div>
+        <div class="role">🚀 ${p.role} — Enso</div>
       </div>
     </div>
     <div class="body">
@@ -353,14 +327,18 @@ function card(p){
   return el;
 }
 function render(list){ grid.innerHTML=''; list.forEach(p=>grid.appendChild(card(p))); }
+
 function filterByLetter(letter){
   if(letter==='all') return DATA;
   if(letter==='0-9') return DATA.filter(p=>/^[0-9]/.test(p.name));
   return DATA.filter(p=>(p.name[0]||'').toUpperCase()===letter);
 }
+
 tabs.forEach(t=>t.addEventListener('click', ()=>{
   tabs.forEach(x=>x.classList.remove('active'));
-  t.classList.add('active'); q.value=''; render(filterByLetter(t.dataset.filter));
+  t.classList.add('active');
+  q.value='';
+  render(filterByLetter(t.dataset.filter));
 }));
 q.addEventListener('input', ()=>{
   const text=q.value.toLowerCase().trim();
@@ -379,9 +357,6 @@ function openModal(p){
   mAvatar.src = p.avatar || placeholderEnso;
   modal.style.display='flex';
 }
-
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
 
 // Initial render
 render(DATA);
