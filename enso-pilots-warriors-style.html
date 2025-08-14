@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Enso Pilots — Roster (Warriors Layout + Theme Toggle)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Commissioner:wght@700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --blue:#1D428A;
+  --gold:#FFC72C;
+  --enso1:#8B5CF6;
+  --enso2:#22D3EE;
+  --ink:#0B0D17;
+  --bg:#ffffff;
+  --muted:#5b667a;
+  --accent-bg:#f6f8fc;
+  --border:#e4e7ee;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+/* Top bar */
+.topbar{ background:var(--blue); color:#fff; transition:background .2s ease; }
+.topbar .container{
+  max-width:1200px; margin:0 auto; padding:12px 16px;
+  display:flex; align-items:center; gap:12px;
+}
+.brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px; }
+.brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); display:inline-block; transition:background .2s ease; }
+.brand span{ font-family:'Commissioner',sans-serif; font-size:18px }
+.toggle{ margin-left:auto; display:flex; align-items:center; gap:8px }
+.switch{
+  border:1px solid var(--border); background:#fff; padding:6px; border-radius:999px;
+  display:flex; gap:6px;
+}
+.switch button{ cursor:pointer; border:none; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px; background:transparent; color:var(--ink)}
+.switch button.active{ background:var(--gold); }
+.switch .enso.active{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); color:#000 }
+.hero{ background:linear-gradient(120deg, var(--blue), #173469); color:#fff; transition:background .2s ease; }
+.hero.enso{ background:linear-gradient(120deg, var(--enso1), var(--enso2)); color:#0b0d17 }
+.hero .container{
+  max-width:1200px; margin:0 auto; padding:28px 16px 18px;
+  display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;
+}
+.hero h1{ margin:0; font-size:clamp(30px,4.5vw,48px); font-weight:800; letter-spacing:.5px }
+.hero .meta{ opacity:.9; font-size:14px }
+/* Subnav */
+.subnav{
+  position:sticky; top:0; z-index:8;
+  background:#fff; border-bottom:2px solid var(--blue); transition:border-color .2s ease;
+}
+.subnav.enso{ border-bottom-color: var(--enso1); }
+.subnav .container{
+  max-width:1200px; margin:0 auto; padding:10px 16px;
+  display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+}
+.tab{
+  padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--accent-bg);
+  font-weight:600; font-size:13px; cursor:pointer;
+}
+.tab.active{ background:var(--gold); border-color:var(--gold) }
+.subnav.enso .tab.active{ background:var(--enso1); border-color:var(--enso1); color:#fff }
+.search{
+  margin-left:auto; display:flex; align-items:center; gap:8px;
+  border:1px solid var(--border); padding:8px 10px; border-radius:10px; background:#fff;
+}
+.search input{ border:none; outline:none; font-size:14px; width:180px; }
+/* Grid */
+.container-main{ max-width:1200px; margin:0 auto; padding:16px; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
+.card{
+  border:1px solid var(--border); border-radius:14px; background:#fff; overflow:hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover{
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 10px 26px rgba(29,66,138,.18);
+}
+.card.enso:hover{
+  border-color: var(--enso1);
+  box-shadow: 0 10px 26px rgba(139,92,246,.25);
+}
+.card-header{
+  background:linear-gradient(180deg, rgba(29,66,138,.10), rgba(255,255,255,0));
+  padding:14px; display:flex; align-items:center; gap:12px;
+}
+.card-header.enso{ background:linear-gradient(180deg, rgba(139,92,246,.10), rgba(255,255,255,0)); }
+.badge{
+  background:var(--gold); color:var(--ink); font-weight:800; font-family:'Commissioner',sans-serif;
+  min-width:38px; height:38px; display:grid; place-items:center; border-radius:8px;
+}
+.badge.enso{ background:var(--enso1); color:#fff }
+.avatar{ width:72px; height:72px; border-radius:50%; border:3px solid var(--gold); object-fit:cover; background:#fff }
+.avatar.enso{ border-color:var(--enso1) }
+.info h3{ margin:2px 0 4px; font-size:18px }
+.info .role{ color:var(--muted); font-size:12px }
+.card-body{ padding:0 14px 14px; display:flex; gap:8px; }
+.btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  border:1px solid var(--border); padding:10px 10px; border-radius:10px; background:#f9fbff;
+  cursor:pointer; text-decoration:none; color:var(--ink); font-weight:600; font-size:13px;
+}
+.btn:hover{ border-color:var(--blue) }
+.enso .btn:hover{ border-color:var(--enso1) }
+/* Modal */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:20;
+}
+.modal{ width:min(680px, 92vw); background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.35) }
+.modal-head{ background:var(--blue); color:#fff; padding:16px 18px; display:flex; justify-content:space-between; align-items:center }
+.modal-head.enso{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); color:#0b0d17; }
+.modal-body{ padding:18px }
+.close{ background:none; border:none; color:#fff; font-size:22px; cursor:pointer }
+.enso .close{ color:#0b0d17 }
+/* Footer */
+.footer{ border-top:1px solid var(--border); color:#5b667a; font-size:12px; margin-top:18px; }
+.footer .container{ max-width:1200px; margin:0 auto; padding:18px 16px; }
+</style>
+</head>
+<body class="theme-warriors">
+
+<div class="topbar" id="topbar">
+  <div class="container">
+    <div class="brand"><span class="dot" id="brand-dot"></span><span>ENSO • PILOTS</span></div>
+    <div class="toggle">
+      <div class="switch">
+        <button id="btn-warriors" class="active">Blue–Gold</button>
+        <button id="btn-enso" class="enso">Enso Purple–Cyan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="container">
+    <div>
+      <h1>Roster</h1>
+      <div class="meta" id="meta"></div>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" id="subnav">
+  <div class="container">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="0-9">0–9</button>
+    <button class="tab" data-filter="A">A</button>
+    <button class="tab" data-filter="B">B</button>
+    <button class="tab" data-filter="C">C</button>
+    <button class="tab" data-filter="D">D</button>
+    <button class="tab" data-filter="E">E</button>
+    <button class="tab" data-filter="F">F</button>
+    <button class="tab" data-filter="G">G</button>
+    <button class="tab" data-filter="H">H</button>
+    <button class="tab" data-filter="J">J</button>
+    <button class="tab" data-filter="K">K</button>
+    <button class="tab" data-filter="L">L</button>
+    <button class="tab" data-filter="M">M</button>
+    <button class="tab" data-filter="N">N</button>
+    <button class="tab" data-filter="R">R</button>
+    <button class="tab" data-filter="S">S</button>
+    <button class="tab" data-filter="T">T</button>
+    <button class="tab" data-filter="V">V</button>
+    <button class="tab" data-filter="W">W</button>
+
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#1D428A" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="q" placeholder="Search by name…" />
+    </div>
+  </div>
+</nav>
+
+<main class="container-main">
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <div class="modal-head" id="m-head">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div id="m-number" class="badge" style="min-width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-family:'Commissioner',sans-serif;font-weight:800"></div>
+        <div>
+          <div id="m-name" style="font-weight:800"></div>
+          <div id="m-role" style="opacity:.85;font-size:12px">Pilot</div>
+        </div>
+      </div>
+      <button class="close" id="m-close">×</button>
+    </div>
+    <div class="modal-body">
+      <img id="m-avatar" style="width:120px;height:120px;border-radius:50%;border:4px solid var(--gold);object-fit:cover;box-shadow:0 10px 26px rgba(29,66,138,.18)" />
+      <p style="color:#5b667a;font-size:14px;margin-top:12px">This is an Enso Pilot. Add Discord/X links to cards for direct contact.</p>
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <a id="m-discord" class="btn" target="_blank" rel="noreferrer noopener">Discord</a>
+        <a id="m-twitter" class="btn" target="_blank" rel="noreferrer noopener">X (Twitter)</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">Layout inspired by NBA Warriors roster • Theme toggle for Enso ↔ Blue-Gold.</div>
+</footer>
+
+<script>
+// ===== Data (35 names from your screenshots) =====
+const DATA = [
+  "0xKh1n","Abdul","Alt_Coiner","Andrik","bc1pBITHERU…","Cozmee","ezrmol","Falcon",
+  "Ghfri","GIAN","hanzo(φ,G)","haruya_","HASHAN",
+  "JohnnyChuon…","KAIRO","kokoko","LEVIOUSA","Leyba","Lolichan","longdv","Lucky",
+  "MMPR(✧✦)","Moted.Eth","Ngô Hoàng","Rutto",
+  "shark_thegreat","Shubh","SOJIB","Tomiwayrn","Vkorn","Wiko","NDUKAM","MONTEGO","S!LOWEK","Ric vn"
+].map((n,i)=>({ name:n, number:i+1, role:"Pilot", avatar:"", twitter:"", discord:"" }));
+
+// Placeholder avatars (theme-aware)
+const placeholderWarriors =
+"data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'>
+  <defs><radialGradient id='g' cx='50%' cy='40%' r='70%'><stop offset='0%' stop-color='#FFE08A'/><stop offset='50%' stop-color='#FFC72C'/><stop offset='100%' stop-color='#E0AE10'/></radialGradient></defs>
+  <circle cx='72' cy='72' r='70' fill='url(#g)'/><circle cx='72' cy='72' r='60' fill='white'/>
+  <circle cx='72' cy='60' r='20' fill='#DDE3F0'/><path d='M36 110c8-20 28-28 36-28s28 8 36 28' fill='#DDE3F0'/>
+</svg>`);
+
+const placeholderEnso =
+"data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'>
+  <defs><linearGradient id='ring' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#8B5CF6'/><stop offset='100%' stop-color='#22D3EE'/></linearGradient></defs>
+  <circle cx='72' cy='72' r='70' fill='url(#ring)'/><circle cx='72' cy='72' r='60' fill='white'/>
+  <circle cx='72' cy='60' r='20' fill='#E6EEFF'/><path d='M36 110c8-20 28-28 36-28s28 8 36 28' fill='#E6EEFF'/>
+</svg>`);
+
+// ===== UI =====
+const grid = document.getElementById('grid');
+const q = document.getElementById('q');
+const tabs = document.querySelectorAll('.tab');
+const meta = document.getElementById('meta');
+const hero = document.getElementById('hero');
+const subnav = document.getElementById('subnav');
+const topbar = document.getElementById('topbar');
+const brandDot = document.getElementById('brand-dot');
+const btnWarriors = document.getElementById('btn-warriors');
+const btnEnso = document.getElementById('btn-enso');
+const modal = document.getElementById('modal');
+const mHead = document.getElementById('m-head');
+
+let theme = 'warriors';
+
+function cardTemplate(p){
+  const div = document.createElement('article');
+  div.className = 'card'+(theme==='enso'?' enso':'');
+  div.innerHTML = `
+    <div class="card-header ${theme==='enso'?'enso':''}">
+      <div class="badge ${theme==='enso'?'enso':''}">#${p.number}</div>
+      <img class="avatar ${theme==='enso'?'enso':''}" src="${p.avatar || (theme==='enso'?placeholderEnso:placeholderWarriors)}" alt="${p.name}">
+      <div class="info">
+        <h3>${p.name}</h3>
+        <div class="role">🚀 ${p.role} — Enso</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <a class="btn" ${p.discord ? `href="${p.discord}"` : ''}>Discord</a>
+      <a class="btn" ${p.twitter ? `href="${p.twitter}"` : ''}>X</a>
+    </div>`;
+  div.addEventListener('click', (e) => {
+    if(e.target.closest('.btn')) return;
+    openModal(p);
+  });
+  return div;
+}
+
+function render(list){
+  grid.innerHTML = '';
+  list.forEach(p => grid.appendChild(cardTemplate(p)));
+  meta.textContent = `Updated ${new Date().toISOString().slice(0,10)} • ${list.length} members`;
+}
+
+function filterByLetter(letter){
+  if(letter === 'all') return DATA;
+  if(letter === '0-9') return DATA.filter(p => /^[0-9]/.test(p.name));
+  return DATA.filter(p => (p.name[0] || '').toUpperCase() === letter);
+}
+
+tabs.forEach(t => t.addEventListener('click', () => {
+  tabs.forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  q.value = '';
+  render(filterByLetter(t.dataset.filter));
+}));
+
+q.addEventListener('input', () => {
+  const text = q.value.toLowerCase().trim();
+  const current = document.querySelector('.tab.active').dataset.filter;
+  let arr = filterByLetter(current);
+  if(text) arr = arr.filter(p => p.name.toLowerCase().includes(text));
+  render(arr);
+});
+
+document.getElementById('m-close').addEventListener('click', () => modal.style.display = 'none');
+modal.addEventListener('click', (e) => { if(e.target.id === 'modal') modal.style.display = 'none'; });
+
+function openModal(p){
+  const badge = document.getElementById('m-number');
+  document.getElementById('m-name').textContent = p.name;
+  document.getElementById('m-avatar').src = p.avatar || (theme==='enso'?placeholderEnso:placeholderWarriors);
+  badge.textContent = '#'+p.number;
+  badge.style.background = theme==='enso' ? 'var(--enso1)' : 'var(--gold)';
+  badge.style.color = theme==='enso' ? '#fff' : 'var(--ink)';
+  mHead.classList.toggle('enso', theme==='enso');
+  modal.style.display = 'flex';
+}
+
+// Theme toggle
+function applyTheme(t){
+  theme = t;
+  const ens = t==='enso';
+  hero.classList.toggle('enso', ens);
+  subnav.classList.toggle('enso', ens);
+  document.body.classList.toggle('enso', ens);
+  btnWarriors.classList.toggle('active', !ens);
+  btnEnso.classList.toggle('active', ens);
+  topbar.style.background = ens ? 'linear-gradient(90deg,var(--enso1),var(--enso2))' : 'var(--blue)';
+  brandDot.style.background = ens ? 'var(--enso2)' : 'var(--gold)';
+  render(filterByLetter(document.querySelector('.tab.active').dataset.filter));
+}
+btnWarriors.addEventListener('click', ()=>applyTheme('warriors'));
+btnEnso.addEventListener('click', ()=>applyTheme('enso'));
+
+// initial render
+applyTheme('warriors');
+</script>
+</body>
+</html>
