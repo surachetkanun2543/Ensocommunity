@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Enso Pilots — Roster (Warriors Layout + Theme Toggle)</title>
+<title>Enso Pilots — Roster</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Commissioner:wght@700&display=swap" rel="stylesheet" />
@@ -12,6 +12,7 @@
   /* Brand */
   --blue:#1D428A;
   --gold:#FFC72C;
+  --gold-25:rgba(255,199,44,.25);
   --enso1:#8B5CF6; /* purple */
   --enso2:#22D3EE; /* cyan */
 
@@ -21,24 +22,18 @@
   --ink:#E6F3FF;           /* primary text */
   --muted:#9AA4B2;         /* secondary text */
   --accent-bg:rgba(255,255,255,.05);
-  --border:rgba(255,255,255,.10);
+  --border:rgba(255,255,255,.08);
   --ring:0 0 0 1px rgba(255,255,255,.06) inset, 0 10px 30px rgba(34,211,238,.10), 0 6px 18px rgba(139,92,246,.12);
   --glow:0 14px 36px rgba(139,92,246,.25), 0 8px 22px rgba(34,211,238,.18);
-
-  /* Warriors (legacy light) */
-  --bg-light:#ffffff;
-  --ink-dark:#0B0D17;
-  --muted-dark:#5b667a;
-  --accent-bg-light:#f6f8fc;
-  --border-light:#e4e7ee;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  background:radial-gradient(1200px 600px at 20% -10%, rgba(139,92,246,.18), transparent 40%),
-             radial-gradient(900px 500px at 100% 10%, rgba(34,211,238,.16), transparent 45%),
-             var(--bg);
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(139,92,246,.18), transparent 40%),
+    radial-gradient(900px 500px at 100% 10%, rgba(34,211,238,.16), transparent 45%),
+    var(--bg);
   color:var(--ink);
   font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
@@ -47,26 +42,27 @@ body{
 .topbar{
   background:linear-gradient(90deg,var(--enso1),var(--enso2));
   color:#0B0D17;
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid var(--gold-25);
+  box-shadow: 0 8px 26px rgba(0,0,0,.25), 0 0 0 1px inset rgba(255,199,44,.12);
 }
 .topbar .container{
   max-width:1200px; margin:0 auto; padding:12px 16px;
   display:flex; align-items:center; gap:12px;
 }
 .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px; }
-.brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--enso2); display:inline-block; box-shadow:0 0 0 3px rgba(34,211,238,.25) }
+.brand img{ height:26px; filter: drop-shadow(0 4px 12px rgba(34,211,238,.25)); }
 .brand span{ font-family:'Commissioner',sans-serif; font-size:18px }
 .toggle{ margin-left:auto; display:flex; align-items:center; gap:8px }
 .switch{
-  border:1px solid var(--border); background:var(--panel); padding:6px; border-radius:999px;
+  border:1px solid var(--gold-25); background:var(--panel); padding:6px; border-radius:999px;
   display:flex; gap:6px; backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px inset rgba(255,199,44,.12);
 }
 .switch button{
-  cursor:pointer; border:none; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px;
+  cursor:pointer; border:1px solid transparent; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px;
   background:transparent; color:var(--ink); transition:all .2s ease;
 }
-.switch button.active{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); color:#0B0D17; box-shadow: var(--glow); }
-.switch .enso.active{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); }
+.switch button.active{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); color:#0B0D17; box-shadow: var(--glow), 0 0 0 1px var(--gold) inset; }
 
 /* Hero */
 .hero{
@@ -76,6 +72,7 @@ body{
     radial-gradient(800px 300px at 80% 0%, rgba(34,211,238,.20), transparent 60%),
     linear-gradient(120deg, #0C1020, #0B0F1A);
   color:var(--ink);
+  border-bottom:1px solid var(--gold-25);
 }
 .hero .container{
   max-width:1200px; margin:0 auto; padding:32px 16px 22px;
@@ -88,7 +85,7 @@ body{
 .subnav{
   position:sticky; top:0; z-index:8;
   background:rgba(9,11,20,.7);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid var(--gold-25);
   backdrop-filter: blur(10px);
 }
 .subnav .container{
@@ -96,16 +93,16 @@ body{
   display:flex; gap:10px; align-items:center; flex-wrap:wrap;
 }
 .tab{
-  padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--accent-bg);
+  padding:8px 12px; border-radius:999px; border:1px solid var(--gold-25); background:var(--accent-bg);
   font-weight:600; font-size:13px; cursor:pointer; color:var(--ink);
   transition: all .2s ease;
 }
 .tab:hover{ box-shadow: var(--ring) }
-.tab.active{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); border-color:transparent; color:#0B0D17; box-shadow: var(--glow) }
+.tab.active{ background:linear-gradient(90deg,var(--enso1),var(--enso2)); border-color:var(--gold); color:#0B0D17; box-shadow: var(--glow) }
 
 .search{
   margin-left:auto; display:flex; align-items:center; gap:8px;
-  border:1px solid var(--border); padding:8px 10px; border-radius:10px; background:var(--panel);
+  border:1px solid var(--gold-25); padding:8px 10px; border-radius:10px; background:var(--panel);
   backdrop-filter: blur(8px);
 }
 .search input{ border:none; outline:none; font-size:14px; width:180px; background:transparent; color:var(--ink) }
@@ -114,104 +111,133 @@ body{
 .container-main{ max-width:1200px; margin:0 auto; padding:16px; }
 .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
 .card{
-  border:1px solid var(--border); border-radius:16px; background:var(--panel); overflow:hidden;
+  position:relative;
+  border:1px solid var(--gold-25); border-radius:16px; background:var(--panel); overflow:hidden;
   transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px inset rgba(255,199,44,.10);
 }
 .card:hover{
   transform: translateY(-6px);
-  border-color: transparent;
-  box-shadow: var(--glow);
+  border-color: var(--gold);
+  box-shadow: var(--glow), 0 10px 26px rgba(0,0,0,.35);
+}
+.card::before{
+  /* Formula1-style diagonal light with per-card gradient */
+  content:"";
+  position:absolute; inset:-30% -30% auto auto;
+  width:160%; height:160%;
+  background: var(--card-gradient, linear-gradient(135deg, var(--enso1), var(--enso2)));
+  opacity:.28; transform: rotate(20deg);
+  filter: saturate(1.05);
 }
 .card-header{
-  background:linear-gradient(180deg, rgba(139,92,246,.14), rgba(255,255,255,0));
-  padding:14px; display:flex; align-items:center; gap:12px;
+  background:
+    linear-gradient(180deg, rgba(139,92,246,.16), rgba(255,255,255,0));
+  padding:14px; display:flex; align-items:center; gap:12px; position:relative; z-index:1;
+  border-bottom:1px solid rgba(255,199,44,.15);
 }
 .badge{
   background:linear-gradient(90deg,var(--enso1),var(--enso2));
   color:#0B0D17; font-weight:800; font-family:'Commissioner',sans-serif;
   min-width:38px; height:38px; display:grid; place-items:center; border-radius:10px;
   box-shadow: var(--glow);
+  outline:1px solid var(--gold-25);
 }
 .avatar{
   width:72px; height:72px; border-radius:50%;
-  border:3px solid rgba(139,92,246,.75); outline: 2px solid rgba(34,211,238,.35);
+  border:3px solid var(--gold); outline: 2px solid rgba(34,211,238,.35);
   object-fit:cover; background:#0B0F1A;
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
 }
 .info h3{ margin:2px 0 4px; font-size:18px }
 .info .role{ color:var(--muted); font-size:12px }
-.card-body{ padding:0 14px 14px; display:flex; gap:8px; }
+.card-body{ padding:12px 14px 14px; display:flex; gap:8px; position:relative; z-index:1; }
 .btn{
   flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
-  border:1px solid var(--border); padding:10px 10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--gold-25); padding:10px 10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
   cursor:pointer; text-decoration:none; color:var(--ink); font-weight:600; font-size:13px;
   transition: all .2s ease;
 }
-.btn:hover{ border-color:transparent; box-shadow: var(--ring) }
+.btn:hover{ border-color:var(--gold); box-shadow: 0 0 0 1px inset var(--gold), var(--ring) }
 
 /* Modal */
 .modal-backdrop{
   position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:20;
 }
 .modal{
-  width:min(700px, 92vw); background:var(--panel); border:1px solid var(--border); border-radius:16px; overflow:hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,.45); backdrop-filter: blur(10px);
+  width:min(700px, 92vw); background:var(--panel); border:1px solid var(--gold-25); border-radius:16px; overflow:hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45), 0 0 0 1px inset rgba(255,199,44,.12); backdrop-filter: blur(10px);
 }
 .modal-head{
   background: linear-gradient(90deg,var(--enso1),var(--enso2));
-  color:#0B0D17; padding:16px 18px; display:flex; justify-content:space-between; align-items:center
+  color:#0B0D17; padding:16px 18px; display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid var(--gold-25);
 }
 .modal-body{ padding:18px; color:var(--ink) }
-.close{ background:none; border:none; color:#0B0D17; font-size:22px; cursor:pointer }
+.close{ background:none; border:1px solid transparent; color:#0B0D17; font-size:22px; cursor:pointer; border-radius:8px }
+.close:hover{ border-color:#0B0D17 }
+
+/* ROLE INFORMATION panel (lux look) */
+.role-panel{
+  max-width:1200px; margin:6px auto 26px; padding:0 16px;
+}
+.role-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 24px rgba(255,199,44,.18) inset;
+}
+.role-head{
+  display:flex; align-items:center; gap:12px; margin-bottom:8px;
+}
+.role-head .dot{
+  width:12px; height:12px; border-radius:50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(255,199,44,.18);
+}
+.role-title{
+  font-family:'Commissioner',sans-serif; font-weight:800; letter-spacing:.3px; font-size:18px;
+}
+.role-grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.role-box{
+  border:1px solid var(--gold-25);
+  border-radius:12px;
+  padding:12px;
+  background: rgba(14,16,26,.55);
+  box-shadow: 0 0 0 1px inset rgba(255,199,44,.08);
+}
+.role-box h4{
+  margin:0 0 8px; font-size:14px; color:var(--ink); letter-spacing:.2px
+}
+.role-box ul{ margin:0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.55 }
+.role-box li + li{ margin-top:4px }
 
 /* Footer */
-.footer{ border-top:1px solid var(--border); color:var(--muted); font-size:12px; margin-top:18px; }
+.footer{ border-top:1px solid var(--gold-25); color:var(--muted); font-size:12px; margin-top:18px; }
 .footer .container{ max-width:1200px; margin:0 auto; padding:18px 16px; }
 
-/* Light (Warriors) fallback when toggled */
+/* Light (Warriors) fallback when toggled) — keep, but still gold edges */
 body.theme-warriors{
-  background:var(--bg-light); color:var(--ink-dark);
+  background:#ffffff; color:#0B0D17;
 }
-body.theme-warriors .topbar{ background:var(--blue); color:#fff }
-body.theme-warriors .brand .dot{ background:var(--gold); box-shadow:none }
-body.theme-warriors .switch{ background:#fff; border:1px solid var(--border-light); backdrop-filter:none }
-body.theme-warriors .switch button.active{ background:var(--gold); color:#0B0D17; box-shadow:none }
-body.theme-warriors .hero{
-  background:linear-gradient(120deg, var(--blue), #173469); color:#fff;
-}
-body.theme-warriors .subnav{
-  background:#fff; border-bottom:2px solid var(--blue); backdrop-filter:none;
-}
-body.theme-warriors .tab{
-  background:var(--accent-bg-light); border-color:var(--border-light); color:var(--ink-dark);
-}
-body.theme-warriors .tab.active{ background:var(--gold); border-color:var(--gold); color:#0B0D17; box-shadow:none }
-body.theme-warriors .search{
-  background:#fff; border-color:var(--border-light); color:var(--ink-dark);
-}
-body.theme-warriors .card{
-  background:#fff; border-color:var(--border-light); backdrop-filter:none; border-radius:14px;
-}
-body.theme-warriors .card:hover{
-  border-color: var(--gold);
-  box-shadow: 0 10px 26px rgba(29,66,138,.18);
-}
-body.theme-warriors .card-header{
-  background:linear-gradient(180deg, rgba(29,66,138,.10), rgba(255,255,255,0));
-}
-body.theme-warriors .badge{ background:var(--gold); color:#0B0D17; box-shadow:none; border-radius:8px }
-body.theme-warriors .avatar{ border:3px solid var(--gold); outline:none; background:#fff }
-body.theme-warriors .btn{ background:#f9fbff; color:#0B0D17 }
-body.theme-warriors .modal{ background:#fff; border-color:var(--border-light); backdrop-filter:none }
-body.theme-warriors .modal-head{ background:var(--blue); color:#fff }
-body.theme-warriors .close{ color:#fff }
+body.theme-warriors .subnav{ background:#fff; border-bottom:1px solid var(--gold-25) }
+body.theme-warriors .card{ background:#fff }
 </style>
 </head>
-<body class="theme-enso"><!-- default = Enso vibe -->
+<body class="theme-enso">
 
+<!-- Topbar with new logo -->
 <div class="topbar" id="topbar">
   <div class="container">
-    <div class="brand"><span class="dot" id="brand-dot"></span><span>ENSO • PILOTS</span></div>
+    <div class="brand">
+      <img src="https://framerusercontent.com/images/FPnvhl6ocJ58PYgLaYri68xb6cQ.webp" alt="Enso Logo">
+      <span>ENSO • PILOTS</span>
+    </div>
     <div class="toggle">
       <div class="switch">
         <button id="btn-warriors">Blue–Gold</button>
@@ -264,6 +290,55 @@ body.theme-warriors .close{ color:#fff }
   <div class="grid" id="grid"></div>
 </main>
 
+<!-- ROLE INFORMATION (หรู ขอบทอง) -->
+<section class="role-panel" aria-labelledby="role-title">
+  <div class="role-card">
+    <div class="role-head">
+      <div class="dot"></div>
+      <div id="role-title" class="role-title">ROLE INFORMATION</div>
+    </div>
+    <div class="role-grid">
+      <div class="role-box">
+        <h4>GENERAL</h4>
+        <ul>
+          <li>@Community — Verified Community member</li>
+          <li>@OG Enso — OGs, members who have joined before April 19, 2022</li>
+          <li>@Enso Booster — Thank you for boosting the server, but it wasn't necessary.</li>
+          <li>@Game Master — You love Enso's Gaming events</li>
+        </ul>
+      </div>
+      <div class="role-box">
+        <h4>SPEEDRUN</h4>
+        <ul>
+          <li>@Neon Rookie</li>
+          <li>@Midnight Racer</li>
+          <li>@Supersonic Samurai</li>
+          <li>@Tokyo Drifter</li>
+          <li>@Nitro Sensei</li>
+        </ul>
+      </div>
+      <div class="role-box">
+        <h4>DRIP</h4>
+        <ul>
+          <li>@Raiders — Ready to spread the word</li>
+          <li>@Portal — Spend 350 Shortcats and cross the Portal</li>
+          <li>@Veteran — Thank you for your service</li>
+        </ul>
+      </div>
+      <div class="role-box">
+        <h4>RANKS</h4>
+        <ul>
+          <li>@Trainee</li>
+          <li>@Junior</li>
+          <li>@Pit Crew</li>
+          <li>@Mechanic</li>
+          <li>@Pilot — Highest Rank. Ascended after completing the Ceremony.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="modal-backdrop" id="modal">
   <div class="modal">
     <div class="modal-head" id="m-head">
@@ -277,7 +352,7 @@ body.theme-warriors .close{ color:#fff }
       <button class="close" id="m-close">×</button>
     </div>
     <div class="modal-body">
-      <img id="m-avatar" style="width:120px;height:120px;border-radius:50%;border:4px solid rgba(139,92,246,.8);outline:2px solid rgba(34,211,238,.35);object-fit:cover;box-shadow:0 10px 26px rgba(139,92,246,.25)" />
+      <img id="m-avatar" style="width:120px;height:120px;border-radius:50%;border:4px solid var(--gold);outline:2px solid rgba(34,211,238,.35);object-fit:cover;box-shadow:0 10px 26px rgba(139,92,246,.25)" />
       <p style="color:var(--muted);font-size:14px;margin-top:12px">This is an Enso Pilot. Add Discord/X links to cards for direct contact.</p>
       <div style="display:flex;gap:10px;margin-top:6px">
         <a id="m-discord" class="btn" target="_blank" rel="noreferrer noopener">Discord</a>
@@ -288,11 +363,11 @@ body.theme-warriors .close{ color:#fff }
 </div>
 
 <footer class="footer">
-  <div class="container">Layout inspired by NBA Warriors roster • Enso theme: dark + neon purple/cyan, glass, glow.</div>
+  <div class="container">Cards inspired by Formula 1 style • Enso palette with per-pilot gradients • Gold accents throughout.</div>
 </footer>
 
 <script>
-// ===== Data (35 names from your screenshots) =====
+// ===== Data =====
 const DATA = [
   "0xKh1n","Abdul","Alt_Coiner","Andrik","bc1pBITHERU…","Cozmee","ezrmol","Falcon",
   "Ghfri","GIAN","hanzo(φ,G)","haruya_","HASHAN",
@@ -301,13 +376,17 @@ const DATA = [
   "shark_thegreat","Shubh","SOJIB","Tomiwayrn","Vkorn","Wiko","NDUKAM","MONTEGO","S!LOWEK","Ric vn"
 ].map((n,i)=>({ name:n, number:i+1, role:"Pilot", avatar:"", twitter:"", discord:"" }));
 
-// Placeholder avatars (theme-aware)
-const placeholderWarriors =
-"data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'>
-  <defs><radialGradient id='g' cx='50%' cy='40%' r='70%'><stop offset='0%' stop-color='#FFE08A'/><stop offset='50%' stop-color='#FFC72C'/><stop offset='100%' stop-color='#E0AE10'/></radialGradient></defs>
-  <circle cx='72' cy='72' r='70' fill='url(#g)'/><circle cx='72' cy='72' r='60' fill='white'/>
-  <circle cx='72' cy='60' r='20' fill='#DDE3F0'/><path d='M36 110c8-20 28-28 36-28s28 8 36 28' fill='#DDE3F0'/>
-</svg>`);
+// Per-pilot gradient palette (Enso tones, all look-good combos)
+const GRADIENTS = [
+  ["#8B5CF6","#22D3EE"],
+  ["#7C3AED","#06B6D4"],
+  ["#9333EA","#0EA5E9"],
+  ["#A855F7","#14B8A6"],
+  ["#C084FC","#06B6D4"],
+  ["#6D28D9","#22D3EE"],
+  ["#9F7AEA","#06B6D4"],
+  ["#8B5CF6","#0EA5E9"],
+];
 
 const placeholderEnso =
 "data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='144' height='144' viewBox='0 0 144 144'>
@@ -324,11 +403,12 @@ const meta = document.getElementById('meta');
 const modal = document.getElementById('modal');
 const mHead = document.getElementById('m-head');
 
-let theme = 'enso';
-
 function cardTemplate(p){
   const div = document.createElement('article');
   div.className = 'card';
+  // set unique gradient per pilot
+  const grad = GRADIENTS[p.number % GRADIENTS.length];
+  div.style.setProperty('--card-gradient', `linear-gradient(135deg, ${grad[0]}, ${grad[1]})`);
   div.innerHTML = `
     <div class="card-header">
       <div class="badge">#${p.number}</div>
@@ -344,7 +424,7 @@ function cardTemplate(p){
     </div>`;
   div.addEventListener('click', (e) => {
     if(e.target.closest('.btn')) return;
-    openModal(p);
+    openModal(p, grad);
   });
   return div;
 }
@@ -379,13 +459,14 @@ q.addEventListener('input', () => {
 document.getElementById('m-close').addEventListener('click', () => modal.style.display = 'none');
 modal.addEventListener('click', (e) => { if(e.target.id === 'modal') modal.style.display = 'none'; });
 
-function openModal(p){
+function openModal(p, grad){
   const badge = document.getElementById('m-number');
   document.getElementById('m-name').textContent = p.name;
   document.getElementById('m-avatar').src = p.avatar || placeholderEnso;
   badge.textContent = '#'+p.number;
   badge.className = 'badge';
-  mHead.classList.remove('enso'); // header already gradient
+  // subtle matching border in modal head (optional feel)
+  mHead.style.boxShadow = `inset 0 -2px 0 rgba(255,199,44,.35), 0 6px 18px rgba(0,0,0,.25)`;
   modal.style.display = 'flex';
 }
 
@@ -394,19 +475,16 @@ const btnWarriors = document.getElementById('btn-warriors');
 const btnEnso = document.getElementById('btn-enso');
 
 function applyTheme(t){
-  theme = t;
   const ens = t==='enso';
   document.body.classList.toggle('theme-warriors', !ens);
   btnWarriors.classList.toggle('active', !ens);
   btnEnso.classList.toggle('active', ens);
-  // rerender to switch placeholders/borders if needed
   render(filterByLetter(document.querySelector('.tab.active').dataset.filter));
 }
-
 btnWarriors.addEventListener('click', ()=>applyTheme('warriors'));
 btnEnso.addEventListener('click', ()=>applyTheme('enso'));
 
-// initial render (Enso by default)
+// initial render
 applyTheme('enso');
 </script>
 </body>
