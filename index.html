@@ -148,7 +148,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 /* ===== “Video from enso.build” (embedded) ===== */
 .scrub{min-height:60vh; position:relative}
 .scrub-sticky{position:sticky; top:8vh; height:72vh; border:1px solid rgba(255,255,255,.14); border-radius:18px; overflow:hidden; background:#0B1422; display:flex; align-items:stretch}
-.scrub iframe{width:100%; height:100%; border:0; display:block}
+.scrub iframe, .scrub video{width:100%; height:100%; border:0; display:block; object-fit:cover}
 .scrub .fallback{
   position:absolute; inset:auto 16px 16px auto; z-index:3;
   padding:10px 12px; border-radius:10px; font-weight:800; background:rgba(0,0,0,.48);
@@ -212,7 +212,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
   <!-- Hero -->
   <section id="home" class="hero glass reveal">
     <div class="container">
-      <h1>ENSO Pilots Hall of Fame</h1>
+      <h1>ENSO global community</h1>
       <p>Enso is the fastest way to build and launch onchain — a shared engine that maps every onchain interaction. Focus on product, community, and growth.</p>
       <div class="cta-row">
         <a class="button gold" href="https://www.enso.build/" target="_blank" rel="noreferrer noopener">Start with Enso</a>
@@ -327,15 +327,16 @@ npm i @enso/widgets
     </div>
   </section>
 
-  <!-- SEE IT IN MOTION — replaced with live video from enso.build -->
+  <!-- DEMO: replaced with MP4 -->
   <section id="demo" class="section reveal">
     <div class="eyebrow">SEE IT IN MOTION</div>
-    <h2>Intent-driven coordination in one flow.</h2>
-    <div class="scrub glass" aria-label="Embedded demo from enso.build">
+    <h2>The best execution.</h2>
+    <p class="lead">Powered by Enso Network.</p>
+    <div class="scrub glass" aria-label="Demo video">
       <div class="scrub-sticky">
-        <iframe id="ensoEmbed" src="https://www.enso.build/" title="Enso — live video/hero" loading="lazy" allow="autoplay; fullscreen; clipboard-write" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <a class="fallback" id="ensoFallback" href="https://www.enso.build/" target="_blank" rel="noreferrer noopener">Open on enso.build ↗</a>
-        <div class="caption">Live from enso.build</div>
+        <video src="https://framerusercontent.com/assets/GifwF0GC6kftxDgniF6lsk9E9wc.mp4"
+               autoplay muted loop playsinline></video>
+        <div class="caption">Live demo</div>
       </div>
     </div>
   </section>
@@ -353,7 +354,7 @@ npm i @enso/widgets
 
   <!-- Pilots -->
   <section id="pilots" class="section reveal">
-    <div class="eyebrow">ENSO PILOTS HALL OF FAME</div>
+    <div class="eyebrow">ENSO GLOBAL PILOT</div>
     <div class="grid" id="grid"></div>
   </section>
 
@@ -362,162 +363,141 @@ npm i @enso/widgets
 
 <script>
 /* ===== Config / assets ===== */
-var HELMET_ICON_SRC = "/images/pilot-helmet.png";
+const HELMET_ICON_SRC = "/images/pilot-helmet.png";
 
-/* ===== Scroll reveal ===== */
-var io = new IntersectionObserver(function(entries){
-  for (var i=0;i<entries.length;i++){
-    var e = entries[i];
+/* ===== Scroll reveal (keep for everything EXCEPT pilot cards) ===== */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
     if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
-  }
+  });
 },{rootMargin:"-5% 0px -10% 0px", threshold:0.12});
-var _revealEls = document.querySelectorAll('.reveal');
-for (var _i=0; _i<_revealEls.length; _i++){ io.observe(_revealEls[_i]); }
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* ===== Feature parallax shimmer ===== */
-var _featureEls = document.querySelectorAll('.feature');
-for (var _j=0; _j<_featureEls.length; _j++){
-  (function(card){
-    card.addEventListener('pointermove', function(e){
-      var r = card.getBoundingClientRect();
-      var x = ((e.clientX - r.left) / r.width) * 100;
-      var y = ((e.clientY - r.top)  / r.height)* 100;
-      card.style.setProperty('--mx', x+'%'); card.style.setProperty('--my', y+'%');
-    });
-  })(_featureEls[_j]);
-}
+document.querySelectorAll('.feature').forEach(card=>{
+  card.addEventListener('pointermove', (e)=>{
+    const r = card.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top)  / r.height)* 100;
+    card.style.setProperty('--mx', x+'%'); card.style.setProperty('--my', y+'%');
+  });
+});
 
 /* ===== Counters ===== */
 function formatNumber(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-function countUp(el, end, opts){
-  opts = opts || {};
-  var duration = opts.duration || 1500, prefix=opts.prefix||"", suffix=opts.suffix||"";
-  var start = 0; var startTime = performance.now();
+function countUp(el, end, {duration=1500, prefix="", suffix=""}={}){
+  const start = 0; const startTime = performance.now();
   function step(now){
-    var t = Math.min(1, (now - startTime) / duration);
-    var val = Math.floor(start + (end - start) * t);
-    el.innerHTML = prefix + formatNumber(val) + suffix;
+    const t = Math.min(1, (now - startTime) / duration);
+    const val = Math.floor(start + (end - start) * t);
+    el.innerHTML = `${prefix}${formatNumber(val)}${suffix}`;
     if(t < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 }
-var counterIO = new IntersectionObserver(function(ents){
-  for (var k=0;k<ents.length;k++){
-    var ent = ents[k];
+const counterIO = new IntersectionObserver((ents)=>{
+  ents.forEach(ent=>{
     if(ent.isIntersecting){
-      var el = ent.target;
-      var end = +el.dataset.count || 0;
-      var prefix = el.dataset.prefix || "";
-      var suffix = el.dataset.suffix || "";
-      countUp(el, end, {prefix:prefix, suffix:suffix});
+      const el = ent.target;
+      const end = +el.dataset.count || 0;
+      const prefix = el.dataset.prefix || "";
+      const suffix = el.dataset.suffix || "";
+      countUp(el, end, {prefix, suffix});
       counterIO.unobserve(el);
     }
-  }
+  });
 },{threshold:0.6});
-var _countEls = document.querySelectorAll('.count');
-for (var c=0; c<_countEls.length; c++){ counterIO.observe(_countEls[c]); }
+document.querySelectorAll('.count').forEach(el=>counterIO.observe(el));
 
 /* ===== Flags marquee duplicate ===== */
 (function(){
-  var track = document.getElementById('marqueeTrack');
-  if(track && track.parentNode){ track.parentNode.appendChild(track.cloneNode(true)); }
-})();
-
-/* ===== “Video from enso.build” fallback logic ===== */
-(function(){
-  var iframe = document.getElementById('ensoEmbed');
-  var fallback = document.getElementById('ensoFallback');
-  if(!iframe || !fallback) return;
-  iframe.addEventListener('load', function(){ try{ fallback.style.display='none'; }catch(_){} });
+  const track = document.getElementById('marqueeTrack');
+  if(track) track.parentNode.appendChild(track.cloneNode(true));
 })();
 
 /* ===== Initials avatar ===== */
-function initialAvatar(name, size){
-  size = size || 144;
-  var ch = "?";
-  if (name && name.trim()) ch = name.trim().charAt(0).toUpperCase();
-  var pal = [["#3B82F6","#A78BFA"],["#22D3EE","#818CF8"],["#F472B6","#60A5FA"],["#34D399","#22D3EE"],["#F59E0B","#F472B6"],["#A855F7","#06B6D4"]];
-  var sum = 0; for (var i=0;i<name.length;i++){ sum += name.charCodeAt(i); }
-  var idx = Math.abs(sum) % pal.length;
-  var c1 = pal[idx][0], c2 = pal[idx][1];
-  var svg =
-"<svg xmlns='http://www.w3.org/2000/svg' width='"+size+"' height='"+size+"' viewBox='0 0 "+size+" "+size+"'>\
-  <defs>\
-    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='"+c1+"'/><stop offset='100%' stop-color='"+c2+"'/></linearGradient>\
-    <filter id='shadow' x='-50%' y='-50%' width='200%'><feDropShadow dx='0' dy='1' stdDeviation='2' flood-color='#000' flood-opacity='0.35'/></filter>\
-  </defs>\
-  <circle cx='"+(size/2)+"' cy='"+(size/2)+"' r='"+(size/2-3)+"' fill='url(#g)' filter='url(#shadow)'/>\
-  <text x='50%' y='54%' text-anchor='middle' font-family='Inter, system-ui' font-size='"+(size*0.48)+"' fill='#0B0F1A' font-weight='900' dominant-baseline='middle'>"+ch+"</text>\
-</svg>";
+function initialAvatar(name, size=144){
+  const ch = (name?.trim()?.[0] || "?").toUpperCase();
+  const pal = [["#3B82F6","#A78BFA"],["#22D3EE","#818CF8"],["#F472B6","#60A5FA"],["#34D399","#22D3EE"],["#F59E0B","#F472B6"],["#A855F7","#06B6D4"]];
+  const idx = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % pal.length;
+  const [c1,c2] = pal[idx];
+  const svg =
+`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'>
+  <defs>
+    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.35"/></filter>
+  </defs>
+  <circle cx='${size/2}' cy='${size/2}' r='${size/2-3}' fill='url(#g)' filter='url(#shadow)'/>
+  <text x='50%' y='54%' text-anchor='middle' font-family="Inter, system-ui" font-size='${size*0.48}' fill='#0B0F1A' font-weight='900' dominant-baseline='middle'>${ch}</text>
+</svg>`;
   return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
 }
 
 /* ===== Icons ===== */
-function iconDiscord(){return "<svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M20.3 5.6a16 16 0 0 0-4-1.3l-.2.4a12 12 0 0 1 3.5 1.7c-1.6-.7-3.2-1.1-4.9-1.3a9.5 9.5 0 0 0-2.1 0c-1.7.2-3.3.6-4.9 1.3a12 12 0  0 1 3.5-1.7l-.2-.4a16 16 0 0 0-4 1.3C3.6 10 3 14 3.2 18c1.7 1.3 3.6 2.2 5.7 2.7l.5-1.2c-.8-.3-1.6-.6-2.3-1 .2-.2.5-.5.7-.7a12 12 0 0 0 8.7 0l.7.7c-.7.4-1.5.7-2.3 1l.5 1.2c2.1-.5 4-1.4 5.7-2.7.2-4-.4-8-2.8-12.4ZM9.6 15.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z'/></svg>";}
-function iconX(){return "<svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M18.9 2H21l-6.6 7.5L22 22h-6.8l-5.3-6.4L3.9 22H2l7.1-8.1L2 2h6.9l4.8 5.8L18.9 2Zm-2.4 18h1.3L7.7 4H6.4l10.1 16Z'/></svg>";}
+function iconDiscord(){return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 5.6a16 16 0 0 0-4-1.3l-.2.4a12 12 0 0 1 3.5 1.7c-1.6-.7-3.2-1.1-4.9-1.3a9.5 9.5 0 0 0-2.1 0c-1.7.2-3.3.6-4.9 1.3a12 12 0 0 1 3.5-1.7l-.2-.4a16 16 0 0 0-4 1.3C3.6 10 3 14 3.2 18c1.7 1.3 3.6 2.2 5.7 2.7l.5-1.2c-.8-.3-1.6-.6-2.3-1 .2-.2.5-.5.7-.7a12 12 0 0 0 8.7 0l.7.7c-.7.4-1.5.7-2.3 1l.5 1.2c2.1-.5 4-1.4 5.7-2.7.2-4-.4-8-2.8-12.4ZM9.6 15.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>`}
+function iconX(){return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H21l-6.6 7.5L22 22h-6.8l-5.3-6.4L3.9 22H2l7.1-8.1L2 2h6.9l4.8 5.8L18.9 2Zm-2.4 18h1.3L7.7 4H6.4l10.1 16Z"/></svg>`}
 
 /* ===== Fireworks for Pilot cards ===== */
 function launchFireworks(card, x, y){
-  var cvs=document.createElement('canvas'); cvs.className='fireworks-canvas'; card.appendChild(cvs);
-  var dpr=Math.max(1,window.devicePixelRatio||1), r=card.getBoundingClientRect(), w=r.width, h=r.height;
+  const cvs=document.createElement('canvas'); cvs.className='fireworks-canvas'; card.appendChild(cvs);
+  const dpr=Math.max(1,devicePixelRatio||1), r=card.getBoundingClientRect(), w=r.width, h=r.height;
   cvs.style.width=w+'px'; cvs.style.height=h+'px'; cvs.width=Math.floor(w*dpr); cvs.height=Math.floor(h*dpr);
-  var ctx=cvs.getContext('2d'); ctx.scale(dpr,dpr); ctx.globalCompositeOperation='lighter';
-  var bx=x-r.left, by=y-r.top, colors=['#7DD3FC','#A78BFA','#F472B6','#FFFFFF','#FFC94A']; var parts=[];
-  for(var b=0;b<3;b++){ var ox=bx+(Math.random()*30-15), oy=by+(Math.random()*30-15);
-    for(var i=0;i<115;i++){ var ang=Math.random()*Math.PI*2, sp=3.2+Math.random()*5.4;
+  const ctx=cvs.getContext('2d'); ctx.scale(dpr,dpr); ctx.globalCompositeOperation='lighter';
+  const bx=x-r.left, by=y-r.top, colors=['#7DD3FC','#A78BFA','#F472B6','#FFFFFF','#FFC94A']; const parts=[];
+  for(let b=0;b<3;b++){ const ox=bx+(Math.random()*30-15), oy=by+(Math.random()*30-15);
+    for(let i=0;i<115;i++){ const ang=Math.random()*Math.PI*2, sp=3.2+Math.random()*5.4;
       parts.push({x:ox,y:oy,px:ox,py:oy,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:900+Math.random()*700,age:0,size:2+Math.random()*3.2,color:colors[Math.floor(Math.random()*colors.length)],drag:0.992-Math.random()*0.015,grav:0.03+Math.random()*0.02,sparkle:Math.random()<0.45});
   }}
-  var last=performance.now();
+  let last=performance.now();
   function tick(now){
-    var dt=now-last; last=now; ctx.clearRect(0,0,w,h); var alive=false;
-    for(var j=0;j<parts.length;j++){ var p=parts[j]; p.age+=dt; if(p.age<p.life){ alive=true; p.px=p.x; p.py=p.y; p.vx*=p.drag; p.vy=p.vy*p.drag+p.grav; p.x+=p.vx; p.y+=p.vy;
-      var a=Math.max(0,1-p.age/p.life); ctx.strokeStyle=p.color; ctx.fillStyle=p.color; ctx.globalAlpha=Math.max(a,.22);
+    const dt=now-last; last=now; ctx.clearRect(0,0,w,h); let alive=false;
+    for(const p of parts){ p.age+=dt; if(p.age<p.life){ alive=true; p.px=p.x; p.py=p.y; p.vx*=p.drag; p.vy=p.vy*p.drag+p.grav; p.x+=p.vx; p.y+=p.vy;
+      const a=Math.max(0,1-p.age/p.life); ctx.strokeStyle=p.color; ctx.fillStyle=p.color; ctx.globalAlpha=Math.max(a,.22);
       ctx.lineWidth=p.size*.55; ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(p.x,p.y); ctx.stroke();
       if(p.sparkle && (p.age|0)%80<40){ ctx.globalAlpha=Math.max(a,.28); ctx.beginPath(); ctx.arc(p.x,p.y,p.size*.9,0,Math.PI*2); ctx.fill(); } } }
     ctx.globalAlpha=1; if(alive) requestAnimationFrame(tick); else card.removeChild(cvs);
   } requestAnimationFrame(tick);
 }
 
-/* ===== Pilot cards (template) ===== */
+/* ===== Pilot cards (template) — show immediately (no reveal) ===== */
 function cardTemplate(p){
-  var el=document.createElement('article'); el.className='card glass reveal';
-  el.innerHTML=
-    '<div class="card-header" title="Celebrate 🎉">'+
-      '<div class="badge">#'+p.number+'</div>'+
-      '<div class="media">'+
-        '<img class="avatar" src="'+p.avatar+'" alt="'+p.name+'">'+
-        '<img class="helmet" src="'+HELMET_ICON_SRC+'" alt="Pilot Helmet" onerror="this.style.display=\'none\'">'+
-      '</div>'+
-      '<div class="info"><h3>'+p.name+'</h3><div class="role">Pilot — Enso</div></div>'+
-    '</div>'+
-    '<div class="card-info">'+
-      '<div><strong>Status:</strong> '+p.info.status+' &nbsp;•&nbsp; <strong>Since:</strong> '+p.info.since+'</div>'+
-      '<div class="pills">'+p.info.badges.map(function(b){ return '<span class="pill '+(b==='@Pilot'?'pill-pilot':'')+'">'+b+'</span>'; }).join('')+'</div>'+
-    '</div>'+
-    '<div class="card-body">'+
-      '<a class="btn" href="https://discord.gg/enso-build" target="_blank" rel="noreferrer noopener">'+iconDiscord()+' Discord</a>'+
-      '<a class="btn" href="https://x.com/EnsoBuild" target="_blank" rel="noreferrer noopener">'+iconX()+' X</a>'+
-    '</div>';
-  el.querySelector('.card-header').addEventListener('click',function(e){ launchFireworks(el,e.clientX,e.clientY); });
-  io.observe(el);
-  return el;
+  const el=document.createElement('article'); el.className='card glass';
+  el.innerHTML=`
+    <div class="card-header" title="Celebrate 🎉">
+      <div class="badge">#${p.number}</div>
+      <div class="media">
+        <img class="avatar" src="${p.avatar}" alt="${p.name}">
+        <img class="helmet" src="${HELMET_ICON_SRC}" alt="Pilot Helmet" onerror="this.style.display='none'">
+      </div>
+      <div class="info"><h3>${p.name}</h3><div class="role">Pilot — Enso</div></div>
+    </div>
+    <div class="card-info">
+      <div><strong>Status:</strong> ${p.info.status} &nbsp;•&nbsp; <strong>Since:</strong> ${p.info.since}</div>
+      <div class="pills">${p.info.badges.map(b=>`<span class="pill ${b==="@Pilot"?'pill-pilot':''}">${b}</span>`).join('')}</div>
+    </div>
+    <div class="card-body">
+      <a class="btn" href="https://discord.gg/enso-build" target="_blank" rel="noreferrer noopener">${iconDiscord()} Discord</a>
+      <a class="btn" href="https://x.com/EnsoBuild" target="_blank" rel="noreferrer noopener">${iconX()} X</a>
+    </div>`;
+  el.querySelector('.card-header').addEventListener('click',(e)=>launchFireworks(el,e.clientX,e.clientY));
+  return el; // ไม่ observe
 }
 
-/* ===== Pilots (merged from your screenshots + existing list) ===== */
-var NAMES = [
-  "0xKh1n","0xMohamed","Andrik","bc1pBITHERU…","belahteko","DonMontana","EKO","GIAN","haruya_",
-  "JohnnyChuon…","KAIRO","kelp","kennyajaks","kokoko","Leetv","LEVIOUSA","Leyba","Lolichan","longdv","milad",
-  "MMPR(✧✦)","Ngô Hoàng","Queenoma","Rutto","Sakamoto","Sasuke","shark_thegreat","Skygge","SOJIB","Tomiwayrn",
-  "Ulbert 黑手党","Vkorn","ZBingo",
-  /* existing names kept */
-  "Alt_Coiner","Cozmee","ezrmol","Falcon","Ghfri","hanzo(φ,G)","HASHAN","Lucky","Moted.Eth","Shubh",
-  "Wiko","NDUKAM","MONTEGO","S!LOWEK","Ric vn"
+/* ===== Pilots list + immediate render (UPDATED, deduped) ===== */
+const RAW_NAMES = [
+  "0xKh1n","Abdul","Alt_Coiner","Andrik",
+  "bc1pBITHERUMN",
+  "Cozmee","ezrmol","Falcon","Ghfri","GIAN","hanzo(φ,G)","haruya_","HASHAN",
+  "JohnnyChuon…","KAIRO","kokoko","LEVIOUSA","Leyba","Lolichan","longdv","Lucky",
+  "MMPR(✧✦)","Moted.Eth","Ngô Hoàng","Rutto",
+  "shark_thegreat","Shubh","SOJIB","Tomiwayrn","Vkorn","Wiko",
+  "NDUKAM","MONTEGO","S!LOWEK","Ric vn"
 ];
-
-var SAMPLE_INFO={status:"Active", since:"2023", badges:["@Pilot","@Community","@Veteran","@Nitro Sensei"]};
-var DATA=NAMES.map(function(n,i){ return {name:n, number:i+1, avatar:initialAvatar(n), info:Object.assign({}, SAMPLE_INFO)}; });
-var grid=document.getElementById('grid');
-for (var g=0; g<DATA.length; g++){ grid.appendChild(cardTemplate(DATA[g])); }
+const NAMES = [...new Set(RAW_NAMES)];
+const SAMPLE_INFO={status:"Active", since:"2023", badges:["@Pilot","@Community","@Veteran","@Nitro Sensei"]};
+const DATA=NAMES.map((n,i)=>({name:n, number:i+1, avatar:initialAvatar(n), info:{...SAMPLE_INFO}}));
+const grid=document.getElementById('grid');
+DATA.forEach(p=>grid.appendChild(cardTemplate(p)));
 </script>
 </body>
 </html>
