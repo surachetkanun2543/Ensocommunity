@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ENSO Pilots Hall of Fame</title>
+<link rel="icon" href="/images/pilot.png" type="image/x-icon">
+
+<!-- Font stack คล้าย Google Sans Code -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --gold:#FFC72C; --gold-25:rgba(255,199,44,.25);
+  --ink:#E6F3FF; --muted:#9AA4B2;
+  --panel:rgba(14,16,26,.55);
+  --accent:rgba(255,255,255,.06);
+  --ring:0 0 0 1px rgba(255,255,255,.06) inset, 0 10px 30px rgba(34,211,238,.10), 0 6px 18px rgba(139,92,246,.12);
+  --glow:0 14px 36px rgba(139,92,246,.25), 0 8px 22px rgba(34,211,238,.18);
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink);
+  font-family:"Google Sans Code","Google Sans Text","Google Sans","Product Sans","Plus Jakarta Sans","Inter",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;
+  font-size:18px; line-height:1.4;
+  /* พื้นหลังโปร่งใส ไล่เฉดซ้าย→ขวา (cyan→violet→pink) */
+  background:
+    linear-gradient(90deg, rgba(0,230,255,.18) 0%, rgba(107,92,255,.16) 50%, rgba(255,63,165,.14) 100%),
+    radial-gradient(80vh 60vh at 10% -10%, rgba(139,92,246,.22), transparent 60%),
+    radial-gradient(80vh 60vh at 100% 0%, rgba(34,211,238,.18), transparent 60%),
+    #0A0E17;
+}
+.page{ padding:28px; max-width:1680px; margin:0 auto }
+@media (min-width: 900px){ .page{ padding:40px } }
+
+/* Topbar โปร่งใส ไล่เฉดซ้าย→ขวา + blur */
+.topbar{
+  background:linear-gradient(90deg, rgba(0,230,255,.6) 0%, rgba(107,92,255,.55) 50%, rgba(255,63,165,.5) 100%);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  color:#001018; border:1px solid rgba(255,255,255,.28);
+  box-shadow: 0 12px 36px rgba(0,0,0,.28), 0 0 0 1px inset rgba(255,255,255,.18);
+  border-radius:16px; position:sticky; top:18px; z-index:20;
+}
+.topbar .container{ max-width:1400px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:14px }
+.brand{ display:flex; align-items:center; gap:10px; font-weight:800 }
+.brand img{ height:28px }
+.brand span{ color:#001018; text-shadow:0 1px 0 rgba(255,255,255,.35) }
+.switch{ margin-left:auto; display:flex; gap:8px; padding:6px; border:1px solid rgba(255,255,255,.35); border-radius:999px; background:rgba(255,255,255,.25) }
+.switch button{ cursor:pointer; border:1px solid transparent; padding:6px 12px; border-radius:999px; background:transparent; color:#001018; font-weight:800; letter-spacing:.2px }
+.switch .active{ background:#0B0D17; color:#fff; box-shadow:0 6px 18px rgba(0,0,0,.35) }
+
+/* Hero */
+.hero{ border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.03); border-radius:16px; margin-top:18px; backdrop-filter: blur(6px) }
+.hero .container{ max-width:1400px; margin:0 auto; padding:28px 20px 18px }
+.hero h1{ margin:0; font-size:clamp(40px,5.8vw,72px); font-weight:800 }
+.meta{ color:var(--muted); font-size:16px }
+
+/* Subnav */
+.subnav{ position:sticky; top:110px; z-index:19; background:rgba(9,11,20,.45); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(10px); border-radius:16px; margin-top:16px }
+.subnav .container{ max-width:1400px; margin:0 auto; padding:12px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+.tab{ min-width:38px; height:38px; padding:0 12px; display:grid; place-items:center; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:var(--ink); font-weight:800; cursor:pointer; transition:all .2s ease }
+.tab:hover{ box-shadow: var(--ring) }
+.tab.active{ background:linear-gradient(90deg, rgba(0,230,255,.9), rgba(107,92,255,.9)); border-color:var(--gold); color:#0B0D17; box-shadow: var(--glow) }
+.search{ margin-left:auto; display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,.18); padding:8px 10px; border-radius:10px; background:rgba(255,255,255,.06) }
+.search input{ border:none; outline:none; font-size:16px; width:220px; background:transparent; color:var(--ink); font-family:inherit }
+
+/* Grid */
+.container-main{ max-width:1400px; margin:0 auto; padding:20px }
+.grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px }
+@media (max-width: 1200px){ .grid{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width: 720px){ .grid{ grid-template-columns:1fr } }
+
+/* Card */
+.card{
+  position:relative; border:1px solid rgba(255,255,255,.18); border-radius:16px; background:var(--panel);
+  overflow:hidden; backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px inset rgba(255,255,255,.10);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.card:hover{ transform:translateY(-6px); border-color:var(--gold); box-shadow:var(--glow), 0 10px 26px rgba(0,0,0,.35) }
+.card::before{ content:""; position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,230,255,.25), rgba(107,92,255,.25)); opacity:.16; pointer-events:none }
+.card-header{ position:relative; z-index:2; padding:14px 18px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.16); cursor:pointer }
+
+/* Badge (#) วงกลมทอง */
+.badge{
+  width:44px; height:44px; border-radius:50%; display:grid; place-items:center;
+  background:var(--gold); color:#0B0D17; font-weight:900;
+  box-shadow: 0 0 0 2px rgba(255,199,44,.4) inset, 0 6px 16px rgba(0,0,0,.25);
+}
+
+/* Avatar + helmet */
+.media{ position:relative; width:92px; height:92px; flex:0 0 92px }
+.avatar{
+  width:100%; height:100%; border-radius:50%;
+  border:2px solid var(--gold); outline:1px solid rgba(34,211,238,.35);
+  object-fit:cover; background:#0B0F1A; box-shadow:0 8px 18px rgba(0,0,0,.35)
+}
+.helmet{
+  position:absolute; right:-6px; bottom:-6px; width:40px; height:40px;
+  background:none; padding:0; filter: drop-shadow(0 2px 6px rgba(0,0,0,.45));
+}
+
+.info h3{ font-size:24px; margin:0 0 2px; font-weight:800 }
+.info .role{ color:var(--muted); font-size:14px; letter-spacing:.3px }
+
+/* Info + badges */
+.card-info{ padding:12px 18px 0; color:var(--muted); font-size:15px; letter-spacing:.3px }
+.pills{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
+.pill{ border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); padding:6px 12px; border-radius:999px; font-size:13px }
+
+/* Buttons */
+.card-body{ padding:14px 18px 18px; display:flex; gap:12px }
+.btn{ flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid rgba(255,255,255,.18); padding:10px 12px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); color:var(--ink); text-decoration:none; font-size:16px; letter-spacing:.4px; font-weight:800; transition:.2s ease }
+.btn:hover{ border-color:var(--gold); box-shadow:0 0 0 1px inset var(--gold), var(--ring) }
+.btn svg{ width:16px; height:16px }
+
+/* Role panel / Footer */
+.role-panel{ max-width:1400px; margin:12px auto 28px; padding:0 20px }
+.role-card{ border:2px solid var(--gold); border-radius:20px; padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); box-shadow: 0 0 24px rgba(255,199,44,.18) inset, 0 10px 30px rgba(0,0,0,.35) }
+.role-head{ display:flex; align-items:center; gap:10px; margin:0 0 12px; font-weight:800 }
+.role-head .dot{ width:12px; height:12px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(255,199,44,.18) }
+.role-title{ font-weight:800; letter-spacing:.4px }
+.role-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px }
+@media (max-width: 1100px){ .role-grid{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width: 640px){ .role-grid{ grid-template-columns:1fr } }
+.role-box{ border:1px solid rgba(255,255,255,.18); border-radius:14px; padding:14px; background:rgba(14,16,26,.45) }
+.role-box h4{ margin:0 0 10px; font-size:16px; letter-spacing:.3px }
+.role-box ul{ margin:0; padding-left:20px; font-size:14px; color:var(--muted); line-height:1.6 }
+.footer{ border-top:1px solid rgba(255,255,255,.18); color:var(--muted); font-size:16px; margin-top:18px }
+.footer .container{ max-width:1400px; margin:0 auto; padding:18px 20px }
+
+/* Fireworks canvas overlay – โปร่งใส, ไม่บังการคลิก */
+.fireworks-canvas{ position:absolute; inset:0; z-index:3; pointer-events:none; background:transparent }
+</style>
+</head>
+<body>
+<div class="page">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="brand">
+        <img src="https://framerusercontent.com/images/FPnvhl6ocJ58PYgLaYri68xb6cQ.webp" alt="Enso Logo">
+      </div>
+      <div class="switch" role="tablist" aria-label="Theme">
+        <button id="btn-warriors">Blue–Gold</button>
+        <button id="btn-enso" class="active">Enso Purple–Cyan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>ENSO Pilots Hall of Fame</h1>
+      <div class="meta" id="meta"></div>
+    </div>
+  </section>
+
+  <!-- Subnav -->
+  <nav class="subnav">
+    <div class="container">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="0-9">0–9</button>
+      <button class="tab" data-filter="A">A</button>
+      <button class="tab" data-filter="B">B</button>
+      <button class="tab" data-filter="C">C</button>
+      <button class="tab" data-filter="D">D</button>
+      <button class="tab" data-filter="E">E</button>
+      <button class="tab" data-filter="F">F</button>
+      <button class="tab" data-filter="G">G</button>
+      <button class="tab" data-filter="H">H</button>
+      <button class="tab" data-filter="J">J</button>
+      <button class="tab" data-filter="K">K</button>
+      <button class="tab" data-filter="L">L</button>
+      <button class="tab" data-filter="M">M</button>
+      <button class="tab" data-filter="N">N</button>
+      <button class="tab" data-filter="R">R</button>
+      <button class="tab" data-filter="S">S</button>
+      <button class="tab" data-filter="T">T</button>
+      <button class="tab" data-filter="V">V</button>
+      <button class="tab" data-filter="W">W</button>
+
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#7bd7ff" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="q" placeholder="Search by name…" />
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cards -->
+  <main class="container-main">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <!-- Role info -->
+  <section class="role-panel" aria-labelledby="role-title">
+    <div class="role-card">
+      <div class="role-head"><div class="dot"></div><div id="role-title" class="role-title">ROLE INFORMATION</div></div>
+      <div class="role-grid">
+        <div class="role-box"><h4>GENERAL</h4><ul>
+          <li>@Community — Verified Community member</li>
+          <li>@OG Enso — Members before Apr 19, 2022</li>
+          <li>@Enso Booster — Thank you for boosting</li>
+          <li>@Game Master — You love Enso’s Gaming events</li>
+        </ul></div>
+        <div class="role-box"><h4>SPEEDRUN</h4><ul>
+          <li>@Neon Rookie</li><li>@Midnight Racer</li><li>@Supersonic Samurai</li><li>@Tokyo Drifter</li><li>@Nitro Sensei</li>
+        </ul></div>
+        <div class="role-box"><h4>DRIP</h4><ul>
+          <li>@Raiders — Ready to spread the word</li>
+          <li>@Portal — Spend 350 Shortcats and cross the Portal</li>
+          <li>@Veteran — Thank you for your service</li>
+        </ul></div>
+        <div class="role-box"><h4>RANKS</h4><ul>
+          <li>@Trainee</li><li>@Junior</li><li>@Pit Crew</li><li>@Mechanic</li><li>@Pilot — Highest Rank</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal" style="display:none">
+    <div class="modal">
+      <div class="modal-head">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div id="m-number" class="badge" style="width:44px;height:44px">#1</div>
+          <div>
+            <div id="m-name" style="font-size:26px;letter-spacing:.6px">Pilot</div>
+            <div class="role" style="color:#0B0D17;opacity:.8">Pilot — Enso</div>
+          </div>
+        </div>
+        <button class="close" id="m-close" aria-label="Close" style="background:none;border:1px solid transparent;color:#0B0D17;font-size:28px;cursor:pointer;border-radius:8px;line-height:1">×</button>
+      </div>
+      <div class="modal-body" style="padding:18px;color:var(--ink)">
+        <img id="m-avatar" alt="Pilot avatar" style="width:140px;height:140px;border-radius:50%;border:2px solid var(--gold);outline:1px solid rgba(34,211,238,.35);object-fit:cover;box-shadow:0 10px 26px rgba(139,92,246,.25)" />
+        <p style="color:var(--muted);font-size:16px;margin-top:12px">Connect with this Enso Pilot.</p>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <a id="m-discord" class="btn" target="_blank" rel="noreferrer noopener" href="https://discord.gg/enso-build">Discord</a>
+          <a id="m-x" class="btn" target="_blank" rel="noreferrer noopener" href="https://x.com/EnsoBuild">X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"><div class="container">ENSO Pilots Hall of Fame Project Contributors bc1pBITHERUMN ⚡✨</div></footer>
+</div><!-- /.page -->
+
+<script>
+/* ===== Assets ===== */
+const HELMET_ICON_SRC = "/images/pilot-helmet.png";
+
+/* ===== Initial avatar (ตัวอักษรแรก) ===== */
+function initialAvatar(name, size=144){
+  const ch = (name && name.trim()[0] || "?").toUpperCase();
+  const palette = [
+    ["#00E6FF","#6B5CFF"],["#6B5CFF","#FF3FA5"],["#10B981","#06B6D4"],
+    ["#EC4899","#8B5CF6"],["#0EA5E9","#22D3EE"],["#F97316","#F59E0B"]
+  ];
+  const idx = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % palette.length;
+  const [c1,c2] = palette[idx];
+  const svg =
+`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'>
+  <defs>
+    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/></filter>
+  </defs>
+  <circle cx='${size/2}' cy='${size/2}' r='${size/2-4}' fill='url(#g)' filter='url(#shadow)'/>
+  <text x='50%' y='54%' text-anchor='middle' font-family="Google Sans, Plus Jakarta Sans, Inter, sans-serif" font-size='${size*0.5}' fill='#0B0D17' font-weight='900' dominant-baseline='middle'>${ch}</text>
+</svg>`;
+  return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+}
+
+/* ===== Data ===== */
+const NAMES = [
+  "0xKh1n","Abdul","Alt_Coiner","Andrik","bc1pBITHERU…","Cozmee","ezrmol","Falcon",
+  "Ghfri","GIAN","hanzo(φ,G)","haruya_","HASHAN",
+  "JohnnyChuon…","KAIRO","kokoko","LEVIOUSA","Leyba","Lolichan","longdv","Lucky",
+  "MMPR(✧✦)","Moted.Eth","Ngô Hoàng","Rutto",
+  "shark_thegreat","Shubh","SOJIB","Tomiwayrn","Vkorn","Wiko","NDUKAM","MONTEGO","S!LOWEK","Ric vn"
+];
+const SAMPLE_INFO = { role:"🚀 Pilot — Enso", status:"Active", since:"2023", badges:["@Community","@Veteran","@Nitro Sensei"] };
+const DATA = NAMES.map((n,i)=>({ name:n, number:i+1, avatar: initialAvatar(n), info:{...SAMPLE_INFO} }));
+
+/* ===== DOM ===== */
+const grid = document.getElementById('grid');
+const meta = document.getElementById('meta');
+const q = document.getElementById('q');
+const tabs = document.querySelectorAll('.tab');
+const modal = document.getElementById('modal');
+
+/* ===== Icons ===== */
+function iconDiscord(){ return `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 5.6a16 16 0 0 0-4-1.3l-.2.4a12 12 0 0 1 3.5 1.7c-1.6-.7-3.2-1.1-4.9-1.3a9.5 9.5 0 0 0-2.1 0c-1.7.2-3.3.6-4.9 1.3a12 12 0 0 1 3.5-1.7l-.2-.4a16 16 0 0 0-4 1.3C3.6 10 3 14 3.2 18c1.7 1.3 3.6 2.2 5.7 2.7l.5-1.2c-.8-.3-1.6-.6-2.3-1 .2-.2.5-.5.7-.7a12 12 0 0 0 8.7 0l.7.7c-.7.4-1.5.7-2.3 1l.5 1.2c2.1-.5 4-1.4 5.7-2.7.2-4-.4-8-2.8-12.4ZM9.6 15.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>`; }
+function iconX(){ return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H21l-6.6 7.5L22 22h-6.8l-5.3-6.4L3.9 22H2l7.1-8.1L2 2h6.9l4.8 5.8L18.9 2Zm-2.4 18h1.3L7.7 4H6.4l10.1 16Z"/></svg>`; }
+
+/* ===== Fireworks: โปร่งใส 100%, ไม่บังคลิก, ทำงานหลังเปิดการ์ด ===== */
+function launchFireworks(card, x, y){
+  const cvs = document.createElement('canvas');
+  cvs.className = 'fireworks-canvas';
+  card.appendChild(cvs);
+
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  const rect = card.getBoundingClientRect();
+  const w = rect.width, h = rect.height;
+  cvs.style.width = w + 'px';  cvs.style.height = h + 'px';
+  cvs.width = Math.floor(w * dpr); cvs.height = Math.floor(h * dpr);
+
+  const ctx = cvs.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.globalCompositeOperation = 'lighter';
+
+  const baseX = x - rect.left, baseY = y - rect.top;
+  const colors = ['#00E6FF','#6B5CFF','#FF3FA5','#FFC72C','#FFFFFF'];
+  const bursts = 3, perBurst = 120;
+  const parts = [];
+  for(let b=0;b<bursts;b++){
+    const ox = baseX + (Math.random()*30-15);
+    const oy = baseY + (Math.random()*30-15);
+    for(let i=0;i<perBurst;i++){
+      const angle = Math.random()*Math.PI*2;
+      const speed = 3.5 + Math.random()*5.5;
+      parts.push({
+        x:ox, y:oy, px:ox, py:oy,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed,
+        life: 900 + Math.random()*700,
+        age: 0,
+        size: 2 + Math.random()*3.5,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        drag: 0.99 - Math.random()*0.02,
+        grav: 0.035 + Math.random()*0.02,
+        sparkle: Math.random()<0.5
+      });
+    }
+  }
+
+  let last = performance.now();
+  function tick(now){
+    const dt = now - last; last = now;
+
+    // โปร่งใสจริง ๆ: ไม่ระบายพื้นหลัง, เคลียร์ทั้งเฟรม
+    ctx.clearRect(0,0,w,h);
+
+    let alive = false;
+    for(const p of parts){
+      p.age += dt;
+      if(p.age < p.life){
+        alive = true;
+        p.px = p.x; p.py = p.y;
+        p.vx *= p.drag; p.vy = p.vy * p.drag + p.grav;
+        p.x += p.vx; p.y += p.vy;
+
+        const alpha = Math.max(0, 1 - (p.age/p.life));
+        ctx.strokeStyle = p.color; ctx.fillStyle = p.color;
+
+        // trail
+        ctx.globalAlpha = Math.max(alpha, .25);
+        ctx.lineWidth = p.size * .6;
+        ctx.beginPath(); ctx.moveTo(p.px, p.py); ctx.lineTo(p.x, p.y); ctx.stroke();
+
+        // sparkle
+        if(p.sparkle && (p.age|0)%80<40){
+          ctx.globalAlpha = Math.max(alpha, .3);
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.size*0.9, 0, Math.PI*2); ctx.fill();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    if(alive) requestAnimationFrame(tick);
+    else card.removeChild(cvs);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ===== Card template ===== */
+function cardTemplate(p){
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML = `
+    <div class="card-header" title="Open details">
+      <div class="badge">#${p.number}</div>
+      <div class="media">
+        <img class="avatar" src="${p.avatar}" alt="${p.name}">
+        <img class="helmet" src="${HELMET_ICON_SRC}" alt="Pilot Helmet">
+      </div>
+      <div class="info">
+        <h3>${p.name}</h3>
+        <div class="role">Pilot — Enso</div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div><strong>Role:</strong> ${p.info.role} &nbsp;•&nbsp; <strong>Status:</strong> ${p.info.status} &nbsp;•&nbsp; <strong>Since:</strong> ${p.info.since}</div>
+      <div class="pills">${p.info.badges.map(b=>`<span class="pill">${b}</span>`).join('')}</div>
+    </div>
+    <div class="card-body">
+      <a class="btn" href="https://discord.gg/enso-build" target="_blank" rel="noreferrer noopener">${iconDiscord()} Discord</a>
+      <a class="btn" href="https://x.com/EnsoBuild" target="_blank" rel="noreferrer noopener">${iconX()} X</a>
+    </div>
+  `;
+  const header = el.querySelector('.card-header');
+  header.addEventListener('click', (e)=>{
+    // เปิดโมดัลก่อน
+    openModal(p);
+    // แล้วค่อยจุดดอกไม้ไฟ (หน่วงเล็กน้อยให้ modal ขึ้นก่อนชัวร์)
+    const clickX = e.clientX, clickY = e.clientY;
+    setTimeout(()=> launchFireworks(el, clickX, clickY), 250);
+  });
+  return el;
+}
+
+/* ===== Render / Filter ===== */
+function render(list){
+  grid.innerHTML=''; list.forEach(p=>grid.appendChild(cardTemplate(p)));
+  meta.textContent=`Updated ${new Date().toISOString().slice(0,10)} • ${list.length} members`;
+}
+function filterByLetter(letter){
+  if(letter==='all') return DATA;
+  if(letter==='0-9') return DATA.filter(p=>/^[0-9]/.test(p.name));
+  return DATA.filter(p => (p.name[0]||'').toUpperCase()===letter);
+}
+tabs.forEach(t => t.addEventListener('click', ()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active'); q.value='';
+  render(filterByLetter(t.dataset.filter));
+}));
+q.addEventListener('input', ()=>{
+  const text=q.value.toLowerCase().trim();
+  const current=document.querySelector('.tab.active').dataset.filter;
+  let arr=filterByLetter(current);
+  if(text) arr=arr.filter(p=>p.name.toLowerCase().includes(text));
+  render(arr);
+});
+
+/* ===== Modal ===== */
+function openModal(p){
+  document.getElementById('m-number').textContent='#'+p.number;
+  document.getElementById('m-name').textContent=p.name;
+  document.getElementById('m-avatar').src=p.avatar;
+  modal.style.display='flex';
+}
+document.getElementById('m-close').addEventListener('click', ()=> modal.style.display='none');
+modal.addEventListener('click', e => { if(e.target.id==='modal') modal.style.display='none'; });
+
+/* ===== Theme toggle ===== */
+const btnWarriors = document.getElementById('btn-warriors');
+const btnEnso = document.getElementById('btn-enso');
+function applyTheme(theme){
+  if(theme==='enso'){
+    document.body.style.background =
+      `linear-gradient(90deg, rgba(0,230,255,.18), rgba(107,92,255,.16) 50%, rgba(255,63,165,.14) 100%),
+       radial-gradient(80vh 60vh at 10% -10%, rgba(139,92,246,.22), transparent 60%),
+       radial-gradient(80vh 60vh at 100% 0%, rgba(34,211,238,.18), transparent 60%),
+       #0A0E17`;
+  }else{
+    document.body.style.background =
+      `linear-gradient(90deg, rgba(255,199,44,.14), rgba(25,44,99,.18) 50%, rgba(255,199,44,.12) 100%),
+       radial-gradient(80vh 60vh at 10% -10%, rgba(255,199,44,.16), transparent 60%),
+       radial-gradient(80vh 60vh at 100% 0%, rgba(25,44,99,.18), transparent 60%),
+       #0A0E17`;
+  }
+  btnWarriors.classList.toggle('active', theme!=='enso');
+  btnEnso.classList.toggle('active', theme==='enso');
+}
+btnWarriors.addEventListener('click', ()=>applyTheme('warriors'));
+btnEnso.addEventListener('click', ()=>applyTheme('enso'));
+
+/* Init */
+applyTheme('enso');
+render(DATA);
+</script>
+</body>
+</html>
