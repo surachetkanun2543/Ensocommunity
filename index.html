@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ENSO • Builders & Pilots</title>
+<title>ENSO Growing Community</title>
 <link rel="icon" href="/images/pilot.png" type="image/x-icon" />
 
 <!-- Inter font -->
@@ -67,7 +67,10 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 
 /* ===== Sections / reveal ===== */
 .section{margin:36px 0; content-visibility:auto; contain-intrinsic-size:1px 600px}
-.section .eyebrow{color:var(--muted); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px}
+.section .eyebrow{
+  color:var(--muted); font-size:12px; letter-spacing:.06em; /* text-transform removed */
+  margin-bottom:10px
+}
 .section h2{margin:0 0 10px; font-size:clamp(28px,4.4vw,52px); line-height:1.08; font-weight:900; letter-spacing:-.02em}
 .section .lead{color:var(--muted); margin-bottom:18px}
 .reveal{opacity:0; transform:translateY(18px); filter:saturate(90%); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1), filter .7s}
@@ -79,7 +82,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 @media (max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.features{grid-template-columns:1fr}}
 .feature{border:1px solid rgba(255,255,255,.18); border-radius:14px; padding:18px; background:rgba(255,255,255,.05); position:relative; overflow:hidden}
-.feature .sub{color:var(--muted); font-weight:800; font-size:12px; letter-spacing:.14em; text-transform:uppercase; opacity:.85; margin-bottom:8px}
+.feature .sub{color:var(--muted); font-weight:800; font-size:12px; letter-spacing:.06em; margin-bottom:8px}
 .feature h3{margin:0 0 8px; font-size:18px; font-weight:900; letter-spacing:-.01em}
 .feature p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
 .feature.gold{border-color:var(--gold); box-shadow:inset 0 0 0 1px var(--gold-inner), 0 0 22px rgba(255,199,44,.08)}
@@ -100,7 +103,11 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 .api pre{margin:10px 0 0; padding:12px; border-radius:10px; overflow:auto; background:rgba(0,0,0,.35); color:#EAF2FF; font-size:13px; border:1px solid rgba(255,255,255,.12)}
 
 /* ===== Role boxes ===== */
-.role-meta{display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin:18px 0 10px}
+.role-meta{
+  display:flex; align-items:center; justify-content:space-between;
+  color:var(--muted); font-size:12px; letter-spacing:.06em; /* text-transform removed */
+  margin:18px 0 10px
+}
 .role-highlight{font-size:22px; font-weight:900; color:var(--gold); margin-top:4px}
 .roles{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
 @media (max-width:1100px){.roles{grid-template-columns:repeat(2,1fr)}}
@@ -145,7 +152,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 }
 .chip .emoji{font-size:18px; line-height:1}
 
-/* ===== “Video from enso.build” (embedded) ===== */
+/* ===== Video ===== */
 .scrub{min-height:60vh; position:relative}
 .scrub-sticky{position:sticky; top:8vh; height:72vh; border:1px solid rgba(255,255,255,.14); border-radius:18px; overflow:hidden; background:#0B1422; display:flex; align-items:stretch}
 .scrub iframe, .scrub video{width:100%; height:100%; border:0; display:block; object-fit:cover}
@@ -224,7 +231,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
   <!-- Hero -->
   <section id="home" class="hero glass reveal">
     <div class="container">
-      <h1>ENSO GLOBAL COMMUNITY</h1>
+      <h1>ENSO Global Community</h1>
       <p>Enso is the fastest way to build and launch onchain — a shared engine that maps every onchain interaction. Focus on product, community, and growth.</p>
       <div class="cta-row">
         <a class="button gold" href="https://www.enso.build/" target="_blank" rel="noreferrer noopener">Start with Enso</a>
@@ -236,23 +243,23 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 
   <!-- Feature / Roles Top -->
   <section id="why" class="section reveal">
-    <div class="eyebrow">ROLE OVERVIEW</div>
+    <div class="eyebrow">Role overview</div>
     <h2>Empowering the Enso Role System.</h2>
     <div class="role-highlight">@Pilot — Highest Rank</div>
 
     <div class="features">
-      <article class="feature glass"><div class="sub">GENERAL</div><h3>Censorship–Resistant</h3><p>Community identity that can’t be selectively silenced—recognition is earned by participation and stays visible.</p></article>
-      <article class="feature glass"><div class="sub">SPEEDRUN</div><h3>Coordinated by Intents</h3><p>Progression is driven by mission “intents”—complete races/challenges to move up the ladder quickly and transparently.</p></article>
-      <article class="feature glass"><div class="sub">DRIP</div><h3>Permissionless</h3><p>Anyone can contribute signal and outreach; perks acknowledge impact without gatekeepers.</p></article>
-      <article class="feature glass"><div class="sub">RANKS</div><h3>Immutable</h3><p>A stable rank ladder for operations. Milestones don’t change retroactively and culminate at the top rank.</p></article>
-      <article class="feature glass gold"><div class="sub">SPOTLIGHT</div><h3>@Pilot — Highest Rank</h3><p>The pinnacle of the Enso Role System—earned by consistent contributions, mastery, and community leadership.</p></article>
+      <article class="feature glass"><div class="sub">General</div><h3>Censorship–Resistant</h3><p>Community identity that can’t be selectively silenced—recognition is earned by participation and stays visible.</p></article>
+      <article class="feature glass"><div class="sub">Speedrun</div><h3>Coordinated by Intents</h3><p>Progression is driven by mission “intents”—complete races/challenges to move up the ladder quickly and transparently.</p></article>
+      <article class="feature glass"><div class="sub">Drip</div><h3>Permissionless</h3><p>Anyone can contribute signal and outreach; perks acknowledge impact without gatekeepers.</p></article>
+      <article class="feature glass"><div class="sub">Ranks</div><h3>Immutable</h3><p>A stable rank ladder for operations. Milestones don’t change retroactively and culminate at the top rank.</p></article>
+      <article class="feature glass gold"><div class="sub">Spotlight</div><h3>@Pilot — Highest Rank</h3><p>The pinnacle of the Enso Role System—earned by consistent contributions, mastery, and community leadership.</p></article>
     </div>
   </section>
 
   <!-- COMMUNITY STATS -->
   <section id="stats" class="section reveal">
-    <div class="eyebrow">COMMUNITY STATS</div>
-    <h2>Growing a global, censorship-resistant community.</h2>
+    <div class="eyebrow">Community stats</div>
+    <h2>Growing a global, blockchain shortcuts community.</h2>
     <div class="stats">
       <div class="stat">
         <div class="count" data-count="10" data-suffix="+">0</div>
@@ -281,7 +288,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 
   <!-- Global community marquee (flags) -->
   <section id="ecosystem" class="section reveal">
-    <div class="eyebrow">GLOBAL COMMUNITY</div>
+    <div class="eyebrow">Global community</div>
     <h2>Countries represented by our community.</h2>
     <div class="marquee glass" aria-label="Global community flags marquee">
       <div class="track" id="marqueeTrack">
@@ -299,7 +306,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 
   <!-- Build with Shortcuts -->
   <section id="build" class="section reveal">
-    <div class="eyebrow">BUILD WITH SHORTCUTS</div>
+    <div class="eyebrow">Build with shortcuts</div>
     <h2>Unified onchain engine. Two powerful APIs.</h2>
     <p class="lead">Route complex paths or bundle actions into one flow. Add onchain features with templates, not boilerplate.</p>
 
@@ -339,21 +346,15 @@ npm i @enso/widgets
     </div>
   </section>
 
-  <!-- Video section (updated) -->
+  <!-- Video section -->
   <section id="demo" class="section reveal">
-    <div class="eyebrow">SEE IT IN MOTION</div>
+    <div class="eyebrow">See it in motion</div>
     <h2>The best execution.</h2>
     <div class="scrub glass" aria-label="Demo video">
       <div class="scrub-sticky">
-        <!-- No controls shown -->
         <video
           src="https://framerusercontent.com/assets/GifwF0GC6kftxDgniF6lsk9E9wc.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
+          autoplay muted loop playsinline preload="metadata"></video>
         <div class="caption">Powered by Enso Network.</div>
       </div>
     </div>
@@ -361,22 +362,22 @@ npm i @enso/widgets
 
   <!-- Role groups -->
   <section id="roles" class="section reveal">
-    <div class="role-meta"><span>2025</span><span>ROLE GROUPS</span></div>
+    <div class="role-meta"><span>2025</span><span>Role groups</span></div>
     <div class="roles">
-      <article class="role-card glass"><h4>GENERAL</h4><ul><li>@Community — Verified community member</li><li>@OG Enso — Members before Apr 19, 2022</li><li>@Enso Booster — Thank you for boosting</li><li>@Game Master — You love Enso’s gaming events</li></ul></article>
-      <article class="role-card glass"><h4>SPEEDRUN</h4><ul><li>@Neon Rookie</li><li>@Midnight Racer</li><li>@Supersonic Samurai</li><li>@Tokyo Drifter</li><li>@Nitro Sensei</li></ul></article>
-      <article class="role-card glass"><h4>DRIP</h4><ul><li>@Raiders — Ready to spread the word</li><li>@Portal — Spend 350 Shortcats and cross the Portal</li><li>@Veteran — Thank you for your service</li></ul></article>
-      <article class="role-card glass"><h4>RANKS</h4><ul><li>@Trainee</li><li>@Junior</li><li>@Pit Crew</li><li>@Mechanic</li><li>@Pilot — Highest Rank</li></ul></article>
+      <article class="role-card glass"><h4>General</h4><ul><li>@Community — Verified community member</li><li>@OG Enso — Members before Apr 19, 2022</li><li>@Enso Booster — Thank you for boosting</li><li>@Game Master — You love Enso’s gaming events</li></ul></article>
+      <article class="role-card glass"><h4>Speedrun</h4><ul><li>@Neon Rookie</li><li>@Midnight Racer</li><li>@Supersonic Samurai</li><li>@Tokyo Drifter</li><li>@Nitro Sensei</li></ul></article>
+      <article class="role-card glass"><h4>Drip</h4><ul><li>@Raiders — Ready to spread the word</li><li>@Portal — Spend 350 Shortcats and cross the Portal</li><li>@Veteran — Thank you for your service</li></ul></article>
+      <article class="role-card glass"><h4>Ranks</h4><ul><li>@Trainee</li><li>@Junior</li><li>@Pit Crew</li><li>@Mechanic</li><li>@Pilot — Highest Rank</li></ul></article>
     </div>
   </section>
 
-  <!-- Pilots (reveal removed so cards show immediately) -->
+  <!-- Pilots -->
   <section id="pilots" class="section">
-    <div class="eyebrow">ENSO GLOBAL COMMUNITY</div>
+    <div class="eyebrow">Enso global community</div>
     <div class="grid" id="grid"></div>
   </section>
 
-  <!-- Footer (reveal removed + new text) -->
+  <!-- Footer -->
   <footer class="footer"><div class="container">ENSO Growing Community Project Contributors bc1pBITHERUMN ⚡✨</div></footer>
 </div>
 
@@ -475,7 +476,7 @@ function launchFireworks(card, x, y){
   } requestAnimationFrame(tick);
 }
 
-/* ===== Pilot cards (template) — no reveal on cards ===== */
+/* ===== Pilot cards (template) ===== */
 function cardTemplate(p){
   const el=document.createElement('article'); el.className='card glass';
   el.innerHTML=`
