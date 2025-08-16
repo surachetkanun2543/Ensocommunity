@@ -174,7 +174,19 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
 .pill{border:1px solid var(--line); background:rgba(255,255,255,.10); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--ink)}
 .pill-pilot{border-color:var(--gold); color:#FFD76A; background:rgba(255,199,44,.12); box-shadow:inset 0 0 0 1px var(--gold-inner)}
 .card-body{padding:14px 18px 18px; display:flex; gap:10px}
-.btn{flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--line); padding:10px 12px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08)); color:var(--ink); text-decoration:none; font-size:15px; font-weight:800}
+
+/* Buttons */
+.btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  border:1px solid var(--line); padding:10px 12px; border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08));
+  color:var(--ink); text-decoration:none; font-size:15px; font-weight:800; transition:.2s ease
+}
+.btn svg{ width:16px; height:16px }
+.btn:hover{ border-color:var(--gold); box-shadow:0 0 0 1px inset var(--gold), 0 0 20px rgba(255,199,44,.35) }
+/* X button — purple glow on hover */
+.btn-x:hover{ border-color:#A78BFA; box-shadow:0 0 0 1px inset #A78BFA, 0 0 20px rgba(167,139,250,.45) }
+.btn:focus-visible{ outline:2px solid #A78BFA; outline-offset:2px }
 
 /* Footer */
 .footer{border-top:1px solid var(--line); color:var(--muted); font-size:14px; margin-top:18px}
@@ -212,7 +224,7 @@ body::before{content:""; position:fixed; inset:0; z-index:-1; background:var(--b
   <!-- Hero -->
   <section id="home" class="hero glass reveal">
     <div class="container">
-      <h1>ENSO global community</h1>
+      <h1>ENSO GLOBAL COMMUNITY</h1>
       <p>Enso is the fastest way to build and launch onchain — a shared engine that maps every onchain interaction. Focus on product, community, and growth.</p>
       <div class="cta-row">
         <a class="button gold" href="https://www.enso.build/" target="_blank" rel="noreferrer noopener">Start with Enso</a>
@@ -327,16 +339,22 @@ npm i @enso/widgets
     </div>
   </section>
 
-  <!-- DEMO: replaced with MP4 -->
+  <!-- Video section (updated) -->
   <section id="demo" class="section reveal">
     <div class="eyebrow">SEE IT IN MOTION</div>
     <h2>The best execution.</h2>
-    <p class="lead">Powered by Enso Network.</p>
     <div class="scrub glass" aria-label="Demo video">
       <div class="scrub-sticky">
-        <video src="https://framerusercontent.com/assets/GifwF0GC6kftxDgniF6lsk9E9wc.mp4"
-               autoplay muted loop playsinline></video>
-        <div class="caption">Live demo</div>
+        <!-- No controls shown -->
+        <video
+          src="https://framerusercontent.com/assets/GifwF0GC6kftxDgniF6lsk9E9wc.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        ></video>
+        <div class="caption">Powered by Enso Network.</div>
       </div>
     </div>
   </section>
@@ -352,20 +370,18 @@ npm i @enso/widgets
     </div>
   </section>
 
-  <!-- Pilots -->
-  <section id="pilots" class="section reveal">
-    <div class="eyebrow">ENSO GLOBAL PILOT</div>
+  <!-- Pilots (reveal removed so cards show immediately) -->
+  <section id="pilots" class="section">
+    <div class="eyebrow">ENSO GLOBAL COMMUNITY</div>
     <div class="grid" id="grid"></div>
   </section>
 
-  <footer class="footer reveal"><div class="container">© 2025 ENSO • Builders & Pilots • Thanks bc1pBITHERUMN ⚡✨</div></footer>
+  <!-- Footer (reveal removed + new text) -->
+  <footer class="footer"><div class="container">ENSO Growing Community Project Contributors bc1pBITHERUMN ⚡✨</div></footer>
 </div>
 
 <script>
-/* ===== Config / assets ===== */
-const HELMET_ICON_SRC = "/images/pilot-helmet.png";
-
-/* ===== Scroll reveal (keep for everything EXCEPT pilot cards) ===== */
+/* ===== Scroll reveal (kept for other sections) ===== */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
@@ -459,7 +475,7 @@ function launchFireworks(card, x, y){
   } requestAnimationFrame(tick);
 }
 
-/* ===== Pilot cards (template) — show immediately (no reveal) ===== */
+/* ===== Pilot cards (template) — no reveal on cards ===== */
 function cardTemplate(p){
   const el=document.createElement('article'); el.className='card glass';
   el.innerHTML=`
@@ -467,7 +483,7 @@ function cardTemplate(p){
       <div class="badge">#${p.number}</div>
       <div class="media">
         <img class="avatar" src="${p.avatar}" alt="${p.name}">
-        <img class="helmet" src="${HELMET_ICON_SRC}" alt="Pilot Helmet" onerror="this.style.display='none'">
+        <img class="helmet" src="/images/pilot-helmet.png" alt="Pilot Helmet" onerror="this.style.display='none'">
       </div>
       <div class="info"><h3>${p.name}</h3><div class="role">Pilot — Enso</div></div>
     </div>
@@ -477,23 +493,23 @@ function cardTemplate(p){
     </div>
     <div class="card-body">
       <a class="btn" href="https://discord.gg/enso-build" target="_blank" rel="noreferrer noopener">${iconDiscord()} Discord</a>
-      <a class="btn" href="https://x.com/EnsoBuild" target="_blank" rel="noreferrer noopener">${iconX()} X</a>
+      <a class="btn btn-x" href="https://x.com/EnsoBuild" target="_blank" rel="noreferrer noopener">${iconX()} X</a>
     </div>`;
   el.querySelector('.card-header').addEventListener('click',(e)=>launchFireworks(el,e.clientX,e.clientY));
-  return el; // ไม่ observe
+  return el;
 }
 
-/* ===== Pilots list + immediate render (UPDATED, deduped) ===== */
-const RAW_NAMES = [
-  "0xKh1n","Abdul","Alt_Coiner","Andrik",
-  "bc1pBITHERUMN",
-  "Cozmee","ezrmol","Falcon","Ghfri","GIAN","hanzo(φ,G)","haruya_","HASHAN",
-  "JohnnyChuon…","KAIRO","kokoko","LEVIOUSA","Leyba","Lolichan","longdv","Lucky",
-  "MMPR(✧✦)","Moted.Eth","Ngô Hoàng","Rutto",
-  "shark_thegreat","Shubh","SOJIB","Tomiwayrn","Vkorn","Wiko",
-  "NDUKAM","MONTEGO","S!LOWEK","Ric vn"
+/* ===== Pilots (merged list) ===== */
+const NAMES = [
+  "0xKh1n","0xMohamed","Andrik","bc1pBITHERUMN","belahteko","DonMontana","EKO","GIAN","haruya_",
+  "JohnnyChuon…","KAIRO","kelp","kennyajaks","kokoko","Leetv","LEVIOUSA","Leyba","Lolichan","longdv","milad",
+  "MMPR(✧✦)","Ngô Hoàng","Queenoma","Rutto","Sakamoto","Sasuke","shark_thegreat","Skygge","SOJIB","Tomiwayrn",
+  "Ulbert 黑手党","Vkorn","ZBingo",
+  /* existing names kept */
+  "Alt_Coiner","Cozmee","ezrmol","Falcon","Ghfri","hanzo(φ,G)","HASHAN","Lucky","Moted.Eth","Shubh",
+  "Wiko","NDUKAM","MONTEGO","S!LOWEK","Ric vn"
 ];
-const NAMES = [...new Set(RAW_NAMES)];
+
 const SAMPLE_INFO={status:"Active", since:"2023", badges:["@Pilot","@Community","@Veteran","@Nitro Sensei"]};
 const DATA=NAMES.map((n,i)=>({name:n, number:i+1, avatar:initialAvatar(n), info:{...SAMPLE_INFO}}));
 const grid=document.getElementById('grid');
