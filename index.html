@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ENSO Growing Community</title>
+<title>ENSO Shortcuts Community</title>
 <link rel="icon" href="/images/pilot.png" type="image/x-icon" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 
 <style>
 /* ===== Global ===== */
-html{font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;font-synthesis-weight:none}
+html{font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Arial,sans-serif;font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;font-synthesis-weight:none;scroll-behavior:smooth}
 :where(body,h1,h2,h3,h4,h5,h6,p,a,small,strong,em,ul,ol,li,button,input,select,textarea,label,div,span){font-family:inherit}
 :where(pre,code,kbd,samp){font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 :root{
@@ -23,6 +23,7 @@ html{font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Ari
   --bg: radial-gradient(1200px 600px at 20% -10%, #0E1B35 0%, transparent 60%),
         radial-gradient(1200px 600px at 90% 10%, #1C1530 0%, transparent 55%),
         linear-gradient(135deg, #0B1422 0%, #121A30 55%, #1D1425 100%);
+  --sticky-top: 110px;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -36,8 +37,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .topbar{position:sticky;top:20px;z-index:50;border:2px solid var(--blue);border-radius:var(--radius-2xl);box-shadow:0 24px 70px rgba(0,0,0,.42), inset 0 0 0 1px var(--blue-inner)}
 .topbar .wrap{display:flex;align-items:center;gap:16px;padding:12px 18px}
 .brand img{height:28px}
-.nav{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
-.nav a{color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);transition:.25s ease;will-change:transform,box-shadow,border-color}
+.nav{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:13px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08);transition:.25s ease}
 .nav a:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.25);box-shadow:0 6px 18px rgba(0,0,0,.22)}
 .nav a.accent-gold{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-inner);color:#FFD76A}
 .nav a.accent-purple{border-color:#A78BFA;box-shadow:inset 0 0 0 1px rgba(167,139,250,.35)}
@@ -45,16 +46,16 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 /* ===== Hero ===== */
 .hero{margin-top:18px;border:2px solid var(--blue);border-radius:var(--radius-2xl);box-shadow:var(--shadow), inset 0 0 0 1px var(--blue-inner)}
 .hero .container{padding:46px 28px}
-.hero h1{margin:0;font-size:clamp(40px,6.2vw,82px);font-weight:900;letter-spacing:-.02em}
+.hero h1{margin:0;font-size:clamp(40px,6.2vw,78px);font-weight:800;letter-spacing:-.01em}
 .hero p{color:var(--muted);max-width:900px;font-size:18px;margin:12px 0 22px}
 .hero .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 .button{display:inline-flex;align-items:center;gap:10px;font-weight:800;border:1px solid var(--line);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08))}
 .button.gold{border-color:var(--gold);color:#12140c;background:linear-gradient(180deg, rgba(255,199,44,.95), rgba(255,199,44,.75));box-shadow:0 12px 28px rgba(255,199,44,.18)}
 
-/* ===== Sections / reveal ===== */
-.section{margin:36px 0;content-visibility:auto;contain-intrinsic-size:1px 600px}
-.section .eyebrow{color:var(--muted);font-size:12px;letter-spacing:.06em;margin-bottom:10px}
-.section h2{margin:0 0 10px;font-size:clamp(28px,4.4vw,52px);line-height:1.08;font-weight:900;letter-spacing:-.02em}
+/* ===== Sections ===== */
+.section{margin:36px 0;content-visibility:auto;contain-intrinsic-size:1px 600px;scroll-margin-top:calc(var(--sticky-top) + 20px)}
+.section .eyebrow{color:var(--muted);font-size:12px;letter-spacing:.04em;margin-bottom:10px}
+.section h2{margin:0 0 10px;font-size:clamp(28px,4.4vw,48px);line-height:1.12;font-weight:800}
 .section .lead{color:var(--muted);margin-bottom:18px}
 .reveal{opacity:0;transform:translateY(18px);filter:saturate(90%);transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1), filter .7s}
 .reveal.is-visible{opacity:1;transform:none;filter:none}
@@ -66,7 +67,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 @media (max-width:640px){.features{grid-template-columns:1fr}}
 .feature{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:18px;background:rgba(255,255,255,.05);position:relative;overflow:hidden}
 .feature .sub{color:var(--muted);font-weight:800;font-size:12px;letter-spacing:.06em;margin-bottom:8px}
-.feature h3{margin:0 0 8px;font-size:18px;font-weight:900;letter-spacing:-.01em}
+.feature h3{margin:0 0 8px;font-size:18px;font-weight:800;letter-spacing:0}
 .feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
 .feature.gold{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-inner), 0 0 22px rgba(255,199,44,.08)}
 .feature::after{content:"";position:absolute;inset:-40%;background:radial-gradient(400px 220px at var(--mx,60%) var(--my,20%), rgba(255,255,255,.08), transparent 60%);pointer-events:none;transition:opacity .25s;opacity:0}
@@ -78,52 +79,47 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 @media (max-width:700px){.api-grid{grid-template-columns:1fr}}
 .api{border:1px solid rgba(59,130,246,.25);border-radius:14px;padding:18px;background:rgba(255,255,255,.05);transition:transform .25s ease, box-shadow .25s ease}
 .api:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.24)}
-.api h4{margin:0 0 10px;font-size:16px;font-weight:900;letter-spacing:-.01em}
+.api h4{margin:0 0 10px;font-size:16px;font-weight:800}
 .api p{margin:0 0 8px;color:var(--muted);font-size:14px}
 .api pre{margin:10px 0 0;padding:12px;border-radius:10px;overflow:auto;background:rgba(0,0,0,.35);color:#EAF2FF;font-size:13px;border:1px solid rgba(255,255,255,.12)}
 
 /* ===== Role boxes ===== */
 .role-meta{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;letter-spacing:.06em;margin:18px 0 10px}
-.role-highlight{font-size:22px;font-weight:900;color:var(--gold);margin-top:4px}
+.role-highlight{font-size:20px;font-weight:800;color:var(--gold);margin-top:4px}
 .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 @media (max-width:1100px){.roles{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.roles{grid-template-columns:1fr}}
 .role-card{border:1px solid rgba(59,130,246,.25);border-radius:14px;padding:18px;background:rgba(255,255,255,.05);transition:transform .25s ease, box-shadow .25s ease}
 .role-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.24)}
-.role-card h4{margin:0 0 10px;font-size:16px;font-weight:900;letter-spacing:-.01em}
+.role-card h4{margin:0 0 10px;font-size:15px;font-weight:800}
 .role-card ul{margin:0;padding-left:20px}
 .role-card li{margin:8px 0;color:var(--ink)}
-.role-card li::marker{color:var(--gold);font-weight:900}
 
-/* ===== Stats counters ===== */
+/* ===== Stats ===== */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
 @media (max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.stats{grid-template-columns:1fr}}
 .stat{border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:18px;background:rgba(255,255,255,.05);display:flex;flex-direction:column;justify-content:center;gap:10px;height:100%;min-height:160px}
-.stat .count{font-size:clamp(26px,4.2vw,42px);font-weight:900;letter-spacing:-.02em;background:linear-gradient(90deg,#fff,#BEE3FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .count{font-size:clamp(26px,4.2vw,40px);font-weight:800;background:linear-gradient(90deg,#fff,#BEE3FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .stat .label{color:var(--muted);font-size:13px}
 .stat-gold{border-color:var(--gold)!important;box-shadow:inset 0 0 0 1px var(--gold-inner),0 0 18px rgba(255,199,44,.10)}
 .stat-gold .count{background:linear-gradient(90deg,#FFD76A,#FFFFFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.flag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
-.flag{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);font-size:16px;line-height:1}
 
-/* ===== Marquee ===== */
-.marquee{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.05)}
-.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;background:linear-gradient(to right, #0B1422 0%, rgba(11,20,34,0) 100%)}
-.marquee::after{right:0;transform:scaleX(-1)}
-.track{display:flex;gap:18px;padding:16px 24px;width:max-content;animation:scroll 36s linear infinite}
-@keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
-.chip{padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:999px;color:#EAF2FF;opacity:.9;white-space:nowrap;font-weight:800;letter-spacing:.02em;background:rgba(255,255,255,.06);display:flex;align-items:center;gap:8px}
-.chip .emoji{font-size:18px;line-height:1}
+/* ===== Country chips ===== */
+.country-wrap{border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.05);padding:14px}
+.country-chips{display:flex;flex-wrap:wrap;gap:10px}
+.country-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);font-weight:800}
+.country-chip .flag{font-size:16px;line-height:1}
+.country-chip .count{font-size:12px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.35);padding:4px 8px;border-radius:8px}
+.country-chip.active{box-shadow:0 0 0 2px rgba(59,130,246,.6) inset}
 
 /* ===== Video ===== */
 .scrub{min-height:60vh;position:relative}
 .scrub-sticky{position:sticky;top:8vh;height:72vh;border:1px solid rgba(255,255,255,.14);border-radius:18px;overflow:hidden;background:#0B1422;display:flex;align-items:stretch}
-.scrub iframe,.scrub video{width:100%;height:100%;border:0;display:block;object-fit:cover}
-.scrub .fallback{position:absolute;inset:auto 16px 16px auto;z-index:3;padding:10px 12px;border-radius:10px;font-weight:800;background:rgba(0,0,0,.48);border:1px solid rgba(255,255,255,.18);color:#fff;text-decoration:none}
+.scrub video{width:100%;height:100%;border:0;display:block;object-fit:cover}
 .scrub .caption{position:absolute;left:18px;bottom:18px;padding:10px 12px;border-radius:10px;font-weight:800;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15)}
 
-/* ===== Pilots grid (cards) ===== */
+/* ===== Pilots grid ===== */
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 @media (max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:720px){.grid{grid-template-columns:1fr}}
@@ -134,7 +130,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .media{position:relative;width:92px;height:92px;flex:0 0 92px}
 .avatar{width:100%;height:100%;border-radius:50%;border:2px solid var(--gold);outline:1px solid var(--gold-inner);object-fit:cover;background:#0B0F1A;box-shadow:0 8px 18px rgba(255,199,44,.35)}
 .helmet{position:absolute;right:-6px;bottom:-6px;width:40px;height:40px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
-.info h3{font-size:22px;margin:0 0 2px;font-weight:900;letter-spacing:-.01em}
+.info h3{font-size:20px;margin:0 0 2px;font-weight:800}
 .info .role{color:var(--muted);font-size:13px}
 .card-info{padding:12px 18px 0;color:var(--muted);font-size:14px}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
@@ -147,27 +143,25 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .btn-x:hover{border-color:#A78BFA;box-shadow:0 0 0 1px inset #A78BFA,0 0 20px rgba(167,139,250,.45)}
 .btn:focus-visible{outline:2px solid #A78BFA;outline-offset:2px}
 
-/* ===== Add/Edit pilots UI ===== */
-.pilot-toolbar{display:flex;gap:10px;align-items:center;margin:8px 0 14px}
-.pilot-toolbar .btn-sm{border:1px solid var(--line);background:rgba(255,255,255,.08);padding:8px 10px;border-radius:10px;font-weight:800;font-size:13px;color:var(--ink)}
-.pilot-toolbar .btn-sm.gold{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-inner)}
-.tip{color:var(--muted);font-size:12px;margin:6px 0}
-.card .edit-btn{position:absolute;top:10px;right:10px;z-index:3;border:1px solid var(--line);background:rgba(0,0,0,.45);color:#fff;font-weight:800;font-size:12px;padding:6px 8px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+/* editor buttons + toolbar */
+.pilot-toolbar{display:flex;align-items:center;gap:14px;margin:10px 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04)}
+.pilot-toolbar .tip{color:var(--muted);font-size:13px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--gold);background:linear-gradient(180deg, rgba(255,199,44,.95), rgba(255,199,44,.78));color:#0B0F1A;font-weight:800}
+.btn-primary svg{width:16px;height:16px}
+.card .edit-btn{position:absolute;top:10px;right:10px;z-index:4;border:1px solid var(--line);background:rgba(0,0,0,.45);color:#fff;font-weight:800;font-size:12px;padding:6px 8px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
 .card .edit-btn:hover{border-color:var(--gold);box-shadow:0 0 0 1px inset var(--gold)}
 .card.dragging{opacity:.5; cursor:grabbing}
 .card.placeholder{border:2px dashed var(--gold);background:rgba(255,199,44,.06);min-height:185px}
 
-/* ===== Modal (centered with backdrop + animation) ===== */
+/* ===== Fireworks overlay (no card grow) ===== */
+.fireworks-canvas{position:absolute;inset:0;z-index:3;pointer-events:none;background:transparent}
+
+/* ===== Modal ===== */
 .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60}
 .modal.show{display:flex}
 .modal .backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55)}
-.modal .panel{
-  position:relative;margin:0; width:min(760px,92vw); max-height:84vh; overflow:auto;
-  padding:16px;border-radius:16px;border:1px solid var(--line);
-  background:rgba(11,20,34,.96);backdrop-filter:blur(12px);
-  transform:scale(.96); opacity:0; transition:.12s ease-out;
-}
-.modal.show .panel{transform:scale(1); opacity:1}
+.modal .panel{position:relative;margin:0;width:min(760px,92vw);max-height:84vh;overflow:auto;padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(11,20,34,.96);backdrop-filter:blur(12px);transform:scale(.96);opacity:0;transition:.12s ease-out}
+.modal.show .panel{transform:scale(1);opacity:1}
 .modal h3{margin:0 0 10px;font-size:18px;font-weight:900}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:640px){.form{grid-template-columns:1fr}}
@@ -191,7 +185,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .ticker .right{padding:18px;border-left:1px solid var(--line)}
 @media (max-width:900px){.ticker .right{border-left:0;border-top:1px solid var(--line)}}
 .trow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.tsymbol{font-weight:900;font-size:20px;letter-spacing:.06em;opacity:.9}
+.tsymbol{font-weight:800;font-size:18px}
 .tprice{font-size:clamp(28px,4.2vw,44px);font-weight:900;background:linear-gradient(90deg,#fff,#BEE3FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .tchg{font-weight:800;padding:6px 10px;border-radius:999px;font-size:13px}
 .tchg.up{color:#14f195;background:rgba(20,241,149,.12);border:1px solid rgba(20,241,149,.35)}
@@ -204,14 +198,14 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .kpi .lab{color:var(--muted);font-size:12px;letter-spacing:.08em}
 .sparkwrap{border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(255,255,255,.06);padding:12px}
 .sparkwrap header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.sparkwrap .ttl{font-weight:900;letter-spacing:.04em}
+.sparkwrap .ttl{font-weight:900;letter-spacing:.02em}
 canvas#ensoSpark{width:100%;height:160px;display:block}
 .state-note{color:var(--muted);font-size:13px;margin-top:6px}
 
 /* ===== TGE / Countdown ===== */
 .tge{margin:36px 0}
 .tge .wrap{display:flex;flex-direction:column;gap:14px}
-.tge .meme{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(22px,3.2vw,32px);letter-spacing:-.02em}
+.tge .meme{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(22px,3.2vw,30px)}
 .tge .meme .blink{animation:blink 1s steps(2,start) infinite}
 @keyframes blink{to{visibility:hidden}}
 .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
@@ -220,7 +214,6 @@ canvas#ensoSpark{width:100%;height:160px;display:block}
 .time-box.gold{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-inner)}
 .time-box .num{font-size:clamp(28px,4.4vw,44px);font-weight:900;background:linear-gradient(90deg,#FFD76A,#FFFFFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .time-box .lab{color:var(--muted);font-size:12px;letter-spacing:.08em}
-.tge small{color:var(--muted)}
 
 /* Reduced motion */
 @media (prefers-reduced-motion:reduce){
@@ -238,12 +231,12 @@ canvas#ensoSpark{width:100%;height:160px;display:block}
     <div class="wrap">
       <a class="brand" href="#home"><img src="https://framerusercontent.com/images/FPnvhl6ocJ58PYgLaYri68xb6cQ.webp" alt="Enso Logo"></a>
       <nav class="nav">
+        <a href="#price">$ENSO</a>
+        <a href="#tge">TGE</a>
         <a href="#why">Why Enso</a>
         <a href="#build">Shortcuts</a>
         <a href="#roles">Roles</a>
         <a class="accent-gold" href="#pilots">Pilots</a>
-        <a href="#price">$ENSO</a>
-        <a href="#tge">TGE</a>
         <a href="https://docs.enso.build/" target="_blank" rel="noreferrer noopener">Docs</a>
         <a class="accent-purple" href="https://speedrun.enso.build/" target="_blank" rel="noreferrer noopener">Speedrun</a>
       </nav>
@@ -262,168 +255,6 @@ canvas#ensoSpark{width:100%;height:160px;display:block}
       </div>
     </div>
   </section>
-
-  <!-- Feature / Roles Top -->
-  <section id="why" class="section reveal">
-    <div class="eyebrow">Role overview</div>
-    <h2>Empowering the Enso Role System.</h2>
-    <div class="role-highlight">@Pilot — Highest Rank</div>
-    <div class="features">
-      <article class="feature glass"><div class="sub">General</div><h3>Censorship–Resistant</h3><p>Community identity that can’t be selectively silenced—recognition is earned by participation and stays visible.</p></article>
-      <article class="feature glass"><div class="sub">Speedrun</div><h3>Coordinated by Intents</h3><p>Progression is driven by mission “intents”—complete races/challenges to move up the ladder quickly and transparently.</p></article>
-      <article class="feature glass"><div class="sub">Drip</div><h3>Permissionless</h3><p>Anyone can contribute signal and outreach; perks acknowledge impact without gatekeepers.</p></article>
-      <article class="feature glass"><div class="sub">Ranks</div><h3>Immutable</h3><p>A stable rank ladder for operations. Milestones don’t change retroactively and culminate at the top rank.</p></article>
-      <article class="feature glass gold"><div class="sub">Spotlight</div><h3>@Pilot — Highest Rank</h3><p>The pinnacle of the Enso Role System—earned by consistent contributions, mastery, and community leadership.</p></article>
-    </div>
-  </section>
-
-  <!-- COMMUNITY STATS -->
-  <section id="stats" class="section reveal">
-    <div class="eyebrow">Community stats</div>
-    <h2>Growing a global, blockchain shortcuts community.</h2>
-    <div class="stats">
-      <div class="stat">
-        <div class="count" data-count="10" data-suffix="+">0</div>
-        <div class="label">Global community (countries)</div>
-        <div class="flag-row" aria-label="Thailand, Indonesia, Malaysia, Nigeria, India, Ukraine, Russia, Switzerland">
-          <span class="flag" title="Thailand">🇹🇭</span>
-          <span class="flag" title="Indonesia">🇮🇩</span>
-          <span class="flag" title="Malaysia">🇲🇾</span>
-          <span class="flag" title="Nigeria">🇳🇬</span>
-          <span class="flag" title="India">🇮🇳</span>
-          <span class="flag" title="Ukraine">🇺🇦</span>
-          <span class="flag" title="Russia">🇷🇺</span>
-          <span class="flag" title="Switzerland">🇨🇭</span>
-        </div>
-      </div>
-      <div class="stat">
-        <div class="count" data-count="100000" data-suffix="+">0</div>
-        <div class="label">Community</div>
-      </div>
-      <div class="stat stat-gold">
-        <div class="count" id="pilotCount" data-count="80" data-suffix="+">0</div>
-        <div class="label">Community Pilots</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Global community marquee (flags) -->
-  <section id="ecosystem" class="section reveal">
-    <div class="eyebrow">Global community</div>
-    <h2>Countries represented by our community.</h2>
-    <div class="marquee glass" aria-label="Global community flags marquee">
-      <div class="track" id="marqueeTrack">
-        <span class="chip"><span class="emoji">🇹🇭</span> Thailand</span>
-        <span class="chip"><span class="emoji">🇮🇩</span> Indonesia</span>
-        <span class="chip"><span class="emoji">🇲🇾</span> Malaysia</span>
-        <span class="chip"><span class="emoji">🇳🇬</span> Nigeria</span>
-        <span class="chip"><span class="emoji">🇮🇳</span> India</span>
-        <span class="chip"><span class="emoji">🇺🇦</span> Ukraine</span>
-        <span class="chip"><span class="emoji">🇷🇺</span> Russia</span>
-        <span class="chip"><span class="emoji">🇨🇭</span> Switzerland</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Build with Shortcuts -->
-  <section id="build" class="section reveal">
-    <div class="eyebrow">Build with shortcuts</div>
-    <h2>Unified onchain engine. Two powerful APIs.</h2>
-    <p class="lead">Route complex paths or bundle actions into one flow. Add onchain features with templates, not boilerplate.</p>
-
-    <div class="api-grid">
-      <article class="api glass">
-        <h4>Automated Routing API</h4>
-        <p>Calculate optimized multi-step paths between positions or tokens.</p>
-<pre>POST /shortcuts/route
-{
-  "from": {"chain":"ethereum","asset":"USDC"},
-  "to":   {"chain":"ethereum","asset":"wstETH"},
-  "amount":"1000"
-}</pre>
-      </article>
-
-      <article class="api glass">
-        <h4>Bundling API</h4>
-        <p>Compose your own multi-step workflow and ship it as a single Shortcut.</p>
-<pre>POST /shortcuts/bundle
-{
-  "actions":[
-    {"swap":{"from":"USDC","to":"ETH"}},
-    {"stake":{"protocol":"lido"}}
-  ]
-}</pre>
-      </article>
-
-      <article class="api glass">
-        <h4>Plug-and-Play Templates</h4>
-        <p>Drop-in React widgets and starter flows to go live fast.</p>
-<pre>// Install widget
-npm i @enso/widgets
-
-// Use in your app
-&lt;EnsoSwap from="USDC" to="ETH" /&gt;</pre>
-      </article>
-    </div>
-  </section>
-
-  <!-- Video section -->
-  <section id="demo" class="section reveal">
-    <div class="eyebrow">See it in motion</div>
-    <h2>The best execution.</h2>
-    <div class="scrub glass" aria-label="Demo video">
-      <div class="scrub-sticky">
-        <video src="https://framerusercontent.com/assets/GifwF0GC6kftxDgniF6lsk9E9wc.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="caption">Powered by Enso Network.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Role groups -->
-  <section id="roles" class="section reveal">
-    <div class="role-meta"><span>2025</span><span>Role groups</span></div>
-    <div class="roles">
-      <article class="role-card glass"><h4>General</h4><ul><li>@Community — Verified community member</li><li>@OG Enso — Members before Apr 19, 2022</li><li>@Enso Booster — Thank you for boosting</li><li>@Game Master — You love Enso’s gaming events</li></ul></article>
-      <article class="role-card glass"><h4>Speedrun</h4><ul><li>@Neon Rookie</li><li>@Midnight Racer</li><li>@Supersonic Samurai</li><li>@Tokyo Drifter</li><li>@Nitro Sensei</li></ul></article>
-      <article class="role-card glass"><h4>Drip</h4><ul><li>@Raiders — Ready to spread the word</li><li>@Portal — Spend 350 Shortcats and cross the Portal</li><li>@Veteran — Thank you for your service</li></ul></article>
-      <article class="role-card glass"><h4>Ranks</h4><ul><li>@Trainee</li><li>@Junior</li><li>@Pit Crew</li><li>@Mechanic</li><li>@Pilot — Highest Rank</li></ul></article>
-    </div>
-  </section>
-
-  <!-- Pilots -->
-  <section id="pilots" class="section">
-    <div class="eyebrow">Enso global community</div>
-
-    <!-- Toolbar -->
-    <div class="pilot-toolbar" id="pilotToolbar">
-      <button class="btn-sm gold" id="btnAddPilot">+ Add Pilot</button>
-      <span class="tip">Tip: Drag cards to reorder</span>
-    </div>
-
-    <!-- Cards grid -->
-    <div class="grid" id="grid"></div>
-
-    <!-- Modal form -->
-    <div class="modal" id="pilotModal" role="dialog" aria-modal="true" aria-labelledby="pilotModalTitle" aria-hidden="true">
-      <div class="backdrop"></div>
-      <div class="panel">
-        <h3 id="pilotModalTitle">Add Pilot</h3>
-        <div class="form">
-          <div><label for="fName">Name</label><input id="fName" placeholder="e.g., bc1pBITHERUMN" /></div>
-          <div><label for="fStatus">Status</label><input id="fStatus" placeholder="Active" /></div>
-          <div><label for="fSince">Since (Year)</label><input id="fSince" placeholder="2023" /></div>
-          <div><label for="fBadges">Badges (comma separated)</label><input id="fBadges" placeholder="@Pilot,@Community" /></div>
-        </div>
-        <div class="row">
-          <button class="btn-sm gold" id="btnSavePilot">Save</button>
-          <button class="btn-sm" id="btnCancelPilot">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Toast container -->
-  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 
   <!-- $ENSO Price -->
   <section id="price" class="section price reveal">
@@ -470,16 +301,169 @@ npm i @enso/widgets
     </div>
   </section>
 
+  <!-- Role overview -->
+  <section id="why" class="section reveal">
+    <div class="eyebrow">Role overview</div>
+    <h2>Empowering the Enso Role System.</h2>
+    <div class="role-highlight">@Pilot — Highest Rank</div>
+    <div class="features">
+      <article class="feature glass"><div class="sub">General</div><h3>Censorship–Resistant</h3><p>Community identity that can’t be selectively silenced—recognition is earned by participation and stays visible.</p></article>
+      <article class="feature glass"><div class="sub">Speedrun</div><h3>Coordinated by Intents</h3><p>Progression is driven by mission “intents”—complete races/challenges to move up the ladder quickly and transparently.</p></article>
+      <article class="feature glass"><div class="sub">Drip</div><h3>Permissionless</h3><p>Anyone can contribute signal and outreach; perks acknowledge impact without gatekeepers.</p></article>
+      <article class="feature glass"><div class="sub">Ranks</div><h3>Immutable</h3><p>A stable rank ladder for operations. Milestones don’t change retroactively and culminate at the top rank.</p></article>
+      <article class="feature glass gold"><div class="sub">Spotlight</div><h3>@Pilot — Highest Rank</h3><p>The pinnacle of the Enso Role System—earned by consistent contributions, mastery, and community leadership.</p></article>
+    </div>
+  </section>
+
+  <!-- COMMUNITY STATS -->
+  <section id="stats" class="section reveal">
+    <div class="eyebrow">Community stats</div>
+    <h2>Growing a global, blockchain shortcuts community.</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="count" data-count="10" data-suffix="+">0</div>
+        <div class="label">Global community (countries)</div>
+      </div>
+      <div class="stat">
+        <div class="count" data-count="100000" data-suffix="+">0</div>
+        <div class="label">Community</div>
+      </div>
+      <div class="stat stat-gold">
+        <div class="count" id="pilotCount" data-count="80" data-suffix="+">0</div>
+        <div class="label">Community Pilots</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countries (chips with counts) -->
+  <section id="ecosystem" class="section reveal">
+    <div class="eyebrow">Global community</div>
+    <h2>Countries represented by our community.</h2>
+    <div class="country-wrap glass">
+      <div class="country-chips" id="countryChips"></div>
+    </div>
+  </section>
+
+  <!-- Build with Shortcuts -->
+  <section id="build" class="section reveal">
+    <div class="eyebrow">Build with shortcuts</div>
+    <h2>Unified onchain engine. Two powerful APIs.</h2>
+    <p class="lead">Route complex paths or bundle actions into one flow. Add onchain features with templates, not boilerplate.</p>
+
+    <div class="api-grid">
+      <article class="api glass">
+        <h4>Automated Routing API</h4>
+        <p>Calculate optimized multi-step paths between positions or tokens.</p>
+<pre>POST /shortcuts/route
+{
+  "from": {"chain":"ethereum","asset":"USDC"},
+  "to":   {"chain":"ethereum","asset":"wstETH"},
+  "amount":"1000"
+}</pre>
+      </article>
+
+      <article class="api glass">
+        <h4>Bundling API</h4>
+        <p>Compose your own multi-step workflow and ship it as a single Shortcut.</p>
+<pre>POST /shortcuts/bundle
+{
+  "actions":[
+    {"swap":{"from":"USDC","to":"ETH"}},
+    {"stake":{"protocol":"lido"}}
+  ]
+}</pre>
+      </article>
+
+      <article class="api glass">
+        <h4>Plug-and-Play Templates</h4>
+        <p>Drop-in React widgets and starter flows to go live fast.</p>
+<pre>// Install widget
+npm i @enso/widgets
+
+// Use in your app
+&lt;EnsoSwap from="USDC" to="ETH" /&gt;</pre>
+      </article>
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section id="demo" class="section reveal">
+    <div class="eyebrow">See it in motion</div>
+    <h2>The best execution.</h2>
+    <div class="scrub glass" aria-label="Demo video">
+      <div class="scrub-sticky">
+        <video src="https://framerusercontent.com/assets/GifwF0GC6kftxDgniF6lsk9E9wc.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <div class="caption">Powered by Enso Network.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section id="roles" class="section reveal">
+    <div class="role-meta"><span>2025</span><span>Role groups</span></div>
+    <div class="roles">
+      <article class="role-card glass"><h4>General</h4><ul><li>@Community — Verified community member</li><li>@OG Enso — Members before Apr 19, 2022</li><li>@Enso Booster — Thank you for boosting</li><li>@Game Master — You love Enso’s gaming events</li></ul></article>
+      <article class="role-card glass"><h4>Speedrun</h4><ul><li>@Neon Rookie</li><li>@Midnight Racer</li><li>@Supersonic Samurai</li><li>@Tokyo Drifter</li><li>@Nitro Sensei</li></ul></article>
+      <article class="role-card glass"><h4>Drip</h4><ul><li>@Raiders — Ready to spread the word</li><li>@Portal — Spend 350 Shortcats and cross the Portal</li><li>@Veteran — Thank you for your service</li></ul></article>
+      <article class="role-card glass"><h4>Ranks</h4><ul><li>@Trainee</li><li>@Junior</li><li>@Pit Crew</li><li>@Mechanic</li><li>@Pilot — Highest Rank</li></ul></article>
+    </div>
+  </section>
+
+  <!-- Pilots -->
+  <section id="pilots" class="section">
+    <div class="eyebrow">Enso global community</div>
+
+    <div class="pilot-toolbar">
+      <button class="btn-primary" id="btnAddPilot" aria-label="Add a new pilot">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11 5a1 1 0 1 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5z"/></svg>
+        Add Pilot
+      </button>
+      <span class="tip">Tip: Drag cards to reorder</span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <!-- Modal -->
+    <div class="modal" id="pilotModal" role="dialog" aria-modal="true" aria-labelledby="pilotModalTitle" aria-hidden="true">
+      <div class="backdrop"></div>
+      <div class="panel">
+        <h3 id="pilotModalTitle">Add Pilot</h3>
+        <div class="form">
+          <div><label for="fName">Name</label><input id="fName" placeholder="e.g., bc1pBITHERUMN" /></div>
+          <div><label for="fStatus">Status</label><input id="fStatus" placeholder="Active" /></div>
+          <div><label for="fSince">Since (Year)</label><input id="fSince" placeholder="2023" /></div>
+          <div><label for="fBadges">Badges (comma separated)</label><input id="fBadges" placeholder="@Pilot,@Community" /></div>
+        </div>
+        <div class="row">
+          <button class="btn-sm gold" id="btnSavePilot">Save</button>
+          <button class="btn-sm" id="btnCancelPilot">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
   <!-- Footer -->
-  <footer class="footer"><div class="container">Shortcut Community Project Contributors bc1pBITHERUMN ⚡✨</div></footer>
+  <footer class="footer"><div class="container">ENSO Growing Community Project Contributors bc1pBITHERUMN ⚡✨</div></footer>
 </div>
 
 <script>
-/* ===== Scroll reveal ===== */
+/* anchor offset */
+function computeStickyTop(){
+  const tb=document.querySelector('.topbar');
+  const top=(tb?.offsetHeight||64)+16;
+  document.documentElement.style.setProperty('--sticky-top', top+'px');
+}
+computeStickyTop();
+window.addEventListener('resize', ()=>{ clearTimeout(window.__stk); window.__stk=setTimeout(computeStickyTop,120); });
+
+/* reveal */
 const io = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});},{rootMargin:"-5% 0px -10% 0px",threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ===== Feature shimmer ===== */
+/* feature shimmer */
 document.querySelectorAll('.feature').forEach(card=>{
   card.addEventListener('pointermove',(e)=>{
     const r=card.getBoundingClientRect();
@@ -488,29 +472,54 @@ document.querySelectorAll('.feature').forEach(card=>{
   });
 });
 
-/* ===== Counters ===== */
+/* counters */
 function formatNumber(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");}
 function countUp(el,end,{duration=1500,prefix="",suffix=""}={}){const start=0,t0=performance.now();function step(now){const t=Math.min(1,(now-t0)/duration);el.innerHTML=`${prefix}${formatNumber(Math.floor(start+(end-start)*t))}${suffix}`;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
 const counterIO=new IntersectionObserver((ents)=>{ents.forEach(ent=>{if(ent.isIntersecting){const el=ent.target;countUp(el,+el.dataset.count||0,{prefix:el.dataset.prefix||"",suffix:el.dataset.suffix||""});counterIO.unobserve(el);}})},{threshold:0.6});
 document.querySelectorAll('.count').forEach(el=>counterIO.observe(el));
 
-/* ===== Flags marquee duplicate ===== */
-(function(){const track=document.getElementById('marqueeTrack');if(track) track.parentNode.appendChild(track.cloneNode(true));})();
-
-/* ===== Initials avatar ===== */
-function initialAvatar(name,size=144){
-  const ch=(name?.trim()?.[0]||"?").toUpperCase();
-  const pal=[["#3B82F6","#A78BFA"],["#22D3EE","#818CF8"],["#F472B6","#60A5FA"],["#34D399","#22D3EE"],["#F59E0B","#F472B6"],["#A855F7","#06B6D4"]];
-  const idx=Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0))%pal.length; const [c1,c2]=pal[idx];
-  const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient><filter id="shadow" x="-50%" y="-50%" width="200%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.35"/></filter></defs><circle cx='${size/2}' cy='${size/2}' r='${size/2-3}' fill='url(#g)' filter='url(#shadow)'/><text x='50%' y='54%' text-anchor='middle' font-family="Inter, system-ui" font-size='${size*0.48}' fill='#0B0F1A' font-weight='900' dominant-baseline='middle'>${ch}</text></svg>`;
-  return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);
+/* ===== Countries chips (complete set from screenshot) ===== */
+const COUNTRIES=[
+  {flag:"🇨🇳", code:"CN", count:4951},
+  {flag:"🇷🇺", code:"RU", count:2301},
+  {flag:"🇪🇸", code:"ES", count:655},
+  {flag:"🇹🇭", code:"TH", count:373, active:true},
+  {flag:"🇮🇩", code:"ID", count:1495},
+  {flag:"🇻🇳", code:"VN", count:1186},
+  {flag:"🇮🇳", code:"IN", count:498},
+  {flag:"🇵🇭", code:"PH", count:177},
+  {flag:"🇺🇦", code:"UA", count:932},
+  {flag:"🇧🇷", code:"BR", count:139},
+  {flag:"🇰🇷", code:"KR", count:181},
+  {flag:"🇳🇬", code:"NG", count:223},
+  {flag:"🇭🇺", code:"HU", count:83},
+  {flag:"🇮🇷", code:"IR", count:162},
+  {flag:"🇧🇩", code:"BD", count:116},
+  {flag:"🇹🇷", code:"TR", count:21},
+];
+const chips=document.getElementById('countryChips');
+if(chips){
+  COUNTRIES.forEach(c=>{
+    const el=document.createElement('span');
+    el.className='country-chip'+(c.active?' active':'');
+    el.innerHTML=`<span class="flag" title="${c.code}">${c.flag}</span><span class="count">${c.count.toLocaleString()}</span>`;
+    chips.appendChild(el);
+  });
 }
 
-/* ===== Icons ===== */
+/* seeded random + generated avatars (deterministic) */
+function hashStr(s){let h=2166136261>>>0; for(let i=0;i<s.length;i++){h^=s.charCodeAt(i); h=Math.imul(h,16777619);} return h>>>0;}
+function rng(seed){let t=seed>>>0; return ()=>((t=(t+0x6D2B79F5)|0, t=Math.imul(t^t>>>15,1|t), (t^t>>>7)>>>0)/4294967296);}
+function avatarInitials(name,size=144,rand=rng(hashStr(name))){const ch=(name?.trim()?.[0]||"?").toUpperCase();const colors=[["#3B82F6","#A78BFA"],["#22D3EE","#818CF8"],["#F472B6","#60A5FA"],["#34D399","#22D3EE"],["#F59E0B","#F472B6"],["#A855F7","#06B6D4"]];const [c1,c2]=colors[Math.floor(rand()*colors.length)];const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient><filter id="shadow" x="-50%" y="-50%" width="200%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity=".35"/></filter></defs><circle cx='${size/2}' cy='${size/2}' r='${size/2-3}' fill='url(#g)' filter='url(#shadow)'/><text x='50%' y='54%' text-anchor='middle' font-family="Inter, system-ui" font-size='${size*0.48}' fill='#0B0F1A' font-weight='900' dominant-baseline='middle'>${ch}</text></svg>`;return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);}
+function avatarBlockies(name,size=144){const r=rng(hashStr(name));const n=5,cell=size/n;const hue=Math.floor(r()*360),c1=`hsl(${hue},85%,62%)`,c2=`hsl(${(hue+200)%360},70%,55%)`,bg='hsl(220,35%,12%)';let rects="";for(let y=0;y<n;y++){let row=[];for(let x=0;x<Math.ceil(n/2);x++){row[x]=r()>0.5;}const mirror=row.concat(row.slice(0,Math.floor(n/2)).reverse());mirror.forEach((on,x)=>{if(on){const col=r()>0.5?c1:c2;rects+=`<rect x='${x*cell}' y='${y*cell}' width='${cell}' height='${cell}' fill='${col}' rx='${cell*0.2}'/>`;}});}const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><rect width='100%' height='100%' fill='${bg}'/>${rects}</svg>`;return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);}
+function avatarEmoji(name,size=144){const r=rng(hashStr(name));const emojis=["🚀","🛠️","✨","⚡","🎮","🧩","🌐","🎯","🏁","🧪","🧠","🐱‍👤"];const e=emojis[Math.floor(r()*emojis.length)];const h=Math.floor(r()*360),c1=`hsl(${h},90%,60%)`,c2=`hsl(${(h+40)%360},90%,50%)`;const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient></defs><rect width='100%' height='100%' rx='${size/2}' fill='url(#g)'/><text x='50%' y='52%' font-size='${size*0.48}' text-anchor='middle' dominant-baseline='middle'>${e}</text></svg>`;return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);}
+function genAvatar(name){const seed=hashStr(name);const pick=seed%3;return pick===0?avatarInitials(name):pick===1?avatarBlockies(name):avatarEmoji(name);}
+
+/* icons */
 function iconDiscord(){return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 5.6a16 16 0 0 0-4-1.3l-.2.4a12 12 0 0 1 3.5 1.7c-1.6-.7-3.2-1.1-4.9-1.3a9.5 9.5 0 0 0-2.1 0c-1.7.2-3.3.6-4.9 1.3a12 12 0 0 1 3.5-1.7l-.2-.4a16 16 0 0 0-4 1.3C3.6 10 3 14 3.2 18c1.7 1.3 3.6 2.2 5.7 2.7l.5-1.2c-.8-.3-1.6-.6-2.3-1 .2-.2.5-.5.7-.7a12 12 0 0 0 8.7 0l.7.7c-.7.4-1.5.7-2.3 1l.5 1.2c2.1-.5 4-1.4 5.7-2.7.2-4-.4-8-2.8-12.4ZM9.6 15.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>`}
 function iconX(){return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H21l-6.6 7.5L22 22h-6.8l-5.3-6.4L3.9 22H2l7.1-8.1L2 2h6.9l4.8 5.8L18.9 2Zm-2.4 18h1.3L7.7 4H6.4l10.1 16Z"/></svg>`}
 
-/* ===== Fireworks ===== */
+/* fireworks */
 function launchFireworks(card,x,y){
   const cvs=document.createElement('canvas'); cvs.className='fireworks-canvas'; card.appendChild(cvs);
   const dpr=Math.max(1,devicePixelRatio||1), r=card.getBoundingClientRect(), w=r.width, h=r.height;
@@ -532,29 +541,27 @@ function launchFireworks(card,x,y){
   } requestAnimationFrame(tick);
 }
 
-/* ===== Toast helper ===== */
+/* toast */
 function toast(msg,type='ok',ms=2200){
   const box=document.getElementById('toast'); if(!box) return;
   const item=document.createElement('div'); item.className=`item ${type}`; item.textContent=msg;
   box.appendChild(item); setTimeout(()=>{ item.style.transition='opacity .25s'; item.style.opacity='0'; setTimeout(()=>item.remove(),250); }, ms);
 }
 
-/* ===== Pilots data + Add/Edit + DragSort ===== */
+/* Pilots + edit + drag */
 const DEFAULT_NAMES=["0xKh1n","0xMohamed","Andrik","bc1pBITHERUMN","belahteko","DonMontana","EKO","GIAN","haruya_","JohnnyChuon…","KAIRO","kelp","kennyajaks","kokoko","Leetv","LEVIOUSA","Leyba","Lolichan","longdv","milad","MMPR(✧✦)","Ngô Hoàng","Queenoma","Rutto","Sakamoto","Sasuke","shark_thegreat","Skygge","SOJIB","Tomiwayrn","Ulbert 黑手党","Vkorn","ZBingo","Alt_Coiner","Cozmee","ezrmol","Falcon","Ghfri","hanzo(φ,G)","HASHAN","Lucky","Moted.Eth","Shubh","Wiko","NDUKAM","MONTEGO","S!LOWEK","Ric vn"];
 const SAMPLE_INFO={status:"Active",since:"2023",badges:["@Pilot","@Community","@Veteran","@Nitro Sensei"]};
 const uid=()=> (crypto?.randomUUID?.() || (Date.now().toString(36)+Math.random().toString(36).slice(2)));
 function normalize(p){ if(!p.id)p.id=uid(); if(!Array.isArray(p.info?.badges)) p.info.badges=(p.info.badges||"@Pilot,@Community").split(",").map(s=>s.trim()).filter(Boolean); return p; }
-function loadPilots(){ try{const raw=localStorage.getItem('ensoPilots_v2'); if(raw){const arr=JSON.parse(raw); if(Array.isArray(arr)&&arr.length) return arr.map(normalize);} }catch(e){} return DEFAULT_NAMES.map((n,i)=>normalize({id:uid(),name:n,number:i+1,avatar:initialAvatar(n),info:{...SAMPLE_INFO}})); }
+function loadPilots(){ try{const raw=localStorage.getItem('ensoPilots_v2'); if(raw){const arr=JSON.parse(raw); if(Array.isArray(arr)&&arr.length) return arr.map(normalize);} }catch(e){} return DEFAULT_NAMES.map((n,i)=>normalize({id:uid(),name:n,number:i+1,avatar:genAvatar(n),info:{...SAMPLE_INFO}})); }
 function savePilots(list){ localStorage.setItem('ensoPilots_v2', JSON.stringify(list)); }
 function renumber(){ PILOTS.forEach((p,i)=>p.number=i+1); }
 
 let PILOTS=loadPilots();
 
-/* Render + card wiring (edit + drag) */
 const grid=document.getElementById('grid');
 let draggingId=null;
 const placeholder=document.createElement('div'); placeholder.className='card glass placeholder'; placeholder.setAttribute('aria-label','Drop position');
-
 function removePlaceholder(){ if(placeholder.parentNode) placeholder.parentNode.removeChild(placeholder); }
 
 function setupDrag(card,id){
@@ -563,7 +570,6 @@ function setupDrag(card,id){
   card.addEventListener('dragstart',e=>{ draggingId=id; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; try{e.dataTransfer.setData('text/plain',id);}catch{}; });
   card.addEventListener('dragend',()=>{ draggingId=null; card.classList.remove('dragging'); removePlaceholder(); });
 }
-
 function renderPilots(list){
   grid.innerHTML='';
   list.forEach(p=>{
@@ -573,7 +579,7 @@ function renderPilots(list){
       <div class="card-header" title="Celebrate 🎉">
         <div class="badge">#${p.number}</div>
         <div class="media">
-          <img class="avatar" src="${p.avatar}" alt="${p.name}">
+          <img class="avatar" src="${genAvatar(p.name)}" alt="${p.name}">
           <img class="helmet" src="/images/pilot-helmet.png" alt="Pilot Helmet" onerror="this.style.display='none'">
         </div>
         <div class="info"><h3>${p.name}</h3><div class="role">Pilot — Enso</div></div>
@@ -592,35 +598,22 @@ function renderPilots(list){
     grid.appendChild(el);
   });
 }
-
 grid.addEventListener('dragover',e=>{
-  if(!draggingId) return;
-  e.preventDefault();
-  const target=e.target.closest('.card');
-  if(!target || target===placeholder) return;
-  const rect=target.getBoundingClientRect();
-  const before = e.clientY < rect.top + rect.height/2;
-  if(before) grid.insertBefore(placeholder, target);
-  else grid.insertBefore(placeholder, target.nextSibling);
+  if(!draggingId) return; e.preventDefault();
+  const target=e.target.closest('.card'); if(!target || target===placeholder) return;
+  const rect=target.getBoundingClientRect(); const before = e.clientY < rect.top + rect.height/2;
+  if(before) grid.insertBefore(placeholder, target); else grid.insertBefore(placeholder, target.nextSibling);
 });
-
 grid.addEventListener('drop',e=>{
-  if(!draggingId) return;
-  e.preventDefault();
-  const newIndex=[...grid.children].indexOf(placeholder);
-  removePlaceholder();
-  if(newIndex<0) return;
-  const fromIndex=PILOTS.findIndex(p=>p.id===draggingId);
-  if(fromIndex<0) return;
-  const [moved]=PILOTS.splice(fromIndex,1);
-  PILOTS.splice(newIndex,0,moved);
-  renumber(); savePilots(PILOTS); renderPilots(PILOTS);
-  toast('Order updated','ok');
+  if(!draggingId) return; e.preventDefault();
+  const newIndex=[...grid.children].indexOf(placeholder); removePlaceholder(); if(newIndex<0) return;
+  const fromIndex=PILOTS.findIndex(p=>p.id===draggingId); if(fromIndex<0) return;
+  const [moved]=PILOTS.splice(fromIndex,1); PILOTS.splice(newIndex,0,moved);
+  renumber(); savePilots(PILOTS); renderPilots(PILOTS); toast('Order updated','ok');
 });
-
 renderPilots(PILOTS);
 
-/* ===== Modal Add/Edit (centered + UX) ===== */
+/* Modal Add/Edit */
 const modal=document.getElementById('pilotModal');
 const panel=modal.querySelector('.panel');
 const modalTitle=document.getElementById('pilotModalTitle');
@@ -628,138 +621,57 @@ const fName=document.getElementById('fName');
 const fStatus=document.getElementById('fStatus');
 const fSince=document.getElementById('fSince');
 const fBadges=document.getElementById('fBadges');
-let editingId=null;
-let lastFocused=null;
+let editingId=null; let lastFocused=null;
 
 function trapFocus(e){
   const focusable=panel.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
   const first=focusable[0], last=focusable[focusable.length-1];
-  if(e.key==='Tab'){
-    if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
-    else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
-  }else if(e.key==='Escape'){ closeModal(); }
+  if(e.key==='Tab'){ if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); } else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); } }
+  else if(e.key==='Escape'){ closeModal(); }
   else if(e.key==='Enter'){ document.getElementById('btnSavePilot').click(); }
 }
-
-function openModal(){
-  lastFocused=document.activeElement;
-  modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
-  document.body.classList.add('no-scroll');
-  setTimeout(()=>{ fName.focus(); fName.select(); }, 0);
-  document.addEventListener('keydown', trapFocus);
-}
-function closeModal(){
-  modal.classList.remove('show'); modal.setAttribute('aria-hidden','true');
-  document.body.classList.remove('no-scroll');
-  document.removeEventListener('keydown', trapFocus);
-  if(lastFocused) lastFocused.focus();
-}
-
-function openAdd(){
-  editingId=null;
-  modalTitle.textContent='Add Pilot';
-  fName.value=''; fStatus.value='Active'; fSince.value=new Date().getFullYear(); fBadges.value='@Pilot,@Community';
-  openModal();
-}
-function openEdit(id){
-  editingId=id;
-  const p=PILOTS.find(x=>x.id===id); if(!p) return;
-  modalTitle.textContent='Edit Pilot';
-  fName.value=p.name; fStatus.value=p.info.status; fSince.value=p.info.since; fBadges.value=p.info.badges.join(',');
-  openModal();
-}
+function openModal(){ lastFocused=document.activeElement; modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('no-scroll'); setTimeout(()=>{ fName.focus(); fName.select(); },0); document.addEventListener('keydown',trapFocus); }
+function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('no-scroll'); document.removeEventListener('keydown',trapFocus); if(lastFocused) lastFocused.focus(); }
+function openAdd(){ editingId=null; modalTitle.textContent='Add Pilot'; fName.value=''; fStatus.value='Active'; fSince.value=new Date().getFullYear(); fBadges.value='@Pilot,@Community'; openModal(); }
+function openEdit(id){ editingId=id; const p=PILOTS.find(x=>x.id===id); if(!p) return; modalTitle.textContent='Edit Pilot'; fName.value=p.name; fStatus.value=p.info.status; fSince.value=p.info.since; fBadges.value=p.info.badges.join(','); openModal(); }
 document.getElementById('btnAddPilot')?.addEventListener('click',openAdd);
 document.getElementById('btnSavePilot')?.addEventListener('click',()=>{
   const name=(fName.value||'').trim(); if(!name){toast('Please enter a name','warn'); fName.focus(); return;}
   const info={status:(fStatus.value||'Active').trim(), since:(fSince.value||'2023').trim(), badges:(fBadges.value||'@Pilot,@Community').split(',').map(s=>s.trim()).filter(Boolean)};
-  if(editingId){
-    const i=PILOTS.findIndex(x=>x.id===editingId); if(i>=0){PILOTS[i].name=name; PILOTS[i].info=info; PILOTS[i].avatar=initialAvatar(name);}
-    toast('Pilot updated','ok');
-  }else{
-    PILOTS.push({id:uid(), name, number:PILOTS.length+1, avatar:initialAvatar(name), info});
-    toast('Pilot added','ok');
-  }
+  if(editingId){ const i=PILOTS.findIndex(x=>x.id===editingId); if(i>=0){PILOTS[i].name=name; PILOTS[i].info=info; PILOTS[i].avatar=genAvatar(name);} toast('Pilot updated','ok'); }
+  else{ PILOTS.push({id:uid(), name, number:PILOTS.length+1, avatar:genAvatar(name), info}); toast('Pilot added','ok'); }
   renumber(); savePilots(PILOTS); renderPilots(PILOTS); closeModal();
 });
 document.getElementById('btnCancelPilot')?.addEventListener('click',closeModal);
 modal?.addEventListener('click',e=>{ if(e.target.classList.contains('backdrop')) closeModal(); });
 
-/* ===== $ENSO Price Widget ===== */
+/* $ENSO widget (placeholder / auto when live) */
 (async function ensoPriceWidget(){
-  const DEXSCREENER_TOKEN="";  // set when live
-  const COINGECKO_ID="";       // set when listed
-
+  const DEXSCREENER_TOKEN=""; const COINGECKO_ID="";
   const $=(id)=>document.getElementById(id);
   const fmtUSD=(n)=> n==null ? "—" : (+n>=1 ? "$"+Number(n).toLocaleString(undefined,{maximumFractionDigits:2}) : "$"+Number(n).toLocaleString(undefined,{maximumFractionDigits:6}));
   const setChg=(el,v)=>{const val=(v==null?0:v); el.textContent=(val>0?"+":"")+val.toFixed(2)+"%"; el.classList.remove('up','down'); el.classList.add(val>=0?'up':'down');};
-
-  async function fromDexscreener(addr){
-    const res=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addr}`); if(!res.ok) throw new Error("dexscreener");
-    const js=await res.json(); const pair=js.pairs?.[0]; if(!pair) throw new Error("no-pair");
-    const spark=pair.sparkline ?? [];
-    return {source:`${(pair.chainId?.toUpperCase()||pair.chain)} • ${pair.dexId||pair.dex} • ${pair.baseToken?.symbol}/${pair.quoteToken?.symbol}`,
-      price:parseFloat(pair.priceUsd ?? "0"), change:parseFloat(pair.priceChange24h ?? pair.priceChange?.h24 ?? "0"),
-      marketCap:pair.fdv ?? null, volume24h:pair.volume?.h24 ?? pair.volume24h ?? null, liquidity:pair.liquidity?.usd ?? pair.liquidityUSD ?? null,
-      spark};
-  }
-  async function fromCoingecko(id){
-    const res=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(id)}&vs_currencies=usd&include_24hr_change=true`); if(!res.ok) throw new Error("coingecko");
-    const js=await res.json(); const row=js[id]; if(!row) throw new Error("no-cg");
-    return {source:"CoinGecko", price:row.usd, change:row.usd_24h_change, marketCap:null, volume24h:null, liquidity:null, spark:[]};
-  }
-  async function getData(){
-    if(DEXSCREENER_TOKEN){ try{ return await fromDexscreener(DEXSCREENER_TOKEN); }catch(e){} }
-    if(COINGECKO_ID){ try{ return await fromCoingecko(COINGECKO_ID); }catch(e){} }
-    throw new Error("not-live");
-  }
-  function drawSpark(canvas,arr){
-    const ctx=canvas.getContext('2d'); const w=canvas.clientWidth, h=canvas.clientHeight; const dpr=window.devicePixelRatio||1;
-    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr); ctx.scale(dpr,dpr); ctx.clearRect(0,0,w,h);
-    if(!arr || arr.length<2){ ctx.globalAlpha=.6; ctx.fillText("No sparkline yet",10,20); return; }
-    const min=Math.min(...arr.map(Number)), max=Math.max(...arr.map(Number)), pad=6;
-    const X=i=> pad+(w-2*pad)*(i/(arr.length-1));
-    const Y=v=> h-pad-(h-2*pad)*((v-min)/Math.max(1e-9,(max-min)));
-    ctx.lineWidth=2; ctx.strokeStyle='#FFD76A'; ctx.beginPath(); ctx.moveTo(X(0),Y(arr[0])); for(let i=1;i<arr.length;i++) ctx.lineTo(X(i),Y(arr[i])); ctx.stroke();
-    const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,'rgba(255,199,44,.28)'); g.addColorStop(1,'rgba(255,199,44,0)'); ctx.fillStyle=g;
-    ctx.lineTo(X(arr.length-1),h-pad); ctx.lineTo(X(0),h-pad); ctx.closePath(); ctx.fill();
-  }
-  async function render(){
-    try{
-      const d=await getData();
-      $('ensoPrice').textContent=fmtUSD(d.price);
-      setChg($('ensoChange'), d.change||0);
-      $('ensoMcap').textContent=d.marketCap?fmtUSD(d.marketCap):"—";
-      $('ensoVol').textContent=d.volume24h?fmtUSD(d.volume24h):"—";
-      $('ensoLiquidity').textContent=d.liquidity?fmtUSD(d.liquidity):"—";
-      $('ensoPair').textContent=d.source||"—";
-      $('ensoUpdated').textContent="Live market data";
-      $('ensoNote').textContent="Data source may vary across DEX/CEX.";
-      drawSpark($('ensoSpark'), d.spark && d.spark.length ? d.spark.map(Number):[]);
-    }catch(e){
-      $('ensoPrice').textContent="$0.00"; $('ensoChange').textContent="—"; $('ensoChange').classList.remove('up','down');
-      $('ensoMcap').textContent="—"; $('ensoVol').textContent="—"; $('ensoLiquidity').textContent="—"; $('ensoPair').textContent="—";
-      $('ensoUpdated').textContent="Not live yet"; $('ensoNote').textContent="TGE estimated Q3 2025 — price will appear once listed.";
-      drawSpark($('ensoSpark'),[]);
-    }
-  }
+  async function fromDexscreener(addr){ const res=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addr}`); if(!res.ok) throw new Error("dexscreener"); const js=await res.json(); const pair=js.pairs?.[0]; if(!pair) throw new Error("no-pair"); const spark=pair.sparkline ?? []; return {source:`${(pair.chainId?.toUpperCase()||pair.chain)} • ${pair.dexId||pair.dex} • ${pair.baseToken?.symbol}/${pair.quoteToken?.symbol}`, price:parseFloat(pair.priceUsd ?? "0"), change:parseFloat(pair.priceChange24h ?? pair.priceChange?.h24 ?? "0"), marketCap:pair.fdv ?? null, volume24h:pair.volume?.h24 ?? pair.volume24h ?? null, liquidity:pair.liquidity?.usd ?? pair.liquidityUSD ?? null, spark}; }
+  async function fromCoingecko(id){ const res=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(id)}&vs_currencies=usd&include_24hr_change=true`); if(!res.ok) throw new Error("coingecko"); const js=await res.json(); const row=js[id]; if(!row) throw new Error("no-cg"); return {source:"CoinGecko", price:row.usd, change:row.usd_24h_change, marketCap:null, volume24h:null, liquidity:null, spark:[]}; }
+  async function getData(){ if(DEXSCREENER_TOKEN){ try{ return await fromDexscreener(DEXSCREENER_TOKEN); }catch(e){} } if(COINGECKO_ID){ try{ return await fromCoingecko(COINGECKO_ID); }catch(e){} } throw new Error("not-live"); }
+  function drawSpark(canvas,arr){ const ctx=canvas.getContext('2d'); const w=canvas.clientWidth, h=canvas.clientHeight; const dpr=window.devicePixelRatio||1; canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr); ctx.scale(dpr,dpr); ctx.clearRect(0,0,w,h); if(!arr || arr.length<2){ ctx.globalAlpha=.6; ctx.fillText("No sparkline yet",10,20); return; } const min=Math.min(...arr.map(Number)), max=Math.max(...arr.map(Number)), pad=6; const X=i=> pad+(w-2*pad)*(i/(arr.length-1)); const Y=v=> h-pad-(h-2*pad)*((v-min)/Math.max(1e-9,(max-min))); ctx.lineWidth=2; ctx.strokeStyle='#FFD76A'; ctx.beginPath(); ctx.moveTo(X(0),Y(arr[0])); for(let i=1;i<arr.length;i++) ctx.lineTo(X(i),Y(arr[i])); ctx.stroke(); const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,'rgba(255,199,44,.28)'); g.addColorStop(1,'rgba(255,199,44,0)'); ctx.fillStyle=g; ctx.lineTo(X(arr.length-1),h-pad); ctx.lineTo(X(0),h-pad); ctx.closePath(); ctx.fill(); }
+  async function render(){ try{ const d=await getData(); $('ensoPrice').textContent=fmtUSD(d.price); setChg($('ensoChange'), d.change||0); $('ensoMcap').textContent=d.marketCap?fmtUSD(d.marketCap):"—"; $('ensoVol').textContent=d.volume24h?fmtUSD(d.volume24h):"—"; $('ensoLiquidity').textContent=d.liquidity?fmtUSD(d.liquidity):"—"; $('ensoPair').textContent=d.source||"—"; $('ensoUpdated').textContent="Live market data"; $('ensoNote').textContent="Data source may vary across DEX/CEX."; drawSpark($('ensoSpark'), d.spark && d.spark.length ? d.spark.map(Number):[]); }catch(e){ $('ensoPrice').textContent="$0.00"; $('ensoChange').textContent="—"; $('ensoChange').classList.remove('up','down'); $('ensoMcap').textContent="—"; $('ensoVol').textContent="—"; $('ensoLiquidity').textContent="—"; $('ensoPair').textContent="—"; $('ensoUpdated').textContent="Not live yet"; $('ensoNote').textContent="TGE estimated Q3 2025 — price will appear once listed."; drawSpark($('ensoSpark'),[]); } }
   render(); setInterval(render,60_000);
 })();
 
-/* ===== TGE Countdown (end of Q3 2025 UTC) ===== */
+/* TGE Countdown */
 (function(){
   const target=new Date('2025-09-30T23:59:59Z').getTime();
   const D=document.getElementById('cd-days'), H=document.getElementById('cd-hours'), M=document.getElementById('cd-mins'), S=document.getElementById('cd-secs');
   const pad=n=>n.toString().padStart(2,'0');
-  function tick(){
-    const now=Date.now(); let diff=Math.max(0,target-now);
+  function tick(){ const now=Date.now(); let diff=Math.max(0,target-now);
     const days=Math.floor(diff/86400000); diff-=days*86400000;
     const hours=Math.floor(diff/3600000); diff-=hours*3600000;
     const mins=Math.floor(diff/60000); diff-=mins*60000;
     const secs=Math.floor(diff/1000);
     if(D)D.textContent=days; if(H)H.textContent=pad(hours); if(M)M.textContent=pad(mins); if(S)S.textContent=pad(secs);
-    if(target-now<=0){ clearInterval(timer); const meme=document.querySelector('#tge .meme'); if(meme) meme.innerHTML=`IT'S TGE O'CLOCK 🥳 — <span style="color:#FFD76A;">Q3 2025</span>`; }
   }
-  tick(); const timer=setInterval(tick,1000);
+  tick(); setInterval(tick,1000);
 })();
 </script>
 </body>
