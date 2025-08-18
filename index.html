@@ -512,7 +512,74 @@ function hashStr(s){let h=2166136261>>>0; for(let i=0;i<s.length;i++){h^=s.charC
 function rng(seed){let t=seed>>>0; return ()=>((t=(t+0x6D2B79F5)|0, t=Math.imul(t^t>>>15,1|t), (t^t>>>7)>>>0)/4294967296);}
 function avatarInitials(name,size=144,rand=rng(hashStr(name))){const ch=(name?.trim()?.[0]||"?").toUpperCase();const colors=[["#3B82F6","#A78BFA"],["#22D3EE","#818CF8"],["#F472B6","#60A5FA"],["#34D399","#22D3EE"],["#F59E0B","#F472B6"],["#A855F7","#06B6D4"]];const [c1,c2]=colors[Math.floor(rand()*colors.length)];const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient><filter id="shadow" x="-50%" y="-50%" width="200%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity=".35"/></filter></defs><circle cx='${size/2}' cy='${size/2}' r='${size/2-3}' fill='url(#g)' filter='url(#shadow)'/><text x='50%' y='54%' text-anchor='middle' font-family="Inter, system-ui" font-size='${size*0.48}' fill='#0B0F1A' font-weight='900' dominant-baseline='middle'>${ch}</text></svg>`;return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);}
 function avatarBlockies(name,size=144){const r=rng(hashStr(name));const n=5,cell=size/n;const hue=Math.floor(r()*360),c1=`hsl(${hue},85%,62%)`,c2=`hsl(${(hue+200)%360},70%,55%)`,bg='hsl(220,35%,12%)';let rects="";for(let y=0;y<n;y++){let row=[];for(let x=0;x<Math.ceil(n/2);x++){row[x]=r()>0.5;}const mirror=row.concat(row.slice(0,Math.floor(n/2)).reverse());mirror.forEach((on,x)=>{if(on){const col=r()>0.5?c1:c2;rects+=`<rect x='${x*cell}' y='${y*cell}' width='${cell}' height='${cell}' fill='${col}' rx='${cell*0.2}'/>`;}});}const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><rect width='100%' height='100%' fill='${bg}'/>${rects}</svg>`;return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);}
-function avatarEmoji(name,size=144){const r=rng(hashStr(name));const emojis=["🚀","🛠️","✨","⚡","🎮","🧩","🌐","🎯","🏁","🧪","🧠","🐱‍👤"];const e=emojis[Math.floor(r()*emojis.length)];const h=Math.floor(r()*360),c1=`hsl(${h},90%,60%)`,c2=`hsl(${(h+40)%360},90%,50%)`;const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/></linearGradient></defs><rect width='100%' height='100%' rx='${size/2}' fill='url(#g)'/><text x='50%' y='52%' font-size='${size*0.48}' text-anchor='middle' dominant-baseline='middle'>${e}</text></svg>`;return "data:image/svg+xml;utf8,"+encodeURIComponent(svg);}
+
+// Replace existing avatarEmoji(...) with this expanded version
+function avatarEmoji(name, size = 144){
+  const r = rng(hashStr(name));
+
+  // Huge emoji pool (faces, hands, hearts, animals, nature, food, sports, travel, objects, symbols, flags…)
+  const emojiString = `
+😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😜 😝 😛 🥲 🤗 🤩 🤔 🤨 😐 😑 😶 🙄 😏
+😣 😥 😮‍💨 😮 😯 😴 😪 😫 🥱 😤 😠 😡 🤬 😳 🫣 🥵 🥶 😱 😨 😰 😓 🤤 🤒 🤕 🤢 🤮 🤧 🥴 😵 😵‍💫 🤯 🤠 🥳 😎 🤓 🧐
+😺 😸 😹 😻 😼 😽 🙀 😿 😾
+
+👍 👎 👊 ✊ 🤛 🤜 👏 🙌 🤝 🫶 👐 🤲 🙏 👋 🤙 🤘 ✌️ 🖖 🤟 👌 🤏 👈 👉 👆 👇 ☝️ ✋ 🖐️ 🖕 🫵
+
+❤️ 🧡 💛 💚 💙 💜 🖤 🤍 🤎 💖 💘 💝 💞 💓 💗 💕 ❣️ 💔 💥 💫 ✨ 🔥 💯
+
+🐶 🐱 🐭 🐹 🐰 🦊 🐻 🐼 🐻‍❄️ 🐨 🐯 🦁 🐮 🐷 🐸 🐵
+🐔 🐧 🐦 🐤 🐣 🐺 🦄 🐝 🐛 🦋 🐌 🐞 🦂 🐢 🐍 🐙
+🐠 🐟 🐬 🐳 🐋 🦈 🐊 🦅 🦆 🦉 🦇 🐘 🦏 🦒 🦘 🦬 🐫 🐪 🦙 🦌 🐑 🐐 🐎
+
+🌸 🌼 🌻 🌺 🌷 🌹 🥀 🌱 🌿 🍀 🍁 🍂 🍃 🌾 🌵 🌴 🌲 🌳
+🌍 🌎 🌏 🌐 ☀️ 🌤️ ⛅ 🌥️ 🌦️ 🌧️ ⛈️ 🌩️ 🌨️ ❄️ ☃️ 🌈 🌙 🌌 ⭐ 🌟
+
+🍏 🍎 🍐 🍊 🍋 🍌 🍉 🍇 🍓 🫐 🍒 🍑 🥭 🍍 🥥 🥝
+🍅 🥑 🧅 🥕 🥔 🌽 🥒 🧄 🫘 🥦 🥬
+🍞 🥐 🥖 🥨 🧀 🥚 🥞 🧇 🥩 🍗 🍖 🌭 🍔 🍟 🍕 🥪 🌮 🌯 🥙 🧆
+🍝 🍜 🍲 🍛 🍣 🍱 🍤 🍙 🍚 🍘 🥟 🥠 🥡 🍥 🍢 🍡
+🍧 🍨 🍦 🧁 🍰 🎂 🍮 🍭 🍬 🍫 🍿 🧋 ☕ 🍵 🧉 🥤 🥛 🍺 🍻 🍷 🥂 🍸 🍹 🥃
+
+⚽ 🏀 🏈 ⚾ 🎾 🏐 🏉 🎱 🥏 🏓 🏸 🥊 🥋 🥅 ⛳ 🏒 🏑 🛼 🛹 ⛸️ 🛷 🥌 🎿 ⛷️ 🏂
+🚴 🚵 🚣 🧗 🏊 🤽 🤾 🤸 🧘 🏆 🥇 🥈 🥉 🎖️ 🎮 🧩 ♟️ 🎯 🎳 🎰 🎲 🀄
+🎺 🎸 🎻 🪕 🎹 🥁 🎤 🎧 🎼
+
+🚗 🚕 🚙 🚌 🚎 🏎️ 🚓 🚑 🚒 🚐 🛻 🚚 🚛 🚜 🛵 🏍️ 🚲
+✈️ 🛩️ 🛫 🛬 🚀 🛸 🚁 ⛵ 🚤 🛥️ 🚢 ⚓
+🗺️ 🗿 🗽 🗼 🏰 🏯 🏟️ 🏗️ 🏠 🏡 🏢 🏬 🏣 ⛩️ ⛲ 🏞️ 🌋 🏝️ 🏜️ 🏔️ ⛰️ 🏕️
+
+📱 📲 💻 🖥️ 🖨️ ⌨️ 🖱️ 🕹️ 💾 💿 📀 📸 📷 🎥 🎬 📺 📡 🔌 🔋 🔦 🕯️
+🧯 🧰 🧲 🧪 ⚗️ 🔬 🔭 🧬 ⚙️ 🛠️ 🧱 🧵 🪡 🧶 🪢 ⛓️ 🧳
+🗃️ 🗂️ 🗞️ 📦 📫 📮 ✉️ 📧 📩 📤 📥 📜 📃 📄 📑 📊 📈 📉 📚 📖 📰 🔖 🏷️
+🗓️ 📅 ⏰ ⏱️ ⏲️ ⏳ 🕰️ 🧭 🔑 🗝️ 🔒 🔓 🛡️ 🪪 🧾 💳 💰 💎 🧿 🪬 🎁 🧸
+
+♻️ ✅ ❌ ⛔ ⚠️ ☢️ ☣️ 🔞
+➕ ➖ ➗ ✖️ ➡️ ⬅️ ⬆️ ⬇️ ↗️ ↘️ ↖️ ↙️ 🔼 🔽 ▶️ ⏸️ ⏯️ ⏹️ ⏺️ ⏭️ ⏮️ 🔀
+#️⃣ *️⃣ 0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟
+🅰️ 🅱️ 🆎 🆑 🆒 🆕 🆘 🆗 🆙 🆚
+🏳️ 🏴 🏁 🚩 🏳️‍🌈 🏳️‍⚧️
+`;
+
+  const emojis = emojiString.trim().split(/\s+/);
+
+  const e = emojis[Math.floor(r()*emojis.length)];
+  const h = Math.floor(r()*360), c1 = `hsl(${h},90%,60%)`, c2 = `hsl(${(h+40)%360},90%,50%)`;
+
+  const svg =
+  `<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' viewBox='0 0 ${size} ${size}'>
+     <defs>
+       <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+         <stop offset='0%' stop-color='${c1}'/><stop offset='100%' stop-color='${c2}'/>
+       </linearGradient>
+     </defs>
+     <rect width='100%' height='100%' rx='${size/2}' fill='url(#g)'/>
+     <text x='50%' y='52%' font-size='${size*0.48}' text-anchor='middle' dominant-baseline='middle'>${e}</text>
+   </svg>`;
+
+  return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+}
+
+
 function genAvatar(name){const seed=hashStr(name);const pick=seed%3;return pick===0?avatarInitials(name):pick===1?avatarBlockies(name):avatarEmoji(name);}
 
 /* icons */
