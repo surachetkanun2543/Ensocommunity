@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <style>
       /* ===== Global ===== */
       html {
@@ -119,16 +120,25 @@
         position: sticky;
         top: 20px;
         z-index: 50;
-        border: 2px solid var(--blue);
+        border: 2px solid var(--topbar-ring, var(--blue)); /* read color from JS */
         border-radius: var(--radius-2xl);
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42),
-          inset 0 0 0 1px var(--blue-inner);
+          inset 0 0 0 1px var(--topbar-ringInner, var(--blue-inner));
+        overflow: hidden; /* keep glow inside */
+        transition: transform 0.25s ease, opacity 0.25s ease;
+        will-change: transform;
+      }
+      .topbar.hide {
+        transform: translateY(-140%);
+        opacity: 0;
       }
       .topbar .wrap {
         display: flex;
         align-items: center;
         gap: 16px;
         padding: 12px 18px;
+        position: relative;
+        z-index: 1;
       }
       .brand img {
         height: 28px;
@@ -372,7 +382,7 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
       }
 
-      /* ===== Role boxes ===== */
+      /* ===== Role boxes, stats, etc. (unchanged styles) ===== */
       .role-meta {
         display: flex;
         align-items: center;
@@ -428,7 +438,6 @@
         color: var(--ink);
       }
 
-      /* ===== Stats ===== */
       .stats {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -442,7 +451,7 @@
       }
       @media (max-width: 560px) {
         .stats {
-          grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
         }
       }
       .stat {
@@ -514,7 +523,7 @@
         box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.6) inset;
       }
 
-      /* ===== Video ===== */
+      /* ===== Video scrub ===== */
       .scrub {
         min-height: 60vh;
         position: relative;
@@ -707,7 +716,7 @@
         letter-spacing: 0.08em;
       }
 
-      /* ===== CoinList facts ===== */
+      /* ===== CoinList facts, Events, Pilots etc. (styles retained) ===== */
       .facts {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -747,13 +756,13 @@
           0 0 18px rgba(255, 199, 44, 0.1);
       }
 
-      /* ===== Events ===== */
       .events {
         border: 2px solid var(--blue);
         border-radius: var(--radius-2xl);
         box-shadow: var(--shadow), inset 0 0 0 1px var(--blue-inner);
         padding: 18px;
       }
+
       .thisweek {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -981,7 +990,7 @@
         margin-top: 8px;
       }
 
-      /* Special one-off */
+      /* Special */
       .event.special {
         border-color: #a78bfa;
         box-shadow: inset 0 0 0 1px var(--purple-inner),
@@ -1151,7 +1160,6 @@
         outline: 2px solid #a78bfa;
         outline-offset: 2px;
       }
-      /* Edit button on card */
       .card .edit-btn {
         position: absolute;
         top: 10px;
@@ -1179,7 +1187,6 @@
         min-height: 185px;
       }
 
-      /* editor toolbar */
       .pilot-toolbar {
         display: flex;
         align-items: center;
@@ -1210,7 +1217,7 @@
         font-weight: 800;
       }
 
-      /* Fireworks canvas */
+      /* Fireworks canvas (card-local) */
       .fireworks-canvas {
         position: absolute;
         inset: 0;
@@ -1340,17 +1347,7 @@
         }
       }
 
-      /* === Topbar mobile compact + auto-hide === */
-      .topbar {
-        transition: transform 0.25s ease, opacity 0.25s ease;
-        will-change: transform;
-      }
-      .topbar.hide {
-        transform: translateY(-140%);
-        opacity: 0;
-      }
-
-      /* ลดขนาดบนมือถือ */
+      /* มือถือ: ท็อปบาร์เล็กลง */
       @media (max-width: 720px) {
         .topbar {
           top: 8px;
@@ -1390,8 +1387,6 @@
         transform-origin: 50% 50%;
         will-change: transform, filter;
       }
-
-      /* เล่นเอฟเฟกต์เมื่อมีคลาส .ignite */
       .topbar .brand.ignite img {
         animation: ensoSpin 2s cubic-bezier(0.2, 0.9, 0.2, 1) both;
         filter: saturate(1.35) drop-shadow(0 0 6px #ff8a00)
@@ -1420,8 +1415,6 @@
         pointer-events: none;
         animation: flare 2s ease-out forwards;
       }
-
-      /* keyframes */
       @keyframes ensoSpin {
         0% {
           transform: rotate(0deg) scale(0.96);
@@ -1434,7 +1427,7 @@
         }
         100% {
           transform: rotate(1080deg);
-        } /* 3 รอบใน 2 วิ */
+        }
       }
       @keyframes flare {
         0% {
@@ -1449,8 +1442,6 @@
           transform: translate(-50%, -50%) scale(1.35);
         }
       }
-
-      /* เคารพผู้ใช้ที่ปิดอนิเมชัน */
       @media (prefers-reduced-motion: reduce) {
         .topbar .brand.ignite img {
           animation: none;
@@ -1459,8 +1450,6 @@
           display: none;
         }
       }
-
-      /* ให้โลโก้เล็กลงบนมือถือ (เข้ากับ CSS เดิมของคุณ) */
       @media (max-width: 720px) {
         .topbar .brand img {
           height: 22px;
@@ -1485,7 +1474,6 @@
         width: 100%;
         height: 100%;
       }
-
       .fw-banner {
         position: absolute;
         inset: 0;
@@ -1532,89 +1520,232 @@
           transform: scale(1);
         }
       }
-
-      /* เคารพ reduced-motion */
       @media (prefers-reduced-motion: reduce) {
         .fw-canvas {
           display: none;
         }
       }
 
-/* === Navigator Preview (embed + fallback) === */
-.nav-preview{
-  border:2px solid var(--blue); border-radius:var(--radius-2xl);
-  box-shadow:var(--shadow), inset 0 0 0 1px var(--blue-inner);
-  overflow:hidden; position:relative;
-}
-.nav-toolbar{
-  height:42px; display:flex; align-items:center; gap:10px;
-  padding:8px 12px; border-bottom:1px solid var(--line);
-  background:rgba(11,20,34,.6); backdrop-filter: blur(10px) saturate(140%);
-}
-.nav-toolbar .dots i{
-  width:10px;height:10px;border-radius:999px;display:inline-block;margin-right:6px;
-  background:#ff5f56;
-}
-.nav-toolbar .dots i:nth-child(2){ background:#ffbd2e }
-.nav-toolbar .dots i:nth-child(3){ background:#27c93f }
-.nav-toolbar .addr{
-  flex:1; border:1px solid var(--line); border-radius:999px; padding:6px 10px;
-  font-size:12px; color:var(--muted); background:rgba(255,255,255,.06);
-  overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
-}
+      /* === Navigator Preview (embed + fallback) === */
+      .nav-preview {
+        border: 2px solid var(--blue);
+        border-radius: var(--radius-2xl);
+        box-shadow: var(--shadow), inset 0 0 0 1px var(--blue-inner);
+        overflow: hidden;
+        position: relative;
+      }
+      .nav-toolbar {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(11, 20, 34, 0.6);
+        backdrop-filter: blur(10px) saturate(140%);
+      }
+      .nav-toolbar .dots i {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        display: inline-block;
+        margin-right: 6px;
+        background: #ff5f56;
+      }
+      .nav-toolbar .dots i:nth-child(2) {
+        background: #ffbd2e;
+      }
+      .nav-toolbar .dots i:nth-child(3) {
+        background: #27c93f;
+      }
+      .nav-toolbar .addr {
+        flex: 1;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 12px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .nav-frame {
+        width: 100%;
+        height: clamp(320px, 60vh, 760px);
+        border: 0;
+        display: block;
+      }
+      .nav-fallback {
+        position: absolute;
+        inset: 42px 0 0 0;
+        display: none;
+        padding: 16px;
+        background: linear-gradient(
+          180deg,
+          rgba(9, 11, 20, 0.85),
+          rgba(9, 11, 20, 0.95)
+        );
+      }
+      .nav-fallback.show {
+        display: block;
+      }
+      .mock-app {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .mock-app header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .mock-app header .brand {
+        font-weight: 900;
+        letter-spacing: 0.02em;
+      }
+      .mock-app header .tabs span {
+        font-weight: 800;
+        font-size: 12px;
+        margin-left: 10px;
+        opacity: 0.6;
+        cursor: default;
+      }
+      .mock-app header .tabs .on {
+        opacity: 1;
+        color: #ffd76a;
+      }
+      .mock-body {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 360px;
+      }
+      .mock-body aside {
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px;
+      }
+      .side-title {
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+        font-weight: 800;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chips span {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 6px 8px;
+        border-radius: 10px;
+        font-weight: 800;
+        font-size: 12px;
+      }
+      .links {
+        list-style: none;
+        margin: 6px 0 0;
+        padding: 0;
+      }
+      .links li {
+        padding: 6px 0;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+      }
+      .mock-body main {
+        padding: 14px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 900px) {
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 640px) {
+        .mock-body {
+          grid-template-columns: 1fr;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+      .cards .card {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 14px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.06);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .cards .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+      }
+      .cards .card b {
+        display: block;
+        font-weight: 900;
+        margin-bottom: 4px;
+      }
+      .cards .card small {
+        color: var(--muted);
+      }
+      .nav-fallback .hint {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
 
-.nav-frame{ width:100%; height:clamp(320px, 60vh, 760px); border:0; display:block; }
-
-/* fallback */
-.nav-fallback{
-  position:absolute; inset:42px 0 0 0; display:none; padding:16px;
-  background:linear-gradient(180deg, rgba(9,11,20,.85), rgba(9,11,20,.95));
-}
-.nav-fallback.show{ display:block; }
-.mock-app{
-  border:1px solid rgba(255,255,255,.14); border-radius:16px; overflow:hidden;
-  background:rgba(255,255,255,.04);
-}
-.mock-app header{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.04);
-}
-.mock-app header .brand{ font-weight:900; letter-spacing:.02em }
-.mock-app header .tabs span{
-  font-weight:800; font-size:12px; margin-left:10px; opacity:.6; cursor:default;
-}
-.mock-app header .tabs .on{ opacity:1; color:#FFD76A }
-.mock-body{ display:grid; grid-template-columns:260px 1fr; min-height:360px }
-.mock-body aside{ border-right:1px solid rgba(255,255,255,.10); padding:12px }
-.side-title{ font-size:12px; color:var(--muted); letter-spacing:.08em; margin-bottom:6px; font-weight:800 }
-.chips{ display:flex; flex-wrap:wrap; gap:8px }
-.chips span{
-  border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06);
-  padding:6px 8px; border-radius:10px; font-weight:800; font-size:12px
-}
-.links{ list-style:none; margin:6px 0 0; padding:0 }
-.links li{ padding:6px 0; border-bottom:1px dashed rgba(255,255,255,.08) }
-.mock-body main{ padding:14px }
-.cards{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
-}
-@media (max-width:900px){ .cards{ grid-template-columns:repeat(2,1fr) } }
-@media (max-width:640px){
-  .mock-body{ grid-template-columns:1fr }
-  .cards{ grid-template-columns:1fr }
-}
-.cards .card{
-  border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:14px;
-  background:rgba(255,255,255,.06);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.cards .card:hover{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(0,0,0,.28) }
-.cards .card b{ display:block; font-weight:900; margin-bottom:4px }
-.cards .card small{ color:var(--muted) }
-.nav-fallback .hint{ display:block; margin-top:10px; color:var(--muted); font-size:12px }
-
-
+      /* === TOPBAR: spin border only (border-image) === */
+      @property --ring-angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+      .topbar {
+        --ring-w: 2px;
+        --ring-speed: 3.5s;
+      }
+      .topbar.spin-border {
+        border: var(--ring-w) solid transparent;
+        border-radius: var(--radius-2xl);
+        border-image: conic-gradient(
+            from var(--ring-angle),
+            #3b82f6 0%,
+            #a78bfa 45%,
+            #ffc72c 80%,
+            #3b82f6 100%
+          )
+          1;
+        animation: ring-rotate var(--ring-speed) linear infinite;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+          0 0 10px rgba(255, 199, 44, 0.18),
+          0 0 18px rgba(167, 139, 250, 0.14);
+      }
+      @keyframes ring-rotate {
+        to {
+          --ring-angle: 360deg;
+        }
+      }
+      @media (max-width: 720px) {
+        .topbar {
+          --ring-w: 1px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .topbar.spin-border {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1622,29 +1753,37 @@
       <!-- Topbar -->
       <header class="topbar glass reveal">
         <div class="wrap">
-          <a class="brand" href="#home"><img
+          <a class="brand" href="#home"
+            ><img
               src="https://framerusercontent.com/images/FPnvhl6ocJ58PYgLaYri68xb6cQ.webp"
-              alt="Enso Logo" /></a>
+              alt="Enso Logo"
+          /></a>
           <nav class="nav">
-            <a href="#price">$ENSO</a><a href="#tge">TGE</a><a
-              href="#coinlist">CoinList</a><a href="#events">Events</a>
-            <a href="#why">Why Enso</a><a href="#build">Shortcuts</a><a
-              href="#roles">Roles</a>
+            <a href="#price">$ENSO</a><a href="#tge">TGE</a
+            ><a href="#coinlist">CoinList</a><a href="#events">Events</a>
+            <a href="#why">Why Enso</a><a href="#build">Shortcuts</a
+            ><a href="#roles">Roles</a>
             <a class="accent-gold" href="#pilots">Pilots</a>
             <a
               href="https://docs.enso.build/"
               target="_blank"
-              rel="noreferrer noopener">Docs</a>
+              rel="noreferrer noopener"
+              >Docs</a
+            >
             <a
               class="accent-purple"
               href="https://navigator.enso.build/"
               target="_blank"
-              rel="noreferrer noopener">Navigator</a>
+              rel="noreferrer noopener"
+              >Navigator</a
+            >
             <a
               class="accent-purple"
               href="https://speedrun.enso.build/"
               target="_blank"
-              rel="noreferrer noopener">Speedrun</a>
+              rel="noreferrer noopener"
+              >Speedrun</a
+            >
           </nav>
         </div>
       </header>
@@ -1663,22 +1802,30 @@
               class="button gold"
               href="https://www.enso.build/"
               target="_blank"
-              rel="noreferrer noopener">Start with Enso</a>
+              rel="noreferrer noopener"
+              >Start with Enso</a
+            >
             <a
               class="button gold"
               href="https://navigator.enso.build/"
               target="_blank"
-              rel="noreferrer noopener">Navigator</a>
+              rel="noreferrer noopener"
+              >Navigator</a
+            >
             <a
               class="button"
               href="https://docs.enso.build/"
               target="_blank"
-              rel="noreferrer noopener">Read the Docs</a>
+              rel="noreferrer noopener"
+              >Read the Docs</a
+            >
             <a
               class="button"
               href="https://x.com/EnsoBuild"
               target="_blank"
-              rel="noreferrer noopener">Follow @EnsoBuild</a>
+              rel="noreferrer noopener"
+              >Follow @EnsoBuild</a
+            >
           </div>
         </div>
       </section>
@@ -1693,12 +1840,13 @@
             border-radius: var(--radius-2xl);
             box-shadow: var(--shadow), inset 0 0 0 1px var(--blue-inner);
             padding: 22px;
-          ">
+          "
+        >
           <div class="wrap">
             <div class="meme">
-              WEN TGE? 🤔 —
-              <span style="color: #ffd76a">Q3 2025 (Occurred within this
-                period)</span>
+              WEN TGE? 🤔 — <span style="color: #ffd76a"
+                >Q3 2025 (Occurred within this period)</span
+              >
             </div>
             <div class="countdown" aria-live="polite">
               <div class="time-box gold">
@@ -1718,17 +1866,18 @@
                 <div class="lab">SECONDS</div>
               </div>
             </div>
-            <small>Countdown ends at the last moment of Q3 2025 (Sep 30,
-              23:59:59
-              UTC).</small>
-
+            <small
+              >Countdown ends at the last moment of Q3 2025 (Sep 30, 23:59:59
+              UTC).</small
+            >
             <div class="cta-row" style="margin-top: 12px">
               <button
-                id="btnTgeWhat"
+                id="btnCongrats"
                 class="button gold"
                 type="button"
-                aria-label="เมื่อถึงวัน TGE จะเกิดอะไรขึ้น">
-                congratulations! 🎉
+                aria-label="congratulations"
+              >
+                congratulations! 🥳
               </button>
             </div>
           </div>
@@ -1836,17 +1985,23 @@
             class="button gold"
             href="https://coinlist.co/enso"
             target="_blank"
-            rel="noreferrer noopener">View on CoinList</a>
+            rel="noreferrer noopener"
+            >View on CoinList</a
+          >
           <a
             class="button"
             href="https://blog.coinlist.co/announcing-the-enso-token-sale-on-coinlist/"
             target="_blank"
-            rel="noreferrer noopener">Sale Terms</a>
+            rel="noreferrer noopener"
+            >Sale Terms</a
+          >
           <a
             class="button"
             href="https://coinlist.co/help/how-will-the-token-sale-work-d67ae3df-ff53-4f8c-8df8-571a38f899d0"
             target="_blank"
-            rel="noreferrer noopener">Allocation Explainer</a>
+            rel="noreferrer noopener"
+            >Allocation Explainer</a
+          >
         </div>
       </section>
 
@@ -1877,7 +2032,7 @@
         </div>
       </section>
 
-      <!-- Why / Roles / Stats (unchanged) -->
+      <!-- Why / Roles / Stats -->
       <section id="why" class="section reveal">
         <div class="eyebrow">Role overview</div>
         <h2>Empowering the Enso Role System.</h2>
@@ -1973,7 +2128,8 @@
 POST /shortcuts/route
 { "from":{"chain":"ethereum","asset":"USDC"},
   "to":{"chain":"ethereum","asset":"wstETH"},
-  "amount":"1000" }</pre>
+  "amount":"1000" }</pre
+            >
           </article>
           <article class="api glass">
             <h4>Bundling API</h4>
@@ -1986,7 +2142,8 @@ POST /shortcuts/bundle
 { "actions":[
   {"swap":{"from":"USDC","to":"ETH"}},
   {"stake":{"protocol":"lido"}}
-] }</pre>
+] }</pre
+            >
           </article>
           <article class="api glass">
             <h4>Plug-and-Play Templates</h4>
@@ -2010,30 +2167,31 @@ npm i @enso/widgets
             <div class="addr">https://navigator.enso.build/</div>
           </div>
 
-          <!-- live embed (อาจถูกบล็อกโดย X-Frame-Options ของปลายทาง) -->
+          <!-- live embed (may be blocked by X-Frame-Options) -->
           <iframe
             class="nav-frame"
             src="https://navigator.enso.build/"
             loading="lazy"
             referrerpolicy="no-referrer"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
-          </iframe>
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+          ></iframe>
 
-          <!-- fallback UI (โชว์เมื่อฝังไม่ได้) -->
+          <!-- fallback UI -->
           <div class="nav-fallback" id="navFallback" aria-live="polite">
             <div class="mock-app">
               <header>
                 <div class="brand">Navigator</div>
                 <div class="tabs">
-                  <span
-                    class="on">Shortcuts</span><span>Routes</span><span>Activity</span>
+                  <span class="on">Shortcuts</span><span>Routes</span
+                  ><span>Activity</span>
                 </div>
               </header>
               <div class="mock-body">
                 <aside>
                   <div class="side-title">Chains</div>
                   <div class="chips">
-                    <span>Ethereum</span><span>Arbitrum</span><span>Base</span><span>Solana</span>
+                    <span>Ethereum</span><span>Arbitrum</span><span>Base</span
+                    ><span>Solana</span>
                   </div>
                   <div class="side-title" style="margin-top: 10px">
                     Templates
@@ -2067,8 +2225,7 @@ npm i @enso/widgets
                 </main>
               </div>
             </div>
-            <small class="hint">ไม่สามารถฝังหน้าเว็บได้ —
-              แสดงหน้าจอจำลองแทน</small>
+            <small class="hint">ไม่สามารถฝังหน้าเว็บได้ — แสดงหน้าจอจำลองแทน</small>
           </div>
         </div>
       </section>
@@ -2077,10 +2234,7 @@ npm i @enso/widgets
       <section id="pilots" class="section">
         <div class="eyebrow">Enso global community</div>
         <div class="pilot-toolbar">
-          <button
-            class="btn-primary"
-            id="btnAddPilot"
-            aria-label="Add a new pilot">
+          <button class="btn-primary" id="btnAddPilot" aria-label="Add a new pilot">
             Add Pilot
           </button>
           <span class="tip">Tip: Drag cards to reorder</span>
@@ -2094,26 +2248,27 @@ npm i @enso/widgets
           role="dialog"
           aria-modal="true"
           aria-labelledby="pilotModalTitle"
-          aria-hidden="true">
+          aria-hidden="true"
+        >
           <div class="backdrop"></div>
           <div class="panel">
             <h3 id="pilotModalTitle">Add Pilot</h3>
             <div class="form">
               <div>
-                <label for="fName">Name</label><input id="fName"
-                  placeholder="e.g., bc1pBITHERUMN" />
+                <label for="fName">Name</label
+                ><input id="fName" placeholder="e.g., bc1pBITHERUMN" />
               </div>
               <div>
-                <label for="fStatus">Status</label><input id="fStatus"
-                  placeholder="Active" />
+                <label for="fStatus">Status</label
+                ><input id="fStatus" placeholder="Active" />
               </div>
               <div>
-                <label for="fSince">Since (Year)</label><input id="fSince"
-                  placeholder="2023" />
+                <label for="fSince">Since (Year)</label
+                ><input id="fSince" placeholder="2023" />
               </div>
               <div>
-                <label for="fBadges">Badges (comma separated)</label><input
-                  id="fBadges" placeholder="@Pilot,@Community" />
+                <label for="fBadges">Badges (comma separated)</label
+                ><input id="fBadges" placeholder="@Pilot,@Community" />
               </div>
             </div>
             <div class="row">
@@ -2126,9 +2281,7 @@ npm i @enso/widgets
 
       <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
       <footer class="footer">
-        <div class="container">
-          enso shortcut community project contributors bc1pBITHERUMN ⚡✨
-        </div>
+        <div class="container">enso shortcut community project contributors bc1pBITHERUMN ⚡✨</div>
       </footer>
     </div>
 
@@ -2192,16 +2345,14 @@ npm i @enso/widgets
           "resize",
           () => {
             handle();
-            computeStickyTop(); // อัปเดตระยะ scroll-margin ของ section
+            computeStickyTop();
           },
           { passive: true }
         );
-
-        // เรียกตอนโหลดครั้งแรกเผื่อเปิดมาด้วยตำแหน่งเลื่อน
         handle();
       })();
 
-      /* reveal IO */
+      /* reveal on view */
       const io = new IntersectionObserver(
         (es) => {
           es.forEach((e) => {
@@ -2250,9 +2401,7 @@ npm i @enso/widgets
         },
         { threshold: 0.6 }
       );
-      document
-        .querySelectorAll(".count")
-        .forEach((el) => counterIO.observe(el));
+      document.querySelectorAll(".count").forEach((el) => counterIO.observe(el));
 
       /* Country chips */
       const COUNTRIES = [
@@ -2278,14 +2427,12 @@ npm i @enso/widgets
         COUNTRIES.forEach((c) => {
           const el = document.createElement("span");
           el.className = "country-chip" + (c.active ? " active" : "");
-          el.innerHTML = `<span class="flag" title="${c.code}">${
-            c.flag
-          }</span><span class="count">${c.count.toLocaleString()}</span>`;
+          el.innerHTML = `<span class="flag" title="${c.code}">${c.flag}</span><span class="count">${c.count.toLocaleString()}</span>`;
           chips.appendChild(el);
         });
       }
 
-      /* avatar helpers */
+      /* avatars */
       function hashStr(s) {
         let h = 2166136261 >>> 0;
         for (let i = 0; i < s.length; i++) {
@@ -2377,7 +2524,7 @@ npm i @enso/widgets
           : avatarEmoji(name);
       }
 
-      /* fireworks */
+      /* fireworks (card-local) */
       function launchFireworks(card, x, y) {
         const cvs = document.createElement("canvas");
         cvs.className = "fireworks-canvas";
@@ -2610,20 +2757,14 @@ npm i @enso/widgets
           <img class="avatar" src="${genAvatar(p.name)}" alt="${p.name}">
           <img class="helmet" src="/images/pilot-helmet.png" alt="Pilot Helmet" onerror="this.src=window.ENSO_HELMET_SVG; this.onerror=null;">
         </div>
-        <div class="info"><h3>${
-          p.name
-        }</h3><div class="role">Pilot — Enso</div></div>
+        <div class="info"><h3>${p.name}</h3><div class="role">Pilot — Enso</div></div>
       </div>
       <div class="card-info">
-        <div><strong>Status:</strong> ${
-          p.info.status
-        } &nbsp;•&nbsp; <strong>Since:</strong> ${p.info.since}</div>
+        <div><strong>Status:</strong> ${p.info.status} &nbsp;•&nbsp; <strong>Since:</strong> ${p.info.since}</div>
         <div class="pills">${p.info.badges
           .map(
             (b) =>
-              `<span class="pill ${
-                b === "@Pilot" ? "pill-pilot" : ""
-              }">${b}</span>`
+              `<span class="pill ${b === "@Pilot" ? "pill-pilot" : ""}">${b}</span>`
           )
           .join("")}</div>
       </div>
@@ -2668,7 +2809,7 @@ npm i @enso/widgets
       });
       renderPilots(PILOTS);
 
-      /* Modal logic (Add/Edit) */
+      /* Modal logic */
       const modal = document.getElementById("pilotModal");
       const panel = modal.querySelector(".panel");
       const modalTitle = document.getElementById("pilotModalTitle");
@@ -2738,9 +2879,7 @@ npm i @enso/widgets
         openModal();
       }
 
-      document
-        .getElementById("btnAddPilot")
-        ?.addEventListener("click", openAdd);
+      document.getElementById("btnAddPilot")?.addEventListener("click", openAdd);
       document.getElementById("btnSavePilot")?.addEventListener("click", () => {
         const name = (fName.value || "").trim();
         if (!name) {
@@ -2826,7 +2965,7 @@ npm i @enso/widgets
         setInterval(tick, 1000);
       })();
 
-      /* Events */
+      /* Events demo */
       (() => {
         const BY = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
         const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -2850,55 +2989,13 @@ npm i @enso/widgets
         const endTomorrow = new Date(startTomorrow);
         endTomorrow.setHours(23, 59, 59, 999);
         const BASE = [
-          {
-            title: "DAILY Rumble Royale",
-            emoji: "🎮",
-            desc: "Daily brawl — Monday to Friday.",
-            days: [1, 2, 3, 4, 5],
-            time: "17:00",
-          },
-          {
-            title: "GEOGUESSR",
-            emoji: "🗺️",
-            desc: "Link drops 5 minutes before start in #enso-plaza.",
-            days: [2],
-            time: "19:00",
-          },
-          {
-            title: "GARTIC",
-            emoji: "✏️",
-            desc: "Guess the drawing — every Wednesday.",
-            days: [3],
-            time: "19:00",
-          },
-          {
-            title: "ENSO POKER (Thursday)",
-            emoji: "♠️",
-            desc: "Register with Discord handle • Connect Discord • No Re-Entry / Rebuy.",
-            days: [4],
-            time: "19:00",
-          },
-          {
-            title: "ENSO CHESS TOURNAMENT",
-            emoji: "♟️",
-            desc: "45-minute arena decides the winner.",
-            days: [6],
-            time: "19:00",
-          },
-          {
-            title: "ENSO POKER (Sunday)",
-            emoji: "♦️",
-            desc: "Sunday tournament — register with Discord handle.",
-            days: [0],
-            time: "19:00",
-          },
-          {
-            title: "QUIZ",
-            emoji: "❓",
-            desc: "Weekly quiz in #enso-plaza.",
-            days: [1],
-            time: "19:00",
-          },
+          { title: "DAILY Rumble Royale", emoji: "🎮", desc: "Daily brawl — Monday to Friday.", days: [1,2,3,4,5], time: "17:00" },
+          { title: "GEOGUESSR", emoji: "🗺️", desc: "Link drops 5 minutes before start in #enso-plaza.", days: [2], time: "19:00" },
+          { title: "GARTIC", emoji: "✏️", desc: "Guess the drawing — every Wednesday.", days: [3], time: "19:00" },
+          { title: "ENSO POKER (Thursday)", emoji: "♠️", desc: "Register with Discord handle • Connect Discord • No Re-Entry / Rebuy.", days: [4], time: "19:00" },
+          { title: "ENSO CHESS TOURNAMENT", emoji: "♟️", desc: "45-minute arena decides the winner.", days: [6], time: "19:00" },
+          { title: "ENSO POKER (Sunday)", emoji: "♦️", desc: "Sunday tournament — register with Discord handle.", days: [0], time: "19:00" },
+          { title: "QUIZ", emoji: "❓", desc: "Weekly quiz in #enso-plaza.", days: [1], time: "19:00" },
         ];
         const specialTime = new Date(startTomorrow);
         specialTime.setHours(20, 0, 0, 0);
@@ -2949,10 +3046,7 @@ npm i @enso/widgets
           return nextRecurring(ev.days, ev.time, n);
         }
         function daysAbbrev(days) {
-          if (
-            days?.length === 5 &&
-            days.every((d) => [1, 2, 3, 4, 5].includes(d))
-          )
+          if (days?.length === 5 && days.every((d) => [1,2,3,4,5].includes(d)))
             return "MO–FR";
           return (days || []).map((d) => BY[d]).join(", ");
         }
@@ -3045,7 +3139,6 @@ npm i @enso/widgets
         if (!bucketTomorrow.childElementCount) {
           bucketTomorrow.innerHTML = `<div class="mini"><div class="left"><span class="name">— No events tomorrow —</span></div></div>`;
         }
-        /* weekly calendar */
         const weekGrid = document.getElementById("weekGrid");
         if (weekGrid) {
           const dayOfWeek = now.getDay();
@@ -3092,27 +3185,19 @@ npm i @enso/widgets
           const img = brand?.querySelector("img");
           if (!brand || !img) return;
 
-          // ให้ halo ปรับตามขนาดโลโก้จริง (เดสก์ท็อป/มือถือ)
           const h = img.getBoundingClientRect().height || 28;
           brand.style.setProperty("--logo-h", h + "px");
 
-          // รีสตาร์ทเอฟเฟกต์ทุกครั้งที่โหลดหน้า
           brand.classList.remove("ignite");
-          // force reflow เพื่อให้ animation เล่นใหม่
-          void brand.offsetWidth;
+          void brand.offsetWidth; // reflow
           brand.classList.add("ignite");
 
-          // เอา class ออกหลังครบ 2 วิ (หยุดหมุน)
           setTimeout(() => brand.classList.remove("ignite"), 2000);
         }
-
-        // เล่นเมื่อโหลด (รวมกรณี back/forward cache)
         window.addEventListener("DOMContentLoaded", igniteLogo);
         window.addEventListener("pageshow", (e) => {
           if (e.persisted) igniteLogo();
         });
-
-        // อัปเดตเมื่อรีไซส์ (ถ้าโลโก้เปลี่ยนขนาด)
         window.addEventListener(
           "resize",
           () => {
@@ -3127,54 +3212,33 @@ npm i @enso/widgets
         );
       })();
 
-      // === Mega fireworks + SOON banner ===
+      /* Ensure global megaFireworks() exists */
       (function () {
-        const btn = document.getElementById("btnTgeWhat");
-        if (!btn) return;
+        if (typeof window.megaFireworks === "function") return;
 
-        btn.addEventListener("click", megaFireworks);
-
-        function megaFireworks() {
-          // ล้างของเก่าถ้ามี
+        window.megaFireworks = function () {
           document.querySelectorAll(".fw-overlay").forEach((n) => n.remove());
 
           const wrap = document.createElement("div");
           wrap.className = "fw-overlay";
-
           const cvs = document.createElement("canvas");
           cvs.className = "fw-canvas";
-          wrap.appendChild(cvs);
-
           const banner = document.createElement("div");
           banner.className = "fw-banner";
           banner.innerHTML = "<b>SOON!!!</b>";
+          wrap.appendChild(cvs);
           wrap.appendChild(banner);
-
           document.body.appendChild(wrap);
 
-          // ถ้าผู้ใช้ปิด motion ก็โชว์เฉพาะข้อความ
-          const reduce =
-            window.matchMedia &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          if (reduce) {
-            setTimeout(() => {
-              wrap.classList.add("fadeout");
-              setTimeout(() => wrap.remove(), 320);
-            }, 1000);
-            return;
-          }
-
           const ctx = cvs.getContext("2d");
-          const dpr = Math.max(1, window.devicePixelRatio || 1);
-
+          const dpr = Math.max(1, devicePixelRatio || 1);
           function resize() {
             cvs.width = Math.floor(innerWidth * dpr);
             cvs.height = Math.floor(innerHeight * dpr);
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
           }
           resize();
-
-          ctx.globalCompositeOperation = "lighter";
+          addEventListener("resize", resize, { once: true, passive: true });
 
           const colors = [
             "#7DD3FC",
@@ -3183,16 +3247,15 @@ npm i @enso/widgets
             "#22D3EE",
             "#FFD76A",
             "#FFFFFF",
-            "#ff6b6b",
             "#14f195",
+            "#ff6b6b",
           ];
           const parts = [];
-
           function burst(x, y, power = 1) {
-            const n = (180 * power) | 0;
+            const n = (160 * power) | 0;
             for (let i = 0; i < n; i++) {
-              const ang = Math.random() * Math.PI * 2;
-              const sp = (3 + Math.random() * 7) * (1 + power * 0.4);
+              const ang = Math.random() * Math.PI * 2,
+                sp = (2.6 + Math.random() * 6.2) * (1 + power * 0.35);
               parts.push({
                 x,
                 y,
@@ -3201,209 +3264,299 @@ npm i @enso/widgets
                 vx: Math.cos(ang) * sp,
                 vy: Math.sin(ang) * sp,
                 age: 0,
-                life: 900 + Math.random() * 900,
-                size: 1.6 + Math.random() * 3.2,
+                life: 800 + Math.random() * 900,
+                size: 1.4 + Math.random() * 3,
                 color: colors[(Math.random() * colors.length) | 0],
-                drag: 0.992 - Math.random() * 0.015,
-                grav: 0.04 + Math.random() * 0.03,
-                sparkle: Math.random() < 0.5,
+                drag: 0.992 - Math.random() * 0.012,
+                grav: 0.035 + Math.random() * 0.02,
+                sparkle: Math.random() < 0.45,
               });
             }
           }
-
-          // จุดระเบิด: กลางจอ + สุ่มรอบ ๆ
-          burst(innerWidth * 0.5, innerHeight * 0.45, 1.6);
-          for (let b = 0; b < 5; b++) {
+          burst(innerWidth * 0.5, innerHeight * 0.45, 1.5);
+          for (let i = 0; i < 5; i++)
             burst(
               Math.random() * innerWidth,
               innerHeight * (0.25 + 0.5 * Math.random()),
-              1.2
+              1.1
             );
-          }
 
           let last = performance.now();
-          const stopAt = last + 2600; // ยิงใหญ่ ~2.6s
-          let raf;
-
-          function tick(now) {
+          const stopAt = last + 2600;
+          ctx.globalCompositeOperation = "lighter";
+          (function tick(now) {
             const dt = now - last;
             last = now;
             ctx.clearRect(0, 0, innerWidth, innerHeight);
-
             for (const p of parts) {
               p.age += dt;
-              if (p.age < p.life) {
-                p.px = p.x;
-                p.py = p.y;
-                p.vx *= p.drag;
-                p.vy = p.vy * p.drag + p.grav;
-                p.x += p.vx;
-                p.y += p.vy;
-
-                const a = Math.max(0, 1 - p.age / p.life);
-                ctx.globalAlpha = Math.max(a, 0.25);
-                ctx.strokeStyle = p.color;
-                ctx.lineWidth = p.size * 0.55;
+              if (p.age >= p.life) continue;
+              p.px = p.x;
+              p.py = p.y;
+              p.vx *= p.drag;
+              p.vy = p.vy * p.drag + p.grav;
+              p.x += p.vx;
+              p.y += p.vy;
+              const a = Math.max(0, 1 - p.age / p.life);
+              ctx.globalAlpha = Math.max(a, 0.25);
+              ctx.strokeStyle = p.color;
+              ctx.lineWidth = p.size * 0.55;
+              ctx.beginPath();
+              ctx.moveTo(p.px, p.py);
+              ctx.lineTo(p.x, p.y);
+              ctx.stroke();
+              if (p.sparkle && (p.age | 0) % 80 < 40) {
+                ctx.globalAlpha = Math.max(a, 0.35);
+                ctx.fillStyle = p.color;
                 ctx.beginPath();
-                ctx.moveTo(p.px, p.py);
-                ctx.lineTo(p.x, p.y);
-                ctx.stroke();
-
-                if (p.sparkle && (p.age | 0) % 80 < 40) {
-                  ctx.globalAlpha = Math.max(a, 0.35);
-                  ctx.fillStyle = p.color;
-                  ctx.beginPath();
-                  ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                  ctx.fill();
-                }
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
               }
             }
-
-            if (now < stopAt) {
-              raf = requestAnimationFrame(tick);
-            } else {
+            if (now < stopAt) requestAnimationFrame(tick);
+            else {
               wrap.classList.add("fadeout");
-              cancelAnimationFrame(raf);
               setTimeout(() => wrap.remove(), 320);
             }
-          }
-          requestAnimationFrame(tick);
-
-          // ปรับขนาดเมื่อรีไซส์ครั้งถัดไป
-          window.addEventListener("resize", resize, {
-            once: true,
-            passive: true,
-          });
-        }
+          })(last);
+        };
       })();
 
-      /* Navigator preview: ซ่อน fallback เมื่อ iframe โหลดได้ */
-(function(){
-  const frame = document.querySelector('#navPreview .nav-frame');
-  const fb = document.getElementById('navFallback');
-  if(!frame || !fb) return;
+      /* Navigator preview: show fallback if iframe blocked */
+      (function () {
+        const frame = document.querySelector("#navPreview .nav-frame");
+        const fb = document.getElementById("navFallback");
+        if (!frame || !fb) return;
 
-  let shown = false;
-  const showFB = ()=>{ if(!shown){ fb.classList.add('show'); shown = true; } };
+        let shown = false;
+        const showFB = () => {
+          if (!shown) {
+            fb.classList.add("show");
+            shown = true;
+          }
+        };
+        frame.addEventListener("load", () => {
+          setTimeout(() => {
+            const r = frame.getBoundingClientRect();
+            if (r.width === 0 || r.height === 0) showFB();
+          }, 300);
+        });
+        setTimeout(() => {
+          if (!shown) showFB();
+        }, 1200);
+      })();
 
-  // ถ้าโหลดสำเร็จ ให้ซ่อน fallback (ค่าเริ่มต้นคือซ่อนไว้)
-  frame.addEventListener('load', ()=> {
-    // ถ้าโดนบล็อกจริง ๆ เบราว์เซอร์มักไม่แสดงคอนเทนต์ -> setTimeout สำรอง
-    setTimeout(()=> {
-      // ลองเช็คขนาด content (แบบหยาบ) ถ้าสูง/กว้างเป็นศูนย์ ให้โชว์ fallback
-      const r = frame.getBoundingClientRect();
-      if (r.width === 0 || r.height === 0) showFB();
-      // ถ้าโหลดปกติ ก็ไม่ต้องทำอะไร (fallback ถูกซ่อนไว้)
-    }, 300);
-  });
+      /* Funny BOOM on "congratulations!" + fullscreen fireworks */
+      (function () {
+        const btn = document.getElementById("btnCongrats");
+        if (!btn) return;
 
-  // หาก 1.2s แล้วยังไม่ load เลย ให้แสดง fallback
-  setTimeout(()=>{ if(!shown) showFB(); }, 1200);
-})();
+        let ctx;
+        async function ensureCtx() {
+          ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+          if (ctx.state === "suspended") await ctx.resume();
+        }
 
+        function playFunnyBoom() {
+          ensureCtx()
+            .then(() => {
+              const t = ctx.currentTime;
+              const dur = 1.2;
 
-/* === F1 engine rev on page load (autoplay-safe) === */
-(function(){
-  // เคารพผู้ใช้ที่ไม่ชอบเอฟเฟกต์หนัก ๆ
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return;
+              const comp = new DynamicsCompressorNode(ctx, {
+                threshold: -18,
+                knee: 30,
+                ratio: 2.5,
+                attack: 0.003,
+                release: 0.2,
+              });
+              const delay = new DelayNode(ctx, { delayTime: 0.08 });
+              const fb = ctx.createGain();
+              fb.gain.value = 0.25;
+              delay.connect(fb);
+              fb.connect(delay);
 
-  let played = false, ctx;
+              const master = ctx.createGain();
+              master.gain.setValueAtTime(0.0001, t);
+              master.gain.exponentialRampToValueAtTime(0.35, t + 0.06); // softer overall level
+              master.gain.exponentialRampToValueAtTime(0.01, t + dur + 0.25);
 
-  function ensureContext(){
-    ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
-    if (ctx.state === 'suspended') return ctx.resume();
-    return Promise.resolve();
-  }
+              comp.connect(delay);
+              delay.connect(master);
+              master.connect(ctx.destination);
 
-  function playF1(){
-    ensureContext().then(()=>{
-      const t0 = ctx.currentTime;
-      const dur = 2.1;                 // ความยาวเสียง ~2.1s
+              const pan = new StereoPannerNode(ctx, {
+                pan: Math.random() * 0.6 - 0.3,
+              });
+              pan.connect(comp);
 
-      // Master
-      const master = ctx.createGain();
-      master.gain.setValueAtTime(0.0001, t0);
-      master.gain.linearRampToValueAtTime(0.9, t0 + 0.25); // ปรับความดังที่นี่ (0.2–1.0)
-      master.gain.exponentialRampToValueAtTime(0.05, t0 + dur - 0.05);
-      master.connect(ctx.destination);
+              // THUMP
+              const th = ctx.createOscillator();
+              th.type = "sine";
+              th.frequency.setValueAtTime(160, t);
+              th.frequency.exponentialRampToValueAtTime(60, t + 0.35);
+              const thG = ctx.createGain();
+              thG.gain.setValueAtTime(0.0001, t);
+              thG.gain.exponentialRampToValueAtTime(0.9, t + 0.03);
+              thG.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+              const thLP = ctx.createBiquadFilter();
+              thLP.type = "lowpass";
+              thLP.frequency.value = 500;
+              th.connect(thG);
+              thG.connect(thLP);
+              thLP.connect(pan);
 
-      // เคลื่อนเสียงซ้าย→ขวาแบบรถวิ่งผ่าน
-      const pan = new StereoPannerNode(ctx, { pan: -0.6 });
-      pan.connect(master);
-      pan.pan.linearRampToValueAtTime(0.6, t0 + 1.4);
-      pan.pan.linearRampToValueAtTime(0.1, t0 + dur);
+              // NOISE burst
+              const nbuf = ctx.createBuffer(
+                1,
+                ctx.sampleRate * dur,
+                ctx.sampleRate
+              );
+              const arr = nbuf.getChannelData(0);
+              for (let i = 0; i < arr.length; i++) arr[i] = Math.random() * 2 - 1;
+              const ns = ctx.createBufferSource();
+              ns.buffer = nbuf;
+              const nsHP = ctx.createBiquadFilter();
+              nsHP.type = "highpass";
+              nsHP.frequency.value = 180;
+              const nsLP = ctx.createBiquadFilter();
+              nsLP.type = "lowpass";
+              nsLP.frequency.value = 2500;
+              const nsG = ctx.createGain();
+              nsG.gain.setValueAtTime(0.0001, t);
+              nsG.gain.exponentialRampToValueAtTime(0.5, t + 0.02);
+              nsG.gain.exponentialRampToValueAtTime(0.01, t + 0.45);
+              ns.connect(nsHP);
+              nsHP.connect(nsLP);
+              nsLP.connect(nsG);
+              nsG.connect(pan);
 
-      // Distortion เล็กน้อยให้เสียงจัด
-      const dist = ctx.createWaveShaper();
-      dist.curve = new Float32Array(44100).map((_, i) => {
-        const x = i/44100*2 - 1, k = 8; return (1+k)*x/(1+k*Math.abs(x));
-      });
-      dist.connect(pan);
+              // SLIDE-WHISTLE funny tone
+              const wh = ctx.createOscillator();
+              wh.type = "triangle";
+              wh.frequency.setValueAtTime(420, t);
+              wh.frequency.exponentialRampToValueAtTime(900, t + 0.09);
+              wh.frequency.exponentialRampToValueAtTime(220, t + 0.45);
+              const whBP = ctx.createBiquadFilter();
+              whBP.type = "bandpass";
+              whBP.frequency.setValueAtTime(800, t);
+              whBP.Q.value = 6;
+              const lfo = ctx.createOscillator();
+              lfo.frequency.value = 7;
+              const lfoAmt = ctx.createGain();
+              lfoAmt.gain.value = 120;
+              lfo.connect(lfoAmt);
+              lfoAmt.connect(whBP.frequency);
+              const whG = ctx.createGain();
+              whG.gain.setValueAtTime(0.0001, t);
+              whG.gain.exponentialRampToValueAtTime(0.18, t + 0.06);
+              whG.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+              wh.connect(whBP);
+              whBP.connect(whG);
+              whG.connect(pan);
 
-      // เครื่องยนต์หลัก (sawtooth)
-      const osc = ctx.createOscillator(); osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(220, t0);
-      osc.frequency.exponentialRampToValueAtTime(1100, t0 + 1.3);
-      osc.frequency.exponentialRampToValueAtTime(420, t0 + dur);
+              th.start(t);
+              th.stop(t + 0.5);
+              ns.start(t);
+              ns.stop(t + 0.5);
+              wh.start(t);
+              wh.stop(t + 0.72);
+              lfo.start(t);
+              lfo.stop(t + 0.72);
+            })
+            .catch(() => {});
+        }
 
-      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass';
-      lp.frequency.setValueAtTime(1400, t0); lp.Q.value = 0.7;
+        btn.addEventListener("click", () => {
+          playFunnyBoom();
+          if (typeof window.megaFireworks === "function") window.megaFireworks();
+        });
+      })();
 
-      // ฮาร์มอนิกเพิ่มความแสบ (square)
-      const osc2 = ctx.createOscillator(); osc2.type = 'square';
-      osc2.frequency.setValueAtTime(440, t0);
-      osc2.frequency.exponentialRampToValueAtTime(1800, t0 + 1.2);
-      osc2.frequency.exponentialRampToValueAtTime(540, t0 + dur);
+      /* Topbar color morph with scroll progress (blue -> purple -> gold) */
+      (function () {
+        const tb = document.querySelector(".topbar");
+        if (!tb) return;
 
-      const bp = ctx.createBiquadFilter(); bp.type = 'bandpass';
-      bp.frequency.setValueAtTime(900, t0); bp.Q.value = 3;
+        const BLUE = [59, 130, 246];
+        const PURPLE = [167, 139, 250];
+        const GOLD = [255, 199, 44];
 
-      osc.connect(lp);  lp.connect(dist);
-      osc2.connect(bp); bp.connect(dist);
+        const mix = (a, b, t) => [
+          Math.round(a[0] + (b[0] - a[0]) * t),
+          Math.round(a[1] + (b[1] - a[1]) * t),
+          Math.round(a[2] + (b[2] - a[2]) * t),
+        ];
+        const rgb = (v) => `rgb(${v[0]}, ${v[1]}, ${v[2]})`;
 
-      // เสียงลม/เทอร์โบ (noise + filter)
-      const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      for(let i=0;i<data.length;i++) data[i] = (Math.random()*2-1)*0.6;
+        function setRing(color) {
+          tb.style.setProperty("--topbar-ring", rgb(color));
+          tb.style.setProperty(
+            "--topbar-ringInner",
+            `rgba(${color[0]}, ${color[1]}, ${color[2]}, .40)`
+          );
+        }
 
-      const noise = ctx.createBufferSource(); noise.buffer = buf;
-      const nf = ctx.createBiquadFilter(); nf.type = 'highpass'; nf.frequency.setValueAtTime(500, t0);
-      const ng = ctx.createGain(); ng.gain.setValueAtTime(0.0001, t0);
-      ng.gain.linearRampToValueAtTime(0.5, t0 + 0.2);
-      ng.gain.exponentialRampToValueAtTime(0.05, t0 + dur - 0.05);
+        const RANGE = 600;
+        let ticking = false;
 
-      noise.connect(nf); nf.connect(ng); ng.connect(pan);
+        function update() {
+          const y = window.scrollY || 0;
+          const p = Math.max(0, Math.min(1, y / RANGE));
+          let col;
+          if (p < 0.5) col = mix(BLUE, PURPLE, p / 0.5);
+          else col = mix(PURPLE, GOLD, (p - 0.5) / 0.5);
+          setRing(col);
+          ticking = false;
+        }
+        update();
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(update);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+        window.addEventListener(
+          "resize",
+          () => {
+            requestAnimationFrame(update);
+          },
+          { passive: true }
+        );
+      })();
 
-      // start/stop
-      [osc, osc2, noise].forEach(n => n.start(t0));
-      [osc, osc2, noise].forEach(n => n.stop(t0 + dur));
-    }).catch(()=>{/* autoplay อาจถูกบล็อก */});
-  }
+      /* Enable/disable spinning border only when scrolled */
+      (function () {
+        const tb = document.querySelector(".topbar");
+        if (!tb) return;
 
-  function fireOnce(){
-    if (played) return;
-    played = true;
-    // พยายามเล่นทันที
-    playF1();
-    // ถอนตัวดัก event fallback
-    ['pointerdown','keydown','scroll'].forEach(ev =>
-      window.removeEventListener(ev, fireOnce, { passive:true })
-    );
-  }
+        const threshold = 8;
+        let ticking = false;
 
-  // ลองเล่นเมื่อหน้าโหลด (รวมกรณี bfcache)
-  window.addEventListener('DOMContentLoaded', fireOnce, { once:true });
-  window.addEventListener('pageshow', fireOnce, { once:true });
-
-  // ถ้า autoplay ถูกบล็อก ให้เล่นทันทีที่ผู้ใช้แตะ/เลื่อนครั้งแรก
-  ['pointerdown','keydown','scroll'].forEach(ev =>
-    window.addEventListener(ev, fireOnce, { once:true, passive:true })
-  );
-})();
-
-
-      /* Price placeholders already set above */
+        function toggleRing() {
+          const y = window.scrollY || 0;
+          const hidden = tb.classList.contains("hide");
+          if (y > threshold && !hidden) tb.classList.add("spin-border");
+          else tb.classList.remove("spin-border");
+          ticking = false;
+        }
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(toggleRing);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+        window.addEventListener("resize", toggleRing, { passive: true });
+        toggleRing();
+      })();
     </script>
   </body>
 </html>
