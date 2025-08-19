@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <style>
       /* ===== Global ===== */
       html {
@@ -1746,6 +1745,166 @@
           animation: none;
         }
       }
+/* === Community Gallery === */
+.gallery {
+  border: 2px solid var(--blue);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow), inset 0 0 0 1px var(--blue-inner);
+  position: relative;
+  overflow: hidden;
+}
+.gtrack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  gap: 12px;
+  padding: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 14px;
+  -webkit-overflow-scrolling: touch;
+}
+.gtrack::-webkit-scrollbar { height: 8px; }
+.gtrack::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.18);
+  border-radius: 8px;
+}
+.gcard {
+  position: relative;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,.05);
+  scroll-snap-align: start;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.gcard:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,.28); }
+.gmedia {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  background: #0b0f1a;
+}
+.gtitle {
+  position: absolute;
+  left: 10px; bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 900;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.gbadge {
+  position: absolute;
+  left: 10px; top: 10px;
+  font-size: 12px; font-weight: 900;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: #0b0f1a;
+  background: linear-gradient(180deg, rgba(167,139,250,.95), rgba(167,139,250,.78));
+  border: 1px solid #a78bfa;
+}
+.gbtn {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; width: 42px; height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,.45);
+  color: #fff; font-weight: 900;
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+#gPrev { left: 8px; }
+#gNext { right: 8px; }
+.gbtn:disabled { opacity: .35; cursor: default; }
+
+@media (max-width: 720px) {
+  .gtrack { grid-auto-columns: minmax(220px, 80%); }
+}
+
+/* === Community Gallery === */
+.gallery {
+  border: 2px solid var(--blue);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow), inset 0 0 0 1px var(--blue-inner);
+  position: relative;
+  overflow: hidden;
+}
+.gtrack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  gap: 12px;
+  padding: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 14px;
+  -webkit-overflow-scrolling: touch;
+}
+.gtrack::-webkit-scrollbar { height: 8px; }
+.gtrack::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.18);
+  border-radius: 8px;
+}
+.gcard {
+  position: relative;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,.05);
+  scroll-snap-align: start;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.gcard:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,.28); }
+.gmedia {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  background: #0b0f1a;
+}
+.gtitle {
+  position: absolute;
+  left: 10px; bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 900;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.gbadge {
+  position: absolute;
+  left: 10px; top: 10px;
+  font-size: 12px; font-weight: 900;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: #0b0f1a;
+  background: linear-gradient(180deg, rgba(167,139,250,.95), rgba(167,139,250,.78));
+  border: 1px solid #a78bfa;
+}
+.gbtn {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; width: 42px; height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,.45);
+  color: #fff; font-weight: 900;
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+#gPrev { left: 8px; }
+#gNext { right: 8px; }
+.gbtn:disabled { opacity: .35; cursor: default; }
+
+@media (max-width: 720px) {
+  .gtrack { grid-auto-columns: minmax(220px, 80%); }
+}
+
+
+
     </style>
   </head>
   <body>
@@ -1753,37 +1912,29 @@
       <!-- Topbar -->
       <header class="topbar glass reveal">
         <div class="wrap">
-          <a class="brand" href="#home"
-            ><img
+          <a class="brand" href="#home"><img
               src="https://framerusercontent.com/images/FPnvhl6ocJ58PYgLaYri68xb6cQ.webp"
-              alt="Enso Logo"
-          /></a>
+              alt="Enso Logo" /></a>
           <nav class="nav">
-            <a href="#price">$ENSO</a><a href="#tge">TGE</a
-            ><a href="#coinlist">CoinList</a><a href="#events">Events</a>
-            <a href="#why">Why Enso</a><a href="#build">Shortcuts</a
-            ><a href="#roles">Roles</a>
+            <a href="#price">$ENSO</a><a href="#tge">TGE</a><a
+              href="#coinlist">CoinList</a><a href="#events">Events</a>
+            <a href="#why">Why Enso</a><a href="#build">Shortcuts</a><a
+              href="#roles">Roles</a>
             <a class="accent-gold" href="#pilots">Pilots</a>
             <a
               href="https://docs.enso.build/"
               target="_blank"
-              rel="noreferrer noopener"
-              >Docs</a
-            >
+              rel="noreferrer noopener">Docs</a>
             <a
               class="accent-purple"
               href="https://navigator.enso.build/"
               target="_blank"
-              rel="noreferrer noopener"
-              >Navigator</a
-            >
+              rel="noreferrer noopener">Navigator</a>
             <a
               class="accent-purple"
               href="https://speedrun.enso.build/"
               target="_blank"
-              rel="noreferrer noopener"
-              >Speedrun</a
-            >
+              rel="noreferrer noopener">Speedrun</a>
           </nav>
         </div>
       </header>
@@ -1793,7 +1944,7 @@
         <div class="container">
           <h1>ENSO Shortcuts Community</h1>
           <div class="cta-row">
-            <h3 class="button gold" >Built by community for community</h3>
+            <h3 class="button gold">Built by community for community</h3>
           </div>
           <p>
             Enso is the fastest way to build and launch onchain — a shared
@@ -1805,31 +1956,36 @@
               class="button gold"
               href="https://www.enso.build/"
               target="_blank"
-              rel="noreferrer noopener"
-              >Start with Enso</a
-            >
+              rel="noreferrer noopener">Start with Enso</a>
             <a
               class="button gold"
               href="https://navigator.enso.build/"
               target="_blank"
-              rel="noreferrer noopener"
-              >Navigator</a
-            >
+              rel="noreferrer noopener">Navigator</a>
             <a
               class="button"
               href="https://docs.enso.build/"
               target="_blank"
-              rel="noreferrer noopener"
-              >Read the Docs</a
-            >
+              rel="noreferrer noopener">Read the Docs</a>
             <a
               class="button"
               href="https://x.com/EnsoBuild"
               target="_blank"
-              rel="noreferrer noopener"
-              >Follow @EnsoBuild</a
-            >
+              rel="noreferrer noopener">Follow @EnsoBuild</a>
           </div>
+        </div>
+      </section>
+
+            <!-- Community Gallery -->
+      <section id="gallery" class="section reveal">
+        <div class="eyebrow">Community gallery</div>
+        <h2>Moments from the community</h2>
+        <div class="gallery glass">
+          <button id="gPrev" class="gbtn" type="button"
+            aria-label="previous">‹</button>
+          <div id="gTrack" class="gtrack"></div>
+          <button id="gNext" class="gbtn" type="button"
+            aria-label="next">›</button>
         </div>
       </section>
 
@@ -1843,13 +1999,11 @@
             border-radius: var(--radius-2xl);
             box-shadow: var(--shadow), inset 0 0 0 1px var(--blue-inner);
             padding: 22px;
-          "
-        >
+          ">
           <div class="wrap">
             <div class="meme">
-              WEN TGE? 🤔 — <span style="color: #ffd76a"
-                >Q3 2025 (Occurred within this period)</span
-              >
+              WEN TGE? 🤔 — <span style="color: #ffd76a">Q3 2025 (Occurred
+                within this period)</span>
             </div>
             <div class="countdown" aria-live="polite">
               <div class="time-box gold">
@@ -1869,17 +2023,15 @@
                 <div class="lab">SECONDS</div>
               </div>
             </div>
-            <small
-              >Countdown ends at the last moment of Q3 2025 (Sep 30, 23:59:59
-              UTC).</small
-            >
+            <small>Countdown ends at the last moment of Q3 2025 (Sep 30,
+              23:59:59
+              UTC).</small>
             <div class="cta-row" style="margin-top: 12px">
               <button
                 id="btnCongrats"
                 class="button gold"
                 type="button"
-                aria-label="congratulations"
-              >
+                aria-label="congratulations">
                 congratulations! 🥳
               </button>
             </div>
@@ -1988,23 +2140,17 @@
             class="button gold"
             href="https://coinlist.co/enso"
             target="_blank"
-            rel="noreferrer noopener"
-            >View on CoinList</a
-          >
+            rel="noreferrer noopener">View on CoinList</a>
           <a
             class="button"
             href="https://blog.coinlist.co/announcing-the-enso-token-sale-on-coinlist/"
             target="_blank"
-            rel="noreferrer noopener"
-            >Sale Terms</a
-          >
+            rel="noreferrer noopener">Sale Terms</a>
           <a
             class="button"
             href="https://coinlist.co/help/how-will-the-token-sale-work-d67ae3df-ff53-4f8c-8df8-571a38f899d0"
             target="_blank"
-            rel="noreferrer noopener"
-            >Allocation Explainer</a
-          >
+            rel="noreferrer noopener">Allocation Explainer</a>
         </div>
       </section>
 
@@ -2034,6 +2180,8 @@
           <div class="tz-note" id="tzNote">Timezone: —</div>
         </div>
       </section>
+
+
 
       <!-- Why / Roles / Stats -->
       <section id="why" class="section reveal">
@@ -2131,8 +2279,7 @@
 POST /shortcuts/route
 { "from":{"chain":"ethereum","asset":"USDC"},
   "to":{"chain":"ethereum","asset":"wstETH"},
-  "amount":"1000" }</pre
-            >
+  "amount":"1000" }</pre>
           </article>
           <article class="api glass">
             <h4>Bundling API</h4>
@@ -2145,8 +2292,7 @@ POST /shortcuts/bundle
 { "actions":[
   {"swap":{"from":"USDC","to":"ETH"}},
   {"stake":{"protocol":"lido"}}
-] }</pre
-            >
+] }</pre>
           </article>
           <article class="api glass">
             <h4>Plug-and-Play Templates</h4>
@@ -2176,8 +2322,7 @@ npm i @enso/widgets
             src="https://navigator.enso.build/"
             loading="lazy"
             referrerpolicy="no-referrer"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-          ></iframe>
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 
           <!-- fallback UI -->
           <div class="nav-fallback" id="navFallback" aria-live="polite">
@@ -2185,16 +2330,15 @@ npm i @enso/widgets
               <header>
                 <div class="brand">Navigator</div>
                 <div class="tabs">
-                  <span class="on">Shortcuts</span><span>Routes</span
-                  ><span>Activity</span>
+                  <span
+                    class="on">Shortcuts</span><span>Routes</span><span>Activity</span>
                 </div>
               </header>
               <div class="mock-body">
                 <aside>
                   <div class="side-title">Chains</div>
                   <div class="chips">
-                    <span>Ethereum</span><span>Arbitrum</span><span>Base</span
-                    ><span>Solana</span>
+                    <span>Ethereum</span><span>Arbitrum</span><span>Base</span><span>Solana</span>
                   </div>
                   <div class="side-title" style="margin-top: 10px">
                     Templates
@@ -2228,7 +2372,8 @@ npm i @enso/widgets
                 </main>
               </div>
             </div>
-            <small class="hint">ไม่สามารถฝังหน้าเว็บได้ — แสดงหน้าจอจำลองแทน</small>
+            <small class="hint">ไม่สามารถฝังหน้าเว็บได้ —
+              แสดงหน้าจอจำลองแทน</small>
           </div>
         </div>
       </section>
@@ -2237,7 +2382,8 @@ npm i @enso/widgets
       <section id="pilots" class="section">
         <div class="eyebrow">Enso global community</div>
         <div class="pilot-toolbar">
-          <button class="btn-primary" id="btnAddPilot" aria-label="Add a new pilot">
+          <button class="btn-primary" id="btnAddPilot"
+            aria-label="Add a new pilot">
             Add Pilot
           </button>
           <span class="tip">Tip: Drag cards to reorder</span>
@@ -2251,27 +2397,26 @@ npm i @enso/widgets
           role="dialog"
           aria-modal="true"
           aria-labelledby="pilotModalTitle"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <div class="backdrop"></div>
           <div class="panel">
             <h3 id="pilotModalTitle">Add Pilot</h3>
             <div class="form">
               <div>
-                <label for="fName">Name</label
-                ><input id="fName" placeholder="e.g., bc1pBITHERUMN" />
+                <label for="fName">Name</label><input id="fName"
+                  placeholder="e.g., bc1pBITHERUMN" />
               </div>
               <div>
-                <label for="fStatus">Status</label
-                ><input id="fStatus" placeholder="Active" />
+                <label for="fStatus">Status</label><input id="fStatus"
+                  placeholder="Active" />
               </div>
               <div>
-                <label for="fSince">Since (Year)</label
-                ><input id="fSince" placeholder="2023" />
+                <label for="fSince">Since (Year)</label><input id="fSince"
+                  placeholder="2023" />
               </div>
               <div>
-                <label for="fBadges">Badges (comma separated)</label
-                ><input id="fBadges" placeholder="@Pilot,@Community" />
+                <label for="fBadges">Badges (comma separated)</label><input
+                  id="fBadges" placeholder="@Pilot,@Community" />
               </div>
             </div>
             <div class="row">
@@ -2284,7 +2429,8 @@ npm i @enso/widgets
 
       <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
       <footer class="footer">
-        <div class="container">enso shortcut community project contributors bc1pBITHERUMN ⚡✨</div>
+        <div class="container">enso shortcut community project contributors
+          bc1pBITHERUMN ⚡✨</div>
       </footer>
     </div>
 
@@ -3560,6 +3706,163 @@ npm i @enso/widgets
         window.addEventListener("resize", toggleRing, { passive: true });
         toggleRing();
       })();
+
+/* === Community Gallery === */
+(function mountGallery(){
+  const track   = document.getElementById("gTrack");
+  const btnPrev = document.getElementById("gPrev");
+  const btnNext = document.getElementById("gNext");
+  if (!track || !btnPrev || !btnNext) return;
+
+  // สร้างภาพแบบ data-URI (ไม่พึ่งเน็ต)
+  function imgData(i, title){
+    const w=640, h=360;
+    const g1 = ["#0ea5e9","#3b82f6","#a78bfa","#22d3ee","#f472b6"][i%5];
+    const g2 = ["#172554","#0b1020","#1b1030","#101b2b","#17131f"][i%5];
+    const svg =
+      `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'>
+         <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+           <stop offset='0' stop-color='${g1}'/><stop offset='1' stop-color='${g2}'/></linearGradient></defs>
+         <rect width='100%' height='100%' fill='url(#g)'/>
+         <text x='50%' y='54%' text-anchor='middle' fill='#fff'
+           font-size='36' font-family='Inter,system-ui' font-weight='800'>${title}</text>
+       </svg>`;
+    return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+  }
+
+  const ITEMS = [
+    { title:"Ceremony #1" },
+    { title:"Voice Chat" },
+    { title:"Game Night" },
+    { title:"Navigator Tour" },
+    { title:"Speedrun" },
+    { title:"AMA" },
+  ];
+
+  track.innerHTML = "";
+  ITEMS.forEach((it, idx) => {
+    const card = document.createElement("article");
+    card.className = "gcard glass";
+    card.innerHTML = `
+      <img class="gmedia" alt="${it.title}" src="${imgData(idx, it.title)}" />
+      <div class="gtitle">${it.title}</div>
+      <div class="gbadge">Community</div>
+    `;
+    track.appendChild(card);
+  });
+
+  function updateBtns(){
+    btnPrev.disabled = track.scrollLeft <= 0;
+    btnNext.disabled = Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth;
+  }
+  btnPrev.addEventListener("click", () => {
+    track.scrollBy({ left: -track.clientWidth*0.9, behavior: "smooth" });
+  });
+  btnNext.addEventListener("click", () => {
+    track.scrollBy({ left: track.clientWidth*0.9, behavior: "smooth" });
+  });
+  track.addEventListener("scroll", updateBtns, { passive: true });
+  updateBtns();
+})();
+
+/* === Community Gallery (load from /images folder) === */
+/* === ชื่อภาพจากผู้ใช้ (ตามลำดับรูป) === */
+window.GALLERY_TITLES = [
+  { title:"Ceremony #1" },
+  { title:"Voice Chat" },
+  { title:"Ceremony" },
+  { title:"Ceremony" },
+  { title:"Ceremony" },
+  { title:"community" },
+  { title:"community" },
+];
+
+/* === Community Gallery (load from /images folder + ใช้ชื่อจาก GALLERY_TITLES) === */
+(function mountGalleryFromFolder(){
+  const track   = document.getElementById("gTrack");
+  const btnPrev = document.getElementById("gPrev");
+  const btnNext = document.getElementById("gNext");
+  if (!track || !btnPrev || !btnNext) return;
+
+  // 1) ไฟล์รูป (ปรับให้ตรงกับโฟลเดอร์ของคุณ)
+  const FILES = (window.GALLERY_FILES && window.GALLERY_FILES.length)
+    ? window.GALLERY_FILES
+    : [
+      "images/GrT96LGW4AAas9N.jfif",
+      "images/GswtjSxX0AAxRMI.jfif",
+      "images/GuxbuFUXEAA5MXj.jfif",
+      "images/GvA7rzLXAAA1NVw.jfif",
+      "images/GwI-SIqXgAArp8m.jfif",
+      "images/Gx1bjOHWUAAo6hs.jfif",
+      "images/GxvFhorWsAANc5k.jfif",
+    ];
+
+  // 2) helper: สร้างชื่อจากไฟล์ หากไม่มีใน GALLERY_TITLES
+  const titleFromFile = (p) => {
+    const name = p.split("/").pop().replace(/\.[^.]+$/,"");
+    return name.replace(/[-_]/g," ").slice(0, 28);
+  };
+
+  // 3) helper: ลองสกุลไฟล์อื่นอัตโนมัติ
+  function tryOtherExt(img, originalPath){
+    const exts = [".jfif",".jpg",".jpeg",".png",".webp"];
+    const dot  = originalPath.lastIndexOf(".");
+    const root = dot > -1 ? originalPath.slice(0, dot) : originalPath;
+    let i = 0;
+    (function next(){
+      if (i >= exts.length) return;
+      const candidate = root + exts[i++];
+      const probe = new Image();
+      probe.onload  = () => { img.src = candidate; };
+      probe.onerror = next;
+      probe.src = candidate;
+    })();
+  }
+
+  // 4) render
+  track.innerHTML = "";
+  FILES.forEach((src, idx) => {
+    const card  = document.createElement("article");
+    card.className = "gcard glass";
+
+    const img = document.createElement("img");
+    img.className = "gmedia";
+    img.loading   = "lazy";
+    img.alt       = "community image";
+    img.src       = src;
+    img.onerror   = () => tryOtherExt(img, src);
+
+    const titleEl = document.createElement("div");
+    titleEl.className = "gtitle";
+    titleEl.textContent =
+      (window.GALLERY_TITLES && window.GALLERY_TITLES[idx] && window.GALLERY_TITLES[idx].title)
+        ? window.GALLERY_TITLES[idx].title
+        : titleFromFile(src);
+
+    const badge = document.createElement("div");
+    badge.className = "gbadge";
+    badge.textContent = "Community";
+
+    card.addEventListener("click", () => window.open(img.src, "_blank", "noreferrer"));
+
+    card.appendChild(img);
+    card.appendChild(titleEl);
+    card.appendChild(badge);
+    track.appendChild(card);
+  });
+
+  // 5) เลื่อนซ้าย/ขวา
+  function updateBtns(){
+    btnPrev.disabled = track.scrollLeft <= 0;
+    btnNext.disabled = Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth;
+  }
+  btnPrev.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth*0.9, behavior: "smooth" }));
+  btnNext.addEventListener("click", () => track.scrollBy({ left:  track.clientWidth*0.9, behavior: "smooth" }));
+  track.addEventListener("scroll", updateBtns, { passive:true });
+  updateBtns();
+})();
+
+
     </script>
   </body>
 </html>
