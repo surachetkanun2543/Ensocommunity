@@ -3300,15 +3300,6 @@ npm i @enso/widgets
           { title: "ENSO POKER (Sunday)", emoji: "♦️", desc: "Sunday tournament — register with Discord handle.", days: [0], time: "19:00" },
           { title: "QUIZ", emoji: "❓", desc: "Weekly quiz in #enso-plaza.", days: [1], time: "19:00" },
         ];
-        const specialTime = new Date(startToday);
-        specialTime.setHours(21, 0, 0, 0);
-        const SPECIAL = {
-          title: "Oku x Enso: Builders Demo",
-          emoji: "🎙️",
-          desc: "on X Spaces — bring vibes, Builders, and questions.",
-          oneoffAt: specialTime.toISOString(),
-          special: true,
-        };
         let EVENTS = [...BASE];
         if (now <= endToday) EVENTS.unshift(SPECIAL);
         function parseHM(hm) {
