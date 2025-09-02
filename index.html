@@ -1756,7 +1756,7 @@
 .gtrack {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(280px, 1fr);
+  grid-auto-columns: minmax(5000px, 3fr);
   gap: 12px;
   padding: 14px;
   overflow-x: auto;
@@ -1764,7 +1764,7 @@
   scroll-padding: 14px;
   -webkit-overflow-scrolling: touch;
 }
-.gtrack::-webkit-scrollbar { height: 8px; }
+.gtrack::-webkit-scrollbar { height: 10px; }
 .gtrack::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,.18);
   border-radius: 8px;
@@ -2384,6 +2384,8 @@
             <div class="role-box"><h4>DRIP</h4><ul>
                 <li>@Raiders — Ready to spread the word</li>
                 <li>@Portal — Spend 350 Shortcats and cross the Portal</li>
+                <li>@Tipper — 500+ Tip SC</li>
+                <li>@Clipper — 1000 views</li>
                 <li>@Veteran — Thank you for your service</li>
               </ul></div>
             <div class="role-box"><h4>RANKS</h4><ul>
@@ -3899,6 +3901,8 @@ npm i @enso/widgets
     { title:"Navigator Tour" },
     { title:"Speedrun" },
     { title:"AMA" },
+    { title:"@EnsoBuild  Vibe Chat 1" },
+    { title:"@EnsoBuild  Vibe Chat 2" },
   ];
 
   track.innerHTML = "";
@@ -3937,6 +3941,8 @@ window.GALLERY_TITLES = [
   { title:"Ceremony" },
   { title:"community" },
   { title:"community" },
+      { title:"@EnsoBuild  Vibe Chat 1" },
+    { title:"@EnsoBuild  Vibe Chat 2" },
 ];
 
 /* === Community Gallery (load from /images folder + ใช้ชื่อจาก GALLERY_TITLES) === */
@@ -3957,6 +3963,7 @@ window.GALLERY_TITLES = [
       "images/GwI-SIqXgAArp8m.jfif",
       "images/Gx1bjOHWUAAo6hs.jfif",
       "images/GxvFhorWsAANc5k.jfif",
+      "images/v1.jfif",
     ];
 
   // 2) helper: สร้างชื่อจากไฟล์ หากไม่มีใน GALLERY_TITLES
